@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "409691608244",
+    "firebase_url": "https://carlogger-9c080.firebaseio.com",
+    "project_id": "carlogger-9c080",
+    "storage_bucket": "carlogger-9c080.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409691608244:android:7838637e666295f3",
+        "android_client_info": {
+          "package_name": "de.fhbi.mobappproj.carlogger"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409691608244-9b6hgucfmqoqa2dtuq89fa9591671bnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "de.fhbi.mobappproj.carlogger",
+            "certificate_hash": "cf46df70117c03545ded0c35867445cb46cf4c3d"
+          }
+        },
+        {
+          "client_id": "409691608244-01q2bthn0ihc8r78tldk6j2p3u3cudth.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOj4SS4Q2ELCcKDOsEpebaBRjX243XNOU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "409691608244-01q2bthn0ihc8r78tldk6j2p3u3cudth.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
