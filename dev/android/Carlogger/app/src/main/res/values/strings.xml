@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Carlogger</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="navigation_drawer_repair_service">Reparaturen &amp; Service</string>
+    <string name="navigation_drawer_fuel">Tanken</string>
+    <string name="navigation_drawer_reminder">Erinnerungen</string>
+    <string name="navigation_drawer_other_costs">Andere Kosten</string>
 </resources>
