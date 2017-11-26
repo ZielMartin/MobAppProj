@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = "MainActivity";
 
     // Choose authentication providers
-    List<AuthUI.IdpConfig> providers = Arrays.asList(
+    //TODO: fix Rejecting re-init on previously-failed class java.lang.Class<com.firebase.ui.auth.provider.TwitterProvider>: java.lang.NoClassDefFoundError: Failed resolution of: Lcom/twitter/sdk/android/core/Callback
+    private static List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
 
@@ -48,7 +49,9 @@ public class MainActivity extends AppCompatActivity
                 // ...
             } else {
                 // Sign in failed, check response for error code
-                Log.i(TAG, "login failed. response: " + response.toString());
+                if (response != null)
+                    Log.i(TAG, "login failed. response: " + response.toString());
+                else Log.i(TAG, "got no response");
             }
         }
 
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void signIn() {
+
+
         // Create and launch sign-in intent
         Intent signinIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
@@ -163,7 +168,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.loginlogout) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if(user == null) {
+            if (user == null) {
                 signIn();
                 item.setTitle("Logout");
             } else {
