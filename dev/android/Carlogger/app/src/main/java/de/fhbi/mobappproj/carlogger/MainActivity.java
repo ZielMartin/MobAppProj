@@ -1,6 +1,8 @@
 package de.fhbi.mobappproj.carlogger;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -161,6 +163,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_reminder) {
 
         } else if (id == R.id.nav_repair_service) {
+            changeFragmentTo(new RepairFragment());
 
         } else if (id == R.id.nav_share) {
 
@@ -180,5 +183,14 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void changeFragmentTo(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+
+        fragmentTransaction.replace(R.id.MainFrame, fragment);
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.commit();
     }
 }
