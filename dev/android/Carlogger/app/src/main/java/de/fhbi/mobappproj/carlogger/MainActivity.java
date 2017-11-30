@@ -158,13 +158,13 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_fuel) {
             // Handle the fuel action
+            changeFragmentTo(new FuelFragment());
         } else if (id == R.id.nav_otherCosts) {
 
         } else if (id == R.id.nav_reminder) {
 
         } else if (id == R.id.nav_repair_service) {
             changeFragmentTo(new RepairFragment());
-
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
@@ -192,5 +192,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.addToBackStack(null);
 
         fragmentTransaction.commit();
+        Log.i(TAG, "fragment switched to " + fragment.getClass());
     }
 }
