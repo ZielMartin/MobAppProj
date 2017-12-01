@@ -8,9 +8,10 @@
     tools:context="de.fhbi.mobappproj.carlogger.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/MainFrame" />
+        android:id="@+id/MainFrame"
+        android:orientation="horizontal" />
 
 </android.support.constraint.ConstraintLayout>
