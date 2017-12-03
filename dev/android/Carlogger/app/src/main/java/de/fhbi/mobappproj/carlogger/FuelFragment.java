@@ -1,6 +1,7 @@
 package de.fhbi.mobappproj.carlogger;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,6 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+
+import com.borax12.materialdaterangepicker.date.DatePickerDialog;
+
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,7 +25,8 @@ import android.view.ViewGroup;
  * Use the {@link FuelFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FuelFragment extends Fragment {
+
+public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialog.OnDateSetListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +37,8 @@ public class FuelFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private TextView TV_PeriodCost;
 
     public FuelFragment() {
         // Required empty public constructor
@@ -58,13 +69,25 @@ public class FuelFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fuel, container, false);
+        View v = inflater.inflate(R.layout.fragment_fuel, container, false);
+
+        Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_DatePicker);
+        btn_DatePicker.setOnClickListener(this);
+
+        TV_PeriodCost = (TextView) v.findViewById(R.id.TV_PeriodCost);
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,6 +114,32 @@ public class FuelFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.BTN_DatePicker:
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
+                        this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAutoHighlight(true);
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                break;
+            }
+        }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+
+        Resources res = getResources();
+        TV_PeriodCost.setText(getString(R.string.fuelFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
+    }
+}
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -101,8 +150,8 @@ public class FuelFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-}
+

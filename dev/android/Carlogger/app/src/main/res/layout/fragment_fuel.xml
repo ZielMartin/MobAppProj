@@ -1,13 +1,295 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="de.fhbi.mobappproj.carlogger.FuelFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:id="@+id/fragFuelLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_fuel_fragment" />
+        android:layout_margin="2dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="2dp">
 
-</FrameLayout>
+        <TableLayout
+            android:id="@+id/fragFuelStatsTL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TableRow
+                android:id="@+id/totalCostTR"
+                android:layout_width="356dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/totalCostLL"
+                    android:layout_width="310dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_TotalCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuelFragment_fuelConsumption" />
+
+                    <TextView
+                        android:id="@+id/TV_TotalCostValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="500,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <View
+                        android:id="@+id/dividerLine1"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/monthCostTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/monthCostLL"
+                    android:layout_width="310dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_MonthCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuelFragment_monthCost" />
+
+                    <TextView
+                        android:id="@+id/TV_MonthCostValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="100,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <View
+                        android:id="@+id/dividerLine2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/periodCostTR"
+                android:layout_width="396dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/periodCostLL"
+                    android:layout_width="310dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_PeriodCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuelFragment_periodCost" />
+
+                    <TextView
+                        android:id="@+id/TV_PeriodCostValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <View
+                        android:id="@+id/dividerLine3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/BTN_DatePicker"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:background="@drawable/ic_action_calendar"
+                    android:theme="@style/AlertDialog.AppCompat.Light" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/fuelConsumptionTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/fuelConsumptionLL"
+                    android:layout_width="310dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_FuelConsumption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuelFragment_fuelConsumption" />
+
+                    <TextView
+                        android:id="@+id/TV_FuelConsumptionValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10,25"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <View
+                        android:id="@+id/dividerLine4"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorStatsBackground" />
+
+            <View
+                android:id="@+id/dividerLine5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorStatsOtherBackground" />
+
+
+            <TableRow
+                android:id="@+id/monthCostOtherTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsOtherBackground">
+
+                <LinearLayout
+                    android:id="@+id/monthCostOtherLL"
+                    android:layout_width="310dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_monthCostOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuelFragment_monthCostOther" />
+
+                    <TextView
+                        android:id="@+id/TV_MonthCostOtherValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="100,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/fuelConsumptionOtherTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsOtherBackground">
+
+                <LinearLayout
+                    android:id="@+id/fuelConsumptionOtherLL"
+                    android:layout_width="310dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_FuelConsumptionOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fuelFragment_fuelConsumptionOther" />
+
+                    <TextView
+                        android:id="@+id/TV_fuelConsumptionOtherValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="9,56"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorStatsOtherBackground" />
+
+            <View
+                android:id="@+id/dividerLine6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+        </TableLayout>
+
+
+        <TableLayout
+            android:id="@+id/fragFuelEntriesTL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

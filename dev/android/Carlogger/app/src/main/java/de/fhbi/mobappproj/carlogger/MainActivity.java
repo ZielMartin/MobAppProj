@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -27,8 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
     private static final int RC_SIGN_IN = 123;
     private static final String TAG = "MainActivity";
 
@@ -194,4 +194,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
         Log.i(TAG, "fragment switched to " + fragment.getClass());
     }
+
+
 }
