@@ -1,14 +1,252 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RepairFragment">
-
+    tools:context="de.fhbi.mobappproj.carlogger.RepairFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
+        android:id="@+id/fragFuelLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_repair_fragment" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="2dp">
 
-</FrameLayout>
+        <TableLayout
+            android:id="@+id/fragFuelStatsTL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shrinkColumns="*">
+
+
+
+            <TableRow
+                android:id="@+id/totalCostTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/totalCostLL"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_TotalCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/repairFragment_allCost" />
+
+                    <TextView
+                        android:id="@+id/TV_TotalCostValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="500,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <View
+                android:id="@+id/dividerLine1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <TableRow
+                android:id="@+id/monthCostTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/monthCostLL"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_MonthCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/repairFragment_monthCost" />
+
+                    <TextView
+                        android:id="@+id/TV_MonthCostValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="100,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <View
+                android:id="@+id/dividerLine2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <TableRow
+                android:id="@+id/periodCostTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsBackground">
+
+                <LinearLayout
+                    android:id="@+id/periodCostLL"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_PeriodCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/repairFragment_periodCost" />
+
+                    <TextView
+                        android:id="@+id/TV_PeriodCostValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/BTN_Repair_DatePicker"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:background="@drawable/ic_action_calendar"
+                        android:theme="@style/AlertDialog.AppCompat.Light" />
+                </FrameLayout>
+
+            </TableRow>
+
+            <View
+                android:id="@+id/dividerLine3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+
+            <View
+                android:id="@+id/dividerLine4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorStatsBackground" />
+
+            <View
+                android:id="@+id/dividerLine5"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@android:color/darker_gray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorStatsOtherBackground" />
+
+
+            <TableRow
+                android:id="@+id/monthCostOtherTR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorStatsOtherBackground">
+
+                <LinearLayout
+                    android:id="@+id/monthCostOtherLL"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/TV_monthCostOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/repairFragment_monthCostOther" />
+
+                    <TextView
+                        android:id="@+id/TV_MonthCostOtherValue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="100,00€"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+                </LinearLayout>
+
+            </TableRow>
+
+
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/colorStatsOtherBackground" />
+
+            <View
+                android:id="@+id/dividerLine6"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@android:color/darker_gray" />
+
+        </TableLayout>
+
+
+        <!--entries placeholder-->
+        <TableLayout
+            android:id="@+id/fragFuelEntriesTL"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

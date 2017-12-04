@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     private void intiAddFab() {
         menuAdd = (FloatingActionMenu) findViewById(R.id.fabAdd);
+
+        //addButton setup should be done in xml (app_bar_main)
         menuAdd.setMenuButtonColorNormalResId(R.color.colorPrimary);
         menuAdd.setMenuButtonColorPressedResId(R.color.colorAccent);
 
@@ -118,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         fab_addOtherCost.setOnClickListener(this);
 
 
+        //animation
         int delay = 400;
         mUiHandler.postDelayed(new Runnable() {
             @Override
@@ -211,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         } else if (id == R.id.nav_otherCosts) {
 
         } else if (id == R.id.nav_reminder) {
-
+            changeFragmentTo(new ReminderFragment());
         } else if (id == R.id.nav_repair_service) {
             changeFragmentTo(new RepairFragment());
         } else if (id == R.id.nav_share) {

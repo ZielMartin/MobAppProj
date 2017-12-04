@@ -18,7 +18,7 @@
 
 
     <!-- fragmentFuel -->
-    <string name="fuelFragment_fuel">Gesamtkosten für Tanken</string>
+    <string name="fuelFragment_allCost">Gesamtkosten für Tanken</string>
     <string name="fuelFragment_monthCost">Kosten Pro Monat</string>
     <string name="fuelFragment_periodCost">Kosten für Zeitraum</string>
     <string name="fuelFragment_periodCostWithDate">Kosten für Zeitraum %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
@@ -37,6 +37,13 @@
     <string name="fabAdd_reminder">Erinnerung</string>
     <string name="fabAdd_otherCost">Andere Kosten</string>
     <string name="fabAdd_repair_service">Reparatur oder Service</string>
+
+    <!-- fragmentRepair -->
+    <string name="repairFragment_allCost">Gesamtkosten für Reparaturen &amp; Service</string>
+    <string name="repairFragment_monthCost">Kosten Pro Monat</string>
+    <string name="repairFragment_periodCost">Kosten für Zeitraum</string>
+    <string name="repairFragment_periodCostWithDate">Kosten für Zeitraum %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
+    <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
 
 </resources>

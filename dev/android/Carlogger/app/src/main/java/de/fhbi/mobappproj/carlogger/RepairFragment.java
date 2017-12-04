@@ -2,13 +2,21 @@ package de.fhbi.mobappproj.carlogger;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.google.android.gms.plus.PlusOneButton;
+
+import java.util.Calendar;
+
+import static de.fhbi.mobappproj.carlogger.R.id.BTN_Repair_DatePicker;
 
 /**
  * A fragment with a Google +1 button.
@@ -18,7 +26,7 @@ import com.google.android.gms.plus.PlusOneButton;
  * Use the {@link RepairFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RepairFragment extends Fragment {
+public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,6 +38,9 @@ public class RepairFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private TextView TV_PeriodCost;
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,6 +81,12 @@ public class RepairFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_repair, container, false);
 
+        //DatePicker
+        Button btn_DatePicker = (Button) view.findViewById(R.id.BTN_Repair_DatePicker);
+        btn_DatePicker.setOnClickListener(this);
+
+        TV_PeriodCost = (TextView) view.findViewById(R.id.TV_PeriodCost);
+
         return view;
     }
 
@@ -100,6 +117,32 @@ public class RepairFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.BTN_Repair_DatePicker:
+                Calendar now = Calendar.getInstance();
+                DatePickerDialog dpd = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
+                        this,
+                        now.get(Calendar.YEAR),
+                        now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH)
+                );
+                dpd.setAutoHighlight(true);
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+
+                break;
+        }
+
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
+
+        Resources res = getResources();
+        TV_PeriodCost.setText(getString(R.string.repairFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
     }
 
     /**

@@ -30,7 +30,7 @@ import java.util.Calendar;
  * create an instance of this fragment.
  */
 
-public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialog.OnDateSetListener {
+public class ReminderFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,9 +42,9 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
 
     private OnFragmentInteractionListener mListener;
 
-    private TextView TV_PeriodCost;
 
-    public FuelFragment() {
+
+    public ReminderFragment() {
         // Required empty public constructor
     }
 
@@ -57,8 +57,8 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
      * @return A new instance of fragment FuelFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static FuelFragment newInstance(String param1, String param2) {
-        FuelFragment fragment = new FuelFragment();
+    public static ReminderFragment newInstance(String param1, String param2) {
+        ReminderFragment fragment = new ReminderFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -83,19 +83,7 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_fuel, container, false);
-
-        //DatePicker
-        Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_Fuel_DatePicker);
-        btn_DatePicker.setOnClickListener(this);
-
-        //InfoButton
-        Button btn_FuelInfo = (Button) v.findViewById(R.id.BTN_ConsumptionInfo);
-        btn_FuelInfo.setOnClickListener(this);
-
-
-        TV_PeriodCost = (TextView) v.findViewById(R.id.TV_PeriodCost);
-
+        View v = inflater.inflate(R.layout.fragment_reminder, container, false);
 
         return v;
     }
@@ -124,57 +112,10 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         mListener = null;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.BTN_Fuel_DatePicker:
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
-                        this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
-                );
-                dpd.setAutoHighlight(true);
-                dpd.show(getFragmentManager(), "Datepickerdialog");
 
-                break;
 
-            case R.id.BTN_ConsumptionInfo:
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(R.string.fuelDialogFragment_info)
-                        .setPositiveButton(R.string.fuelDialogFragment_ok, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
 
-                            }
-                        });
 
-                // Create the AlertDialog object and return it
-                builder.create();
-                builder.show();
-            }
-        }
-
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-
-        Resources res = getResources();
-        TV_PeriodCost.setText(getString(R.string.fuelFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
-    }
 }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 

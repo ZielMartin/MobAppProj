@@ -131,7 +131,7 @@
                 <FrameLayout
                     android:layout_height="match_parent">
                     <Button
-                        android:id="@+id/BTN_DatePicker"
+                        android:id="@+id/BTN_Fuel_DatePicker"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
 
@@ -296,6 +296,8 @@
         </TableLayout>
 
 
+
+        <!--entries placeholder-->
         <TableLayout
             android:id="@+id/fragFuelEntriesTL"
             android:layout_width="match_parent"
