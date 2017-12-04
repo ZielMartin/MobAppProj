@@ -26,4 +26,17 @@
     <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
     <string name="fuelFragment_fuelConsumptionOther">Verbrauch (L/100KM) anderer Fahrer</string>
 
+    <!-- FuelDialogFragmen -->
+    <string name="fuelDialogFragment_info">Realistische Verbrauchs-Berechnung nur möglich wenn 2 mal hintereinander eine Vollbetankung
+    durchgeführt wurde (Tank muss nicht zwangsläufig leer sein, sollte nach dem Tankvorgang jedoch voll sein).</string>
+    <string name="fuelDialogFragment_ok">OK</string>
+
+    <!-- FabAddMenu -->
+    <string name="fabAdd_label">Hinzufügen</string>
+    <string name="fabAdd_fuel">Tanken</string>
+    <string name="fabAdd_reminder">Erinnerung</string>
+    <string name="fabAdd_otherCost">Andere Kosten</string>
+    <string name="fabAdd_repair_service">Reparatur oder Service</string>
+
+
 </resources>

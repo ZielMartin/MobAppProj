@@ -12,7 +12,8 @@
         android:id="@+id/fragFuelLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="2dp">
@@ -20,19 +21,22 @@
         <TableLayout
             android:id="@+id/fragFuelStatsTL"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:shrinkColumns="*">
+
 
 
             <TableRow
                 android:id="@+id/totalCostTR"
-                android:layout_width="356dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorStatsBackground">
 
                 <LinearLayout
                     android:id="@+id/totalCostLL"
-                    android:layout_width="310dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -48,14 +52,14 @@
                         android:text="500,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <View
-                        android:id="@+id/dividerLine1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
-
                 </LinearLayout>
             </TableRow>
+
+            <View
+                android:id="@+id/dividerLine1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
             <TableRow
                 android:id="@+id/monthCostTR"
@@ -65,8 +69,9 @@
 
                 <LinearLayout
                     android:id="@+id/monthCostLL"
-                    android:layout_width="310dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -82,26 +87,29 @@
                         android:text="100,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <View
-                        android:id="@+id/dividerLine2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
 
                 </LinearLayout>
 
             </TableRow>
 
+            <View
+                android:id="@+id/dividerLine2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
             <TableRow
                 android:id="@+id/periodCostTR"
-                android:layout_width="396dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorStatsBackground">
 
                 <LinearLayout
                     android:id="@+id/periodCostLL"
-                    android:layout_width="310dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="100"
+
                     android:orientation="vertical">
 
                     <TextView
@@ -117,23 +125,27 @@
                         android:text="0,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <View
-                        android:id="@+id/dividerLine3"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
 
                 </LinearLayout>
 
-                <Button
-                    android:id="@+id/BTN_DatePicker"
-                    android:layout_width="48dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0"
-                    android:background="@drawable/ic_action_calendar"
-                    android:theme="@style/AlertDialog.AppCompat.Light" />
+                <FrameLayout
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/BTN_DatePicker"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:background="@drawable/ic_action_calendar"
+                        android:theme="@style/AlertDialog.AppCompat.Light" />
+                </FrameLayout>
 
             </TableRow>
+
+            <View
+                android:id="@+id/dividerLine3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
             <TableRow
                 android:id="@+id/fuelConsumptionTR"
@@ -141,10 +153,12 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorStatsBackground">
 
+
                 <LinearLayout
                     android:id="@+id/fuelConsumptionLL"
-                    android:layout_width="310dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -160,15 +174,24 @@
                         android:text="10,25"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <View
-                        android:id="@+id/dividerLine4"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
-
                 </LinearLayout>
 
+                <FrameLayout
+                    android:layout_height="match_parent">
+                    <Button
+                        android:id="@+id/BTN_ConsumptionInfo"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ic_action_fuel_info" />
+                </FrameLayout>
+
             </TableRow>
+
+            <View
+                android:id="@+id/dividerLine4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
             <View
                 android:layout_width="match_parent"
@@ -178,7 +201,7 @@
             <View
                 android:id="@+id/dividerLine5"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="4dp"
                 android:background="@android:color/darker_gray" />
 
             <View
@@ -195,8 +218,9 @@
 
                 <LinearLayout
                     android:id="@+id/monthCostOtherLL"
-                    android:layout_width="310dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -212,14 +236,15 @@
                         android:text="100,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
 
                 </LinearLayout>
 
             </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
             <TableRow
                 android:id="@+id/fuelConsumptionOtherTR"
@@ -229,8 +254,9 @@
 
                 <LinearLayout
                     android:id="@+id/fuelConsumptionOtherLL"
-                    android:layout_width="310dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
@@ -246,14 +272,15 @@
                         android:text="9,56"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
 
                 </LinearLayout>
 
             </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
             <View
                 android:layout_width="match_parent"
@@ -263,7 +290,7 @@
             <View
                 android:id="@+id/dividerLine6"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="4dp"
                 android:background="@android:color/darker_gray" />
 
         </TableLayout>

@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,18 +18,23 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int RC_SIGN_IN = 123;
     private static final String TAG = "MainActivity";
 
@@ -37,6 +43,16 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private static List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
+
+
+    private FloatingActionMenu menuAdd;
+    private com.github.clans.fab.FloatingActionButton fab_addFuel;
+    private com.github.clans.fab.FloatingActionButton fab_repairService;
+    private com.github.clans.fab.FloatingActionButton fab_addReminder;
+    private com.github.clans.fab.FloatingActionButton fab_addOtherCost;
+
+
+    private Handler mUiHandler = new Handler();
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -67,8 +83,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener((view) -> signIn());
+
+        intiAddFab();
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -78,6 +95,38 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void intiAddFab() {
+        menuAdd = (FloatingActionMenu) findViewById(R.id.fabAdd);
+        menuAdd.setMenuButtonColorNormalResId(R.color.colorPrimary);
+        menuAdd.setMenuButtonColorPressedResId(R.color.colorAccent);
+
+
+        fab_addFuel = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addFuel);
+        fab_repairService = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addRepairService);
+        fab_addReminder = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addReminder);
+        fab_addOtherCost = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addOtherCost);
+
+        menuAdd.setClosedOnTouchOutside(true);
+
+        menuAdd.hideMenuButton(false);
+
+        fab_addFuel.setOnClickListener(this);
+        fab_repairService.setOnClickListener(this);
+        fab_addReminder.setOnClickListener(this);
+        fab_addOtherCost.setOnClickListener(this);
+
+
+        int delay = 400;
+        mUiHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                menuAdd.showMenuButton(true);
+            }
+        }, delay);
+
+
     }
 
     @Override
@@ -196,4 +245,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     }
 
 
+    @Override
+    public void onClick(View view) {
+
+    }
 }

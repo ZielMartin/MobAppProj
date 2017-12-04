@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="de.fhbi.mobappproj.carlogger.MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -22,12 +23,63 @@
 
     <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fabAdd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
 
-</android.support.design.widget.CoordinatorLayout>
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true"
+        fab:menu_backgroundColor="#ccffffff"
+        fab:menu_fab_label="@string/fabAdd_label">
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_addFuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_fuel"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorAccent"
+            fab:fab_size="mini"
+            fab:fab_label="@string/fabAdd_fuel" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_addRepairService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_manage"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorAccent"
+            fab:fab_size="mini"
+            fab:fab_label="@string/fabAdd_repair_service" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_addReminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_calendar"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorAccent"
+            fab:fab_size="mini"
+            fab:fab_label="@string/fabAdd_reminder" />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_addOtherCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_action_cash"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@color/colorAccent"
+            fab:fab_size="mini"
+            fab:fab_label="@string/fabAdd_otherCost" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+    </android.support.design.widget.CoordinatorLayout>

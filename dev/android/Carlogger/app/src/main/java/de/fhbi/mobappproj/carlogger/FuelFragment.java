@@ -1,8 +1,10 @@
 package de.fhbi.mobappproj.carlogger;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.app.AlertDialog;
+
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
@@ -81,8 +85,14 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fuel, container, false);
 
+        //DatePicker
         Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_DatePicker);
         btn_DatePicker.setOnClickListener(this);
+
+        //InfoButton
+        Button btn_FuelInfo = (Button) v.findViewById(R.id.BTN_ConsumptionInfo);
+        btn_FuelInfo.setOnClickListener(this);
+
 
         TV_PeriodCost = (TextView) v.findViewById(R.id.TV_PeriodCost);
 
@@ -129,6 +139,19 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
                 dpd.show(getFragmentManager(), "Datepickerdialog");
 
                 break;
+
+            case R.id.BTN_ConsumptionInfo:
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(R.string.fuelDialogFragment_info)
+                        .setPositiveButton(R.string.fuelDialogFragment_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                            }
+                        });
+
+                // Create the AlertDialog object and return it
+                builder.create();
+                builder.show();
             }
         }
 
