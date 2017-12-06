@@ -1,10 +1,9 @@
-package de.fhbi.mobappproj.carlogger;
+package de.fhbi.mobappproj.carlogger.fragments;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,39 +11,38 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-import com.google.android.gms.plus.PlusOneButton;
 
-import java.util.Calendar;
-
-import static de.fhbi.mobappproj.carlogger.R.id.BTN_Repair_DatePicker;
+import de.fhbi.mobappproj.carlogger.DatePicker;
+import de.fhbi.mobappproj.carlogger.R;
 
 /**
- * A fragment with a Google +1 button.
+ * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link RepairFragment.OnFragmentInteractionListener} interface
+ * {@link OtherCostFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link RepairFragment#newInstance} factory method to
+ * Use the {@link FuelFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+
+public class OtherCostFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    // The request code must be 0 or greater.
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    // The URL to +1.  Must be a valid URL.
-    private final String PLUS_ONE_URL = "http://developer.android.com";
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-
-    private TextView TV_PeriodCost;
-
     private OnFragmentInteractionListener mListener;
 
-    public RepairFragment() {
+    private DatePicker datePicker;
+
+    private TextView TV_OtherPeriodCost;
+
+
+
+    public OtherCostFragment() {
         // Required empty public constructor
     }
 
@@ -54,11 +52,11 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment RepairFragment.
+     * @return A new instance of fragment FuelFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static RepairFragment newInstance(String param1, String param2) {
-        RepairFragment fragment = new RepairFragment();
+    public static ReminderFragment newInstance(String param1, String param2) {
+        ReminderFragment fragment = new ReminderFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,26 +71,26 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_repair, container, false);
+        View v = inflater.inflate(R.layout.fragment_other_cost, container, false);
 
         //DatePicker
-        Button btn_DatePicker = (Button) view.findViewById(R.id.BTN_Repair_DatePicker);
-        btn_DatePicker.setOnClickListener(this);
+        TV_OtherPeriodCost = (TextView) v.findViewById(R.id.TV_OtherPeriodCost);
+        datePicker = new DatePicker((Button) v.findViewById(R.id.BTN_OtherDatePicker), this);
 
-        TV_PeriodCost = (TextView) view.findViewById(R.id.TV_PeriodCost);
 
-        return view;
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -119,31 +117,31 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
         mListener = null;
     }
 
+
+
+
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.BTN_Repair_DatePicker:
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = com.borax12.materialdaterangepicker.date.DatePickerDialog.newInstance(
-                        this,
-                        now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH)
-                );
-                dpd.setAutoHighlight(true);
-                dpd.show(getFragmentManager(), "Datepickerdialog");
-
-                break;
-        }
 
     }
 
+
+    /**
+     * Called after setting Date
+     * @param view
+     * @param year
+     * @param monthOfYear
+     * @param dayOfMonth
+     * @param yearEnd
+     * @param monthOfYearEnd
+     * @param dayOfMonthEnd
+     */
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-
-        Resources res = getResources();
-        TV_PeriodCost.setText(getString(R.string.repairFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
+        TV_OtherPeriodCost.setText(getString(R.string.otherCostFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -155,9 +153,13 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
 }
+
+
+
+

@@ -4,7 +4,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.fhbi.mobappproj.carlogger.FuelFragment">
+    tools:context="de.fhbi.mobappproj.carlogger.fragments.FuelFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -40,13 +40,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_TotalCost"
+                        android:id="@+id/TV_FuelTotalCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/fuelFragment_fuelConsumption" />
 
                     <TextView
-                        android:id="@+id/TV_TotalCostValue"
+                        android:id="@+id/TV_FuelTotalCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="500,00€"
@@ -75,13 +75,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_MonthCost"
+                        android:id="@+id/TV_FuelMonthCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/fuelFragment_monthCost" />
 
                     <TextView
-                        android:id="@+id/TV_MonthCostValue"
+                        android:id="@+id/TV_FuelMonthCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="100,00€"
@@ -113,13 +113,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_PeriodCost"
+                        android:id="@+id/TV_FuelPeriodCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/fuelFragment_periodCost" />
 
                     <TextView
-                        android:id="@+id/TV_PeriodCostValue"
+                        android:id="@+id/TV_FuelPeriodCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0,00€"
@@ -131,7 +131,7 @@
                 <FrameLayout
                     android:layout_height="match_parent">
                     <Button
-                        android:id="@+id/BTN_Fuel_DatePicker"
+                        android:id="@+id/BTN_FuelDatePicker"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
 
@@ -179,7 +179,7 @@
                 <FrameLayout
                     android:layout_height="match_parent">
                     <Button
-                        android:id="@+id/BTN_ConsumptionInfo"
+                        android:id="@+id/BTN_FuelConsumptionInfo"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:background="@drawable/ic_action_fuel_info" />
@@ -266,7 +266,7 @@
                         android:text="@string/fuelFragment_fuelConsumptionOther" />
 
                     <TextView
-                        android:id="@+id/TV_fuelConsumptionOtherValue"
+                        android:id="@+id/TV_FuelConsumptionOtherValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="9,56"
@@ -297,28 +297,7 @@
 
 
 
-        <!--entries placeholder-->
-        <TableLayout
-            android:id="@+id/fragFuelEntriesTL"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableLayout>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

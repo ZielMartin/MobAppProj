@@ -4,12 +4,12 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="de.fhbi.mobappproj.carlogger.fragments.RepairFragment">
+    tools:context="de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:id="@+id/fragRepairLL"
+        android:id="@+id/fragOtherLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
@@ -19,7 +19,7 @@
         tools:layout_editor_absoluteY="2dp">
 
         <TableLayout
-            android:id="@+id/fragRepairStatsTL"
+            android:id="@+id/fragOtherStatsTL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:shrinkColumns="*">
@@ -40,13 +40,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_RepairTotalCost"
+                        android:id="@+id/TV_OtherTotalCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/repairFragment_allCost" />
+                        android:text="@string/otherCostFragment_allCost" />
 
                     <TextView
-                        android:id="@+id/TV_RepairTotalCostValue"
+                        android:id="@+id/TV_OtherTotalCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="500,00€"
@@ -75,13 +75,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_RepairMonthCost"
+                        android:id="@+id/TV_OtherMonthCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/repairFragment_monthCost" />
+                        android:text="@string/otherCostFragment_monthCost" />
 
                     <TextView
-                        android:id="@+id/TV_RepairMonthCostValue"
+                        android:id="@+id/TV_OtherMonthCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="100,00€"
@@ -113,13 +113,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_RepairPeriodCost"
+                        android:id="@+id/TV_OtherPeriodCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/repairFragment_periodCost" />
+                        android:text="@string/otherCostFragment_periodCost" />
 
                     <TextView
-                        android:id="@+id/TV_RepairPeriodCostValue"
+                        android:id="@+id/TV_OtherPeriodCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="0,00€"
@@ -131,7 +131,7 @@
                 <FrameLayout
                     android:layout_height="match_parent">
                     <Button
-                        android:id="@+id/BTN_RepairDatePicker"
+                        android:id="@+id/BTN_OtherDatePicker"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
 
@@ -172,26 +172,26 @@
 
 
             <TableRow
-                android:id="@+id/monthCostOtherTR"
+                android:id="@+id/otherMonthCostOtherTR"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorStatsOtherBackground">
 
                 <LinearLayout
-                    android:id="@+id/monthCostOtherLL"
+                    android:id="@+id/otherMonthCostOtherLL"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="100"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/TV_RepairMonthCostOther"
+                        android:id="@+id/TV_OtherMonthCostOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/repairFragment_monthCostOther" />
+                        android:text="@string/otherCostFragment_monthCostOther" />
 
                     <TextView
-                        android:id="@+id/TV_RepairMonthCostOtherValue"
+                        android:id="@+id/TV_OtherMonthCostOtherValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="100,00€"
@@ -201,9 +201,6 @@
                 </LinearLayout>
 
             </TableRow>
-
-
-
 
 
             <View
@@ -223,7 +220,6 @@
                 android:background="@android:color/darker_gray" />
 
         </TableLayout>
-
 
 
     </LinearLayout>

@@ -1,4 +1,4 @@
-package de.fhbi.mobappproj.carlogger;
+package de.fhbi.mobappproj.carlogger.activities;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -7,9 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,8 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -30,9 +26,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import de.fhbi.mobappproj.carlogger.AddMenu;
+import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
+import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
+import de.fhbi.mobappproj.carlogger.fragments.ReminderFragment;
+import de.fhbi.mobappproj.carlogger.fragments.RepairFragment;
 
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int RC_SIGN_IN = 123;
@@ -45,14 +47,12 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
 
 
-    private FloatingActionMenu menuAdd;
-    private com.github.clans.fab.FloatingActionButton fab_addFuel;
-    private com.github.clans.fab.FloatingActionButton fab_repairService;
-    private com.github.clans.fab.FloatingActionButton fab_addReminder;
-    private com.github.clans.fab.FloatingActionButton fab_addOtherCost;
+    //Plus-Button for entry adding
+    private AddMenu menuAdd;
 
 
-    private Handler mUiHandler = new Handler();
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         setSupportActionBar(toolbar);
 
 
-        intiAddFab();
+        menuAdd = new AddMenu(findViewById(R.id.fabAdd), this);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -97,40 +97,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void intiAddFab() {
-        menuAdd = (FloatingActionMenu) findViewById(R.id.fabAdd);
 
-        //addButton setup should be done in xml (app_bar_main)
-        menuAdd.setMenuButtonColorNormalResId(R.color.colorPrimary);
-        menuAdd.setMenuButtonColorPressedResId(R.color.colorAccent);
-
-
-        fab_addFuel = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addFuel);
-        fab_repairService = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addRepairService);
-        fab_addReminder = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addReminder);
-        fab_addOtherCost = (com.github.clans.fab.FloatingActionButton) findViewById(R.id.fab_addOtherCost);
-
-        menuAdd.setClosedOnTouchOutside(true);
-
-        menuAdd.hideMenuButton(false);
-
-        fab_addFuel.setOnClickListener(this);
-        fab_repairService.setOnClickListener(this);
-        fab_addReminder.setOnClickListener(this);
-        fab_addOtherCost.setOnClickListener(this);
-
-
-        //animation
-        int delay = 400;
-        mUiHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                menuAdd.showMenuButton(true);
-            }
-        }, delay);
-
-
-    }
 
     @Override
     protected void onStart() {
@@ -212,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             // Handle the fuel action
             changeFragmentTo(new FuelFragment());
         } else if (id == R.id.nav_otherCosts) {
-
+            changeFragmentTo(new OtherCostFragment());
         } else if (id == R.id.nav_reminder) {
             changeFragmentTo(new ReminderFragment());
         } else if (id == R.id.nav_repair_service) {

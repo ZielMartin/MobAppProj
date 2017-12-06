@@ -46,4 +46,16 @@
     <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
 
+    <!-- fragmentOtherCost -->
+    <string name="otherCostFragment_allCost">Gesamtkosten für Andere Kosten</string>
+    <string name="otherCostFragment_monthCost">Kosten Pro Monat</string>
+    <string name="otherCostFragment_periodCost">Kosten für Zeitraum</string>
+    <string name="otherCostFragment_periodCostWithDate">Kosten für Zeitraum %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
+    <string name="otherCostFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
+
+
+    <!-- DatePicker -->
+    <string name="datePicker_from">Von</string>
+    <string name="datePicker_to">Bis</string>
+
 </resources>
