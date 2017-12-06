@@ -7,10 +7,8 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 import de.fhbi.mobappproj.carlogger.DatePicker;
 import de.fhbi.mobappproj.carlogger.R;
@@ -24,7 +22,7 @@ import de.fhbi.mobappproj.carlogger.R;
  * create an instance of this fragment.
  */
 
-public class OtherCostFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener{
+public class OtherCostFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,10 +33,6 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener,
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-    private DatePicker datePicker;
-
-    private TextView TV_OtherPeriodCost;
 
 
 
@@ -83,9 +77,10 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener,
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_other_cost, container, false);
 
-        //DatePicker
-        TV_OtherPeriodCost = (TextView) v.findViewById(R.id.TV_OtherPeriodCost);
-        datePicker = new DatePicker((Button) v.findViewById(R.id.BTN_OtherDatePicker), this);
+        //DatePicker//TV_OtherPeriodCost = (TextView) v.findViewById(R.id.TV_OtherPeriodCost);
+        new DatePicker(v.findViewById(R.id.BTN_OtherDatePicker),
+                                    this,
+                                    (TextView) v.findViewById(R.id.TV_OtherPeriodCost));
 
 
 
@@ -127,20 +122,6 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener,
     }
 
 
-    /**
-     * Called after setting Date
-     * @param view
-     * @param year
-     * @param monthOfYear
-     * @param dayOfMonth
-     * @param yearEnd
-     * @param monthOfYearEnd
-     * @param dayOfMonthEnd
-     */
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        TV_OtherPeriodCost.setText(getString(R.string.otherCostFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
-    }
 
 
     /**

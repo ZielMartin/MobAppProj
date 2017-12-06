@@ -15,10 +15,6 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 
 
-import com.borax12.materialdaterangepicker.date.DatePickerDialog;
-
-import java.util.Calendar;
-
 import de.fhbi.mobappproj.carlogger.DatePicker;
 import de.fhbi.mobappproj.carlogger.R;
 
@@ -31,7 +27,7 @@ import de.fhbi.mobappproj.carlogger.R;
  * create an instance of this fragment.
  */
 
-public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialog.OnDateSetListener {
+public class FuelFragment extends Fragment implements OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -44,7 +40,7 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
     private OnFragmentInteractionListener mListener;
 
     private TextView TV_PeriodCost;
-    private DatePicker datePicker;
+
 
     public FuelFragment() {
         // Required empty public constructor
@@ -77,7 +73,6 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         }
 
 
-
     }
 
     @Override
@@ -88,14 +83,13 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         View v = inflater.inflate(R.layout.fragment_fuel, container, false);
 
         //DatePicker
-        TV_PeriodCost = (TextView) v.findViewById(R.id.TV_FuelPeriodCost);
-        datePicker = new DatePicker((Button) v.findViewById(R.id.BTN_FuelDatePicker), this);
+        new DatePicker(v.findViewById(R.id.BTN_FuelDatePicker),
+                this,
+                (TextView) v.findViewById(R.id.TV_FuelPeriodCost));
 
         //InfoButton
         Button btn_FuelInfo = (Button) v.findViewById(R.id.BTN_FuelConsumptionInfo);
         btn_FuelInfo.setOnClickListener(this);
-
-
 
 
         return v;
@@ -141,15 +135,10 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
                 // Create the AlertDialog object and return it
                 builder.create();
                 builder.show();
-            }
         }
-
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-
-        TV_PeriodCost.setText(getString(R.string.fuelFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
     }
-}
+
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -166,3 +155,4 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         void onFragmentInteraction(Uri uri);
     }
 
+}

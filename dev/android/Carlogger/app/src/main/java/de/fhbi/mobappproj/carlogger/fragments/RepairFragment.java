@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-
-import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 
 
 import de.fhbi.mobappproj.carlogger.DatePicker;
@@ -24,7 +21,7 @@ import de.fhbi.mobappproj.carlogger.R;
  * Use the {@link RepairFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
+public class RepairFragment extends Fragment implements View.OnClickListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -37,9 +34,6 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
     private String mParam1;
     private String mParam2;
 
-
-    private TextView TV_RepairPeriodCost;
-    private DatePicker datePicker;
 
     private OnFragmentInteractionListener mListener;
 
@@ -81,9 +75,9 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
         View view = inflater.inflate(R.layout.fragment_repair, container, false);
 
         //DatePicker
-        TV_RepairPeriodCost = (TextView) view.findViewById(R.id.TV_RepairPeriodCost);
-        datePicker = new DatePicker((Button) view.findViewById(R.id.BTN_RepairDatePicker), this);
-
+        new DatePicker(view.findViewById(R.id.BTN_RepairDatePicker),
+                this,
+                (TextView) view.findViewById(R.id.TV_RepairPeriodCost));
 
 
         return view;
@@ -124,10 +118,6 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
 
     }
 
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
-        TV_RepairPeriodCost.setText(getString(R.string.repairFragment_periodCostWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
-    }
 
     /**
      * This interface must be implemented by activities that contain this
