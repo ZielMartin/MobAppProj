@@ -1,12 +1,16 @@
 package de.fhbi.mobappproj.carlogger;
 
+import android.content.Intent;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import com.github.clans.fab.FloatingActionMenu;
 
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAdd;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAdd;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAdd;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAdd;
 
 /**
  * Created by Johannes on 06.12.2017.
@@ -84,9 +88,25 @@ public class AddMenu implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.fab_addReminder:
+                view.getContext().startActivity(new Intent(view.getContext(), ReminderAdd.class));
+                menu.close(false);
+                break;
+            case R.id.fab_addOtherCost:
+                view.getContext().startActivity(new Intent(view.getContext(), OtherCostAdd.class));
+                menu.close(false);
+                break;
             case R.id.fab_addFuel:
-                Log.i(TAG,"test addFuel Button");
+                view.getContext().startActivity(new Intent(view.getContext(), FuelAdd.class));
+                menu.close(false);
+                break;
+            case R.id.fab_addRepairService:
+                view.getContext().startActivity(new Intent(view.getContext(), RepairAdd.class));
+                menu.close(false);
                 break;
         }
     }
+
+
+
 }

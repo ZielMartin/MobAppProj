@@ -25,6 +25,9 @@
     <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
     <string name="fuelFragment_fuelConsumptionOther">Verbrauch (L/100KM) anderer Fahrer</string>
 
+    <!-- FuelAdd -->
+    <string name="fuel_add_title">Tankfüllung hinzufügen</string>
+
     <!-- FuelDialogFragmen -->
     <string name="fuelDialogFragment_info">Realistische Verbrauchs-Berechnung nur möglich wenn 2 mal hintereinander eine Vollbetankung
     durchgeführt wurde (Tank muss nicht zwangsläufig leer sein, sollte nach dem Tankvorgang jedoch voll sein).</string>
@@ -43,6 +46,9 @@
     <string name="repairFragment_periodCost">Kosten für Zeitraum</string>
     <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
+    <!-- RepairAdd -->
+    <string name="repair_add_title">Reparatur &amp; Service hinzufügen</string>
+
 
     <!-- fragmentOtherCost -->
     <string name="otherCostFragment_allCost">Gesamtkosten für Andere Kosten</string>
@@ -50,10 +56,27 @@
     <string name="otherCostFragment_periodCost">Kosten für Zeitraum</string>
     <string name="otherCostFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
+    <!-- OtherCostAdd -->
+    <string name="other_cost_add_title">Andere Kosten hinzufügen</string>
+
+
+    <!-- Reminder -->
+
+
+    <!-- ReminderAdd-->
+    <string name="reminder_add_title">Erinnerung hinzufügen</string>
+    <string name="reminder_add_description">Beschreibung/Name</string>
+    <string name="reminder_cb_push">Push Notification</string>
+
 
     <!-- DatePicker -->
     <string name="datePicker_from">Von</string>
     <string name="datePicker_to">Bis</string>
     <string name="datePicker_periodWithDate">Kosten für Zeitraum %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+
+    <string name="input_error">Fehlerhafte Eingabe</string>
+
 
 </resources>

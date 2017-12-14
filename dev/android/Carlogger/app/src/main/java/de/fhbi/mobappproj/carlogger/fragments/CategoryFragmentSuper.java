@@ -1,28 +1,33 @@
 package de.fhbi.mobappproj.carlogger.fragments;
 
+import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 import de.fhbi.mobappproj.carlogger.DatePicker;
 import de.fhbi.mobappproj.carlogger.R;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link CategoryFragmentSuper.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link CategoryFragmentSuper#newInstance} factory method to
+ * create an instance of this fragment.
+ */
 
-public class OtherCostFragment extends Fragment implements View.OnClickListener{
+public class CategoryFragmentSuper extends Fragment implements OnClickListener {
 
     private OnFragmentInteractionListener mListener;
-
-    public OtherCostFragment() {
-        // Required empty public constructor
-    }
-
 
 
     @Override
@@ -30,18 +35,7 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_other_cost, container, false);
-
-        Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_OtherDatePicker);
-        btn_DatePicker.setOnClickListener(this);
-
-        return v;
-    }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -67,25 +61,10 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
         mListener = null;
     }
 
-
-
-
-
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-
-            case R.id.BTN_OtherDatePicker:
-            //DatePicker
-            new DatePicker(this.getView().findViewById(R.id.BTN_OtherDatePicker),
-                this,
-                (TextView) this.getView().findViewById(R.id.TV_OtherPeriodCost));
-            break;
-    }
 
     }
-
-
 
 
     /**
@@ -104,7 +83,3 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
     }
 
 }
-
-
-
-

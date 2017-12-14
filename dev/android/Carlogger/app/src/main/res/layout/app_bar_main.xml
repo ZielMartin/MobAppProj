@@ -33,10 +33,13 @@
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
 
+
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true"
         fab:menu_backgroundColor="#ccffffff"
         fab:menu_fab_label="@string/fabAdd_label">
+
+
 
 
         <com.github.clans.fab.FloatingActionButton

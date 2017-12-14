@@ -11,4 +11,5 @@
     <color name="light_grey">#EEEEEE</color>
     <color name="white_transparent">#99FFFFFF</color>
     <color name="black">#000</color>
+    <color name="red_primary">#fa0000</color>
 </resources>
