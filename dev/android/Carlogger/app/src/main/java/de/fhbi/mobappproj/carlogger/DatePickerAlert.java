@@ -12,34 +12,34 @@ import java.util.Calendar;
 
 /**
  * Created by Johannes on 06.12.2017.
- * Creates DatePicker Dialog and handles action
+ * Creates DatePickerAlert Dialog and handles action
  * Must be called from a Fragment Instance
  */
 
-public class DatePicker implements DatePickerDialog.OnDateSetListener {
+public class DatePickerAlert implements DatePickerDialog.OnDateSetListener {
 
     private Button callingBTN;
     private Fragment callingFragment;
     private TextView callingTextview;
 
     /**
-     * new DatePicker
+     * new DatePickerAlert
      * @param callingBTN            for clickListener
      * @param callingFragment       callback to access Data
      * @param callingTextview       TextView that should be updated
      */
-    public DatePicker(Button callingBTN, Fragment callingFragment, TextView callingTextview){
+    public DatePickerAlert(Button callingBTN, Fragment callingFragment, TextView callingTextview){
         this.callingFragment = callingFragment;
         this.callingTextview = callingTextview;
         show();
     }
 
     /**
-     * new DatePicker
+     * new DatePickerAlert
      * @param callingBTN            for clickListener
      * @param callingFragment       callback to access Data
      */
-    public DatePicker(Button callingBTN, Fragment callingFragment){
+    public DatePickerAlert(Button callingBTN, Fragment callingFragment){
         this.callingFragment = callingFragment;
         show();
     }

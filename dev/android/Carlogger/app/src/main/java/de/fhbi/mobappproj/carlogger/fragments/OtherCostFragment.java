@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import de.fhbi.mobappproj.carlogger.DatePicker;
+import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
 
 
@@ -76,8 +76,8 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
 
             case R.id.BTN_OtherDatePicker:
-            //DatePicker
-            new DatePicker(this.getView().findViewById(R.id.BTN_OtherDatePicker),
+            //DatePickerAlert
+            new DatePickerAlert(this.getView().findViewById(R.id.BTN_OtherDatePicker),
                 this,
                 (TextView) this.getView().findViewById(R.id.TV_OtherPeriodCost));
             break;

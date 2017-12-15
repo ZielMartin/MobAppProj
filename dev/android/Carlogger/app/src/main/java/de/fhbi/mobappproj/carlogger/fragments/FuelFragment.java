@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 
 
-import de.fhbi.mobappproj.carlogger.DatePicker;
+import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
 
 public class FuelFragment extends Fragment implements OnClickListener {
@@ -81,9 +81,9 @@ public class FuelFragment extends Fragment implements OnClickListener {
                 builder.show();
                 break;
             case R.id.BTN_FuelDatePicker:
-                //DatePicker
+                //DatePickerAlert
 
-                new DatePicker(this.getView().findViewById(R.id.BTN_FuelDatePicker),
+                new DatePickerAlert(this.getView().findViewById(R.id.BTN_FuelDatePicker),
                         this,
                         (TextView) this.getView().findViewById(R.id.TV_FuelPeriodCost));
                 break;

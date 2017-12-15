@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-import de.fhbi.mobappproj.carlogger.DatePicker;
+import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
 
 
@@ -35,7 +35,7 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_repair, container, false);
 
-        //DatePicker
+        //DatePickerAlert
         Button btn_DatePicker = (Button) view.findViewById(R.id.BTN_RepairDatePicker);
         btn_DatePicker.setOnClickListener(this);
 
@@ -77,8 +77,8 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
 
             case R.id.BTN_RepairDatePicker:
-                //DatePicker
-                new DatePicker(this.getView().findViewById(R.id.BTN_RepairDatePicker),
+                //DatePickerAlert
+                new DatePickerAlert(this.getView().findViewById(R.id.BTN_RepairDatePicker),
                         this,
                         (TextView) this.getView().findViewById(R.id.TV_RepairPeriodCost));
                 break;
