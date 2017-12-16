@@ -6,19 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAdd"
+    tools:context="de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAddActivity"
     tools:showIn="@layout/activity_reminder_add">
 
     <ScrollView
+        android:id="@+id/reminderAddSV"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/contentReminderLL"
+            android:id="@+id/reminderAddLL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
             android:orientation="vertical">
@@ -44,7 +44,7 @@
                 android:background="@android:color/darker_gray" />
 
             <DatePicker
-                android:id="@+id/reminderAddDatePicker"
+                android:id="@+id/DP_ReminderAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -59,7 +59,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TimePicker
-                android:id="@+id/reminderAddTimePicker"
+                android:id="@+id/TP_ReminderAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -78,8 +78,8 @@
                 android:id="@+id/CB_ReminderPushNot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:checked="false"
                 android:text="@string/reminder_cb_push" />
 

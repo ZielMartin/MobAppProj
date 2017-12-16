@@ -2,7 +2,9 @@ package de.fhbi.mobappproj.carlogger.DataClasses;
 
 import android.util.Log;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Johannes on 15.12.2017.
@@ -12,16 +14,22 @@ public class ReminderEntry extends EntrySuper{
 
 
     private String description;
-    private Date dateTime;
+    private Calendar dateTime;
     private boolean pushNotification;
     private int hoursNotification;
+
+
+    public ReminderEntry() {
+        ReminderEntryList.getInstance().addEntry(this);
+        dateTime = new GregorianCalendar();
+    }
 
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(Calendar dateTime) {
         this.dateTime = dateTime;
     }
 
@@ -37,9 +45,6 @@ public class ReminderEntry extends EntrySuper{
         this.hoursNotification = hoursNotification;
     }
 
-    public ReminderEntry() {
-        ReminderEntryList.getInstance().addEntry(this);
-    }
 
 
     @Override

@@ -6,11 +6,11 @@ import android.view.View;
 
 import com.github.clans.fab.FloatingActionMenu;
 
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAdd;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAddActivity;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAddActivity;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAdd;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAdd;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAdd;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAddActivity;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAddActivity;
 
 /**
  * Created by Johannes on 06.12.2017.
@@ -89,19 +89,19 @@ public class AddMenu implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fab_addReminder:
-                view.getContext().startActivity(new Intent(view.getContext(), ReminderAdd.class));
+                view.getContext().startActivity(new Intent(view.getContext(), ReminderAddActivity.class));
                 menu.close(false);
                 break;
             case R.id.fab_addOtherCost:
-                view.getContext().startActivity(new Intent(view.getContext(), OtherCostAdd.class));
+                view.getContext().startActivity(new Intent(view.getContext(), OtherCostAddActivity.class));
                 menu.close(false);
                 break;
             case R.id.fab_addFuel:
-                view.getContext().startActivity(new Intent(view.getContext(), FuelAdd.class));
+                view.getContext().startActivity(new Intent(view.getContext(), FuelAddActivity.class));
                 menu.close(false);
                 break;
             case R.id.fab_addRepairService:
-                view.getContext().startActivity(new Intent(view.getContext(), RepairAdd.class));
+                view.getContext().startActivity(new Intent(view.getContext(), RepairAddActivity.class));
                 menu.close(false);
                 break;
         }

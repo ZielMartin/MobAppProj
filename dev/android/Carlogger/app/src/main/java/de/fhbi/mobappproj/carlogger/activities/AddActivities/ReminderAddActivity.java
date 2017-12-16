@@ -18,7 +18,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
-public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
+public class ReminderAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
 
     private EditText ET_Description;
     private FloatingActionButton fab;
@@ -41,7 +41,7 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
         fab.setOnClickListener(this);
 
         //set 24h Format
-        TP_TimePicker = (TimePicker) findViewById(R.id.reminderAddTimePicker);
+        TP_TimePicker = (TimePicker) findViewById(R.id.TP_ReminderAdd);
         TP_TimePicker.setIs24HourView(true);
 
         ET_Description = (EditText) findViewById(R.id.ET_ReminderAddDescriptionValue);
@@ -50,7 +50,7 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
         CB_PushNotification = (CheckBox) findViewById(R.id.CB_ReminderPushNot);
         CB_PushNotification.setOnCheckedChangeListener(this);
 
-        DP_DatePicker = (DatePicker) findViewById(R.id.reminderAddDatePicker);
+        DP_DatePicker = (DatePicker) findViewById(R.id.DP_ReminderAdd);
 
 
 
@@ -63,10 +63,10 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
 
     @Override
     protected boolean checkInput() {
-        String input = ET_Description.getText().toString();
-        if(input == null || input.trim().equals("")) {
+        String descriptionInput = ET_Description.getText().toString();
+        if(descriptionInput == null || descriptionInput.trim().equals("")) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
-            ET_Description.setError("Bitte Beschreibung eingeben");
+            ET_Description.setError(getString(R.string.reminder_error_description));
             ET_Description.requestFocus();
             return false;
         }
@@ -78,12 +78,13 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
     public void onClick(View view) {
         switch(view.getId()){
             case(R.id.fabReminderCheck):
-                //TODO: Save created Data on Firebase
+                // Save created Data on Firebase using DataClasses
                 ReminderEntry re = new ReminderEntry();
                 re.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
                 re.setDescription(ET_Description.getText().toString());
                 re.setHoursNotification(hoursNotification);
                 re.setPushNotification(CB_PushNotification.isChecked());
+                re.push();
 
 
                 if(checkInput()){
@@ -93,7 +94,7 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
         }
     }
 
-    //Push-Notification
+    //Push-Notification AlertDialog
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if ( b )
@@ -137,10 +138,12 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
             // create and show the alert dialog
             AlertDialog dialog = builder.create();
             dialog.show();
+        }else{
+            CB_PushNotification.setText(getString(R.string.reminder_cb_push));
         }
     }
 
-    public static java.util.Date getDateFromDatePicker(DatePicker datePicker, TimePicker timePicker){
+    public Calendar getDateFromDatePicker(DatePicker datePicker, TimePicker timePicker){
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year =  datePicker.getYear();
@@ -150,7 +153,7 @@ public class ReminderAdd extends AddActivitySuper implements CompoundButton.OnCh
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day, hour, minute);
 
-        return calendar.getTime();
+        return calendar;
     }
 
 

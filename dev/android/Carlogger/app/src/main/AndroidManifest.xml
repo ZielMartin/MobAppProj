@@ -28,19 +28,19 @@
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
-            android:name=".activities.AddActivities.ReminderAdd"
+            android:name=".activities.AddActivities.ReminderAddActivity"
             android:label="@string/reminder_add_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.AddActivities.RepairAdd"
+            android:name=".activities.AddActivities.RepairAddActivity"
             android:label="@string/repair_add_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.AddActivities.FuelAdd"
+            android:name=".activities.AddActivities.FuelAddActivity"
             android:label="@string/fuel_add_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.AddActivities.OtherCostAdd"
+            android:name=".activities.AddActivities.OtherCostAddActivity"
             android:label="@string/other_cost_add_title"
             android:theme="@style/AppTheme.NoActionBar" />
 

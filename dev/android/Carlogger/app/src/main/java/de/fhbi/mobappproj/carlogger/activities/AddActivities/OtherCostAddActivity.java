@@ -8,27 +8,25 @@ import android.view.View;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.AddActivitySuper;
 
-public class RepairAdd extends AddActivitySuper {
+public class OtherCostAddActivity extends AddActivitySuper {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     protected void initGUIElements() {
         //TODO Fill
         //addButton
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabRepairCheck);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabOtherCostCheck);
         fab.setOnClickListener(this);
     }
 
     @Override
     protected void setContentView() {
-        super.setContentView(R.layout.activity_repair_add);
+        super.setContentView(R.layout.activity_other_cost_add);
     }
-
 
     @Override
     protected boolean checkInput() {
@@ -40,8 +38,8 @@ public class RepairAdd extends AddActivitySuper {
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case(R.id.fabRepairCheck):
-                //TODO: Save created Data on Firebase
+            case(R.id.fabOtherCostCheck):
+                //TODO: Save created Data on Firebase using DataClasses
                 finish();
                 break;
         }

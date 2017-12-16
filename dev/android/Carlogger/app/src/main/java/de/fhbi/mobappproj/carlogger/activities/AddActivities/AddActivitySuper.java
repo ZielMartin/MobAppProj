@@ -17,6 +17,7 @@ import de.fhbi.mobappproj.carlogger.R;
 /**
  * Superclass for all AddActivities
  *
+ * EditTexts in SubClasses have to set their instance as OnFocusChangedListener to hide the Keyboard when they lost focus
  */
 public abstract class AddActivitySuper extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
 

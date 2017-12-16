@@ -25,8 +25,22 @@
     <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
     <string name="fuelFragment_fuelConsumptionOther">Verbrauch (L/100KM) anderer Fahrer</string>
 
-    <!-- FuelAdd -->
+    <!--FuelAddActivity -->
     <string name="fuel_add_title">Tankfüllung hinzufügen</string>
+    <string name="fuel_add_quantity">Menge in Liter</string>
+    <string name="fuel_add_cost_per_litre">Kosten/Liter in €</string>
+    <string name="fuel_add_km">Kilometerstand</string>
+    <string name="fuel_add_cb_full">Vollgetankt</string>
+    <string name="fuel_add_cb_auto_entry">Automatischer Eintrag</string>
+    <string name="fuel_add_cb_auto_entry_with_time">Automatischer Eintrag (%1$s)</string>
+
+    <string name="ad_auto_entry_title">Diesen Eintrag Automatisch einfügen</string>
+    <string name="ad_auto_entry_daily">Täglich</string>
+    <string name="ad_auto_entry_weekly">Wöchentlich</string>
+    <string name="ad_auto_entry_monthly">Monatlich</string>
+
+    <string name="fuel_add_error_quantity">Bitte Menge eingeben</string>
+    <string name="fuel_add_error_cost">Bitte Kosten/Liter eingeben</string>
 
     <!-- FuelDialogFragmen -->
     <string name="fuelDialogFragment_info">Realistische Verbrauchs-Berechnung nur möglich wenn 2 mal hintereinander eine Vollbetankung
@@ -46,7 +60,7 @@
     <string name="repairFragment_periodCost">Kosten für Zeitraum</string>
     <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
-    <!-- RepairAdd -->
+    <!--RepairAddActivity -->
     <string name="repair_add_title">Reparatur &amp; Service hinzufügen</string>
 
 
@@ -56,18 +70,26 @@
     <string name="otherCostFragment_periodCost">Kosten für Zeitraum</string>
     <string name="otherCostFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
-    <!-- OtherCostAdd -->
+    <!--OtherCostAddActivity -->
     <string name="other_cost_add_title">Andere Kosten hinzufügen</string>
 
 
     <!-- Reminder -->
 
 
-    <!-- ReminderAdd-->
+    <!--ReminderAddActivity-->
     <string name="reminder_add_title">Erinnerung hinzufügen</string>
     <string name="reminder_add_description">Beschreibung/Name</string>
     <string name="reminder_cb_push">Push Notification</string>
     <string name="reminder_cb_push_withTime">Push Notification (%1$s)</string>
+
+    <string name="reminder_error_description">Bitte Beschreibung eingeben</string>
+
+    <string name="ad_push_notification_title">Wann soll die Benachrichtigung erfolgen?</string>
+    <string name="ad_push_notification_1">1 Stunde vorher</string>
+    <string name="ad_push_notification_2">2 Stunden vorher</string>
+    <string name="ad_push_notification_3">3 Stunden vorher</string>
+    <string name="ad_push_notification_24">24 Stunden vorher</string>
 
 
     <!--DatePickerAlert -->
@@ -79,11 +101,7 @@
 
     <string name="input_error">Fehlerhafte Eingabe</string>
 
-    <string name="ad_push_notification_title">Wann soll die Benachrichtigung erfolgen?</string>
-    <string name="ad_push_notification_1">1 Stunde vorher</string>
-    <string name="ad_push_notification_2">2 Stunden vorher</string>
-    <string name="ad_push_notification_3">3 Stunden vorher</string>
-    <string name="ad_push_notification_24">24 Stunden vorher</string>
+
 
 
 
