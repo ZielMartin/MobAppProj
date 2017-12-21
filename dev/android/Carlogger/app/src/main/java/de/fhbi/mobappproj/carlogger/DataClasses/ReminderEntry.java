@@ -21,7 +21,6 @@ public class ReminderEntry extends EntrySuper{
 
     public ReminderEntry() {
         ReminderEntryList.getInstance().addEntry(this);
-        dateTime = new GregorianCalendar();
     }
 
 

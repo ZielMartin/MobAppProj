@@ -10,20 +10,20 @@ import java.util.GregorianCalendar;
 
 public class FuelEntry extends EntrySuper {
 
-    private Calendar calendar;
+
     private double quantity;
     private double costPerLitre;
     private double km;
     private boolean full;
-    private AutoEntryDates.AutoEntry autoEntry;
 
 
 
     public FuelEntry() {
+        super();
         FuelEntryList.getInstance().addEntry(this);
         quantity = 0;
         costPerLitre = 0;
-        calendar = Calendar.getInstance();
+
     }
 
 

@@ -17,6 +17,8 @@ import android.app.AlertDialog;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
 
+import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+
 public class FuelFragment extends Fragment implements OnClickListener {
 
     private OnFragmentInteractionListener mListener;
@@ -45,10 +47,12 @@ public class FuelFragment extends Fragment implements OnClickListener {
 
         Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_FuelDatePicker);
         btn_DatePicker.setOnClickListener(this);
+        buttonEffect(btn_DatePicker);
 
         //InfoButton
         Button btn_FuelInfo = (Button) v.findViewById(R.id.BTN_FuelConsumptionInfo);
         btn_FuelInfo.setOnClickListener(this);
+        buttonEffect(btn_FuelInfo);
 
 
         return v;

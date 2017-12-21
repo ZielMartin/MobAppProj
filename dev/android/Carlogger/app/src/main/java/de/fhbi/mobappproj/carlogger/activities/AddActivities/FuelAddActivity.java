@@ -4,15 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.regex.Pattern;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates.AutoEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
@@ -67,14 +63,14 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
 
 
         Double quantityInput = editTextToDouble(ET_FuelAddQuantity);
-        if(quantityInput == 0) {
+        if(quantityInput <= 0) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
             ET_FuelAddQuantity.setError(getString(R.string.fuel_add_error_quantity));
             ET_FuelAddQuantity.requestFocus();
             return false;
         }
         Double costInput = editTextToDouble(ET_FuelAddCostPerLitre);
-        if( costInput == 0) {
+        if( costInput <= 0) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
             ET_FuelAddCostPerLitre.setError(getString(R.string.fuel_add_error_cost));
             ET_FuelAddCostPerLitre.requestFocus();
@@ -104,17 +100,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
         }
     }
 
-    //parsing string with comma to double
-    private double editTextToDouble(EditText et){
-        String regexp = "^[0-9]\\d*(\\,\\d+)?$";
 
-        if (et.getText().toString().trim().matches(regexp)) {
-            return Double.parseDouble(et.getText().toString().trim().replace(",","."));
-        }
-        else{
-            return 0;
-        }
-    }
 
 
     @Override
@@ -129,7 +115,8 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
             // add a list
             String[] values = {getString(R.string.ad_auto_entry_daily),
                     getString(R.string.ad_auto_entry_weekly),
-                    getString(R.string.ad_auto_entry_monthly)};
+                    getString(R.string.ad_auto_entry_monthly)
+            };
             builder.setItems(values, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {

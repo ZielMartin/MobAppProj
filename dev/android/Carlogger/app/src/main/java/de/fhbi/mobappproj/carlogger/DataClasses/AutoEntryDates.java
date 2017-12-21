@@ -11,10 +11,10 @@ import java.util.concurrent.TimeUnit;
 public class AutoEntryDates {
 
     public enum AutoEntry {
-        DAILY , WEEKLY, MONTHLY, YEARLY, EVERYTWOMONTH, EVERYTHREEMONTH
+        DAILY , WEEKLY, MONTHLY, YEARLY, EVERYTWOMONTH, EVERYTHREEMONTH, EVERYTWOYEAR
     }
 
-    public static int DAILYINT = 1, WEEKLYINT = 7, MONTHLYINT = 30, YEARLYINT = 356, EVERYTWOMONTH = 60, EVERYTHREEMONTH = 90;
+    private static int DAILYINT = 1, WEEKLYINT = 7, MONTHLYINT = 30, YEARLYINT = 365, EVERYTWOMONTH = 60, EVERYTHREEMONTH = 90, EVERYTWOYEAR = 730;
 
     public static ArrayList<Calendar> getList(Calendar lastEntryCalendar, AutoEntry entry){
         switch (entry){
@@ -52,11 +52,14 @@ public class AutoEntryDates {
         long start = lastEntryCalendar.getTimeInMillis();
         long days = TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
 
-        for(int i = 1; i <= days; i+=intervall){
+        for(int i = 1; i <=days; i+=intervall){
             Calendar newCal = (Calendar) lastEntryCalendar.clone();
             newCal.add(Calendar.DAY_OF_MONTH,i);
             list.add(newCal);
+            //System.out.println(newCal.getTime()+"  entries: "+days/intervall+"  intervall: "+intervall+"   i: "+i);
         }
+
+
 
         return list;
     }

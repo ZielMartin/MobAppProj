@@ -2,10 +2,143 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/repairAddCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAddActivity"
     tools:showIn="@layout/activity_repair_add">
 
+    <ScrollView
+        android:id="@+id/repairAddSV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/repairAddLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TV_RepairAddType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_add_type" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/repair_type"
+                android:spinnerMode="dialog" />
+
+            <TextView
+                android:id="@+id/TV_RepairAddCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_add_cost" />
+
+            <EditText
+                android:id="@+id/ET_RepairAddCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789,"
+                android:ems="10"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:text="0,00" />
+
+            <TextView
+                android:id="@+id/TV_RepairAddPartCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_add_part_cost" />
+
+            <EditText
+                android:id="@+id/ET_RepairAddPartCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789,"
+                android:ems="10"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:text="0,00" />
+
+            <TextView
+                android:id="@+id/TV_RepairAddLaborCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_add_labor_cost" />
+
+            <EditText
+                android:id="@+id/ET_RepairAddLaborCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789,"
+                android:ems="10"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:text="0,00" />
+
+            <TextView
+                android:id="@+id/TV_RepairAddDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_add_description" />
+
+            <EditText
+                android:id="@+id/ET_RepairAddDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:selectAllOnFocus="true" />
+
+
+            <CheckBox
+                android:id="@+id/CB_ReminderAddAutoEntry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/fuel_add_cb_auto_entry" />
+
+            <View
+                android:id="@+id/dividerLine1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/TV_RepairAddBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repair_add_bill" />
+
+            <Button
+                android:id="@+id/BTN_RepairAddBill"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_menu_camera" />
+
+            <ImageView
+                android:id="@+id/IV_RepairAddBill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                />
+
+            <Button
+                android:id="@+id/BTN_RepairAddDeleteBill"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@android:drawable/ic_delete"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

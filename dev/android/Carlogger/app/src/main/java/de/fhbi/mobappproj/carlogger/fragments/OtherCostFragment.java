@@ -14,6 +14,8 @@ import android.widget.TextView;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
 
+import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+
 
 public class OtherCostFragment extends Fragment implements View.OnClickListener{
 
@@ -39,6 +41,7 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
 
         Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_OtherDatePicker);
         btn_DatePicker.setOnClickListener(this);
+        buttonEffect(btn_DatePicker);
 
         return v;
     }

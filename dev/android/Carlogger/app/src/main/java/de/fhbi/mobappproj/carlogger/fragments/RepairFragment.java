@@ -14,6 +14,8 @@ import android.widget.TextView;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
 
+import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+
 
 public class RepairFragment extends Fragment implements View.OnClickListener{
 
@@ -38,6 +40,7 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
         //DatePickerAlert
         Button btn_DatePicker = (Button) view.findViewById(R.id.BTN_RepairDatePicker);
         btn_DatePicker.setOnClickListener(this);
+        buttonEffect(btn_DatePicker);
 
 
         return view;

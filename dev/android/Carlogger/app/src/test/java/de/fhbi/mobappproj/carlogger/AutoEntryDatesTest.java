@@ -37,7 +37,7 @@ public class AutoEntryDatesTest {
         //curDate - 1 Month
         lastEntry.add(Calendar.MONTH,-1);
         dates = AutoEntryDates.getList(lastEntry, AutoEntryDates.AutoEntry.DAILY);
-        assertEquals(30,dates.size());
+        assertTrue(dates.size()<=31 && dates.size() >= 28);
 
     }
 
@@ -90,11 +90,63 @@ public class AutoEntryDatesTest {
 
     @Test
     public void entryWeeklyOneMonth() throws Exception {
+
+        System.out.println("entryWeeklyOneMonth");
         //curDate - 1 Month
         lastEntry.add(Calendar.MONTH,-1);
         dates = AutoEntryDates.getList(lastEntry, AutoEntryDates.AutoEntry.WEEKLY);
-        //assertEquals(lastEntry.get(Calendar.WEEK_OF_MONTH)-);
 
+        //1st entry
+        Calendar entry = dates.get(0);
+        //should be one month ago
+        assertEquals(cur.get(Calendar.MONTH)-1, entry.get(Calendar.MONTH));
+        //last field
+        entry = dates.get(dates.size()-1);
+        //should be cur month
+        assertEquals(cur.get(Calendar.MONTH),entry.get(Calendar.MONTH));
+
+
+
+    }
+
+    @Test
+    public void entryWeeklyThreeMonth() throws Exception {
+
+        System.out.println("entryWeeklyThreeMonth");
+        //curDate - 3 Month
+        lastEntry.add(Calendar.MONTH,-3);
+        dates = AutoEntryDates.getList(lastEntry, AutoEntryDates.AutoEntry.WEEKLY);
+
+        //1st entry
+        Calendar entry = dates.get(0);
+        //should be 3 month ago
+        assertEquals(cur.get(Calendar.MONTH)-3, entry.get(Calendar.MONTH));
+        //last field
+        entry = dates.get(dates.size()-1);
+        //should be cur month
+        assertEquals(cur.get(Calendar.MONTH),entry.get(Calendar.MONTH));
+
+    }
+
+    @Test
+    public void entryYearlyTenYears() throws Exception {
+        System.out.println("entryYearlyTenYears");
+        //curDate - 3 Month
+        lastEntry.add(Calendar.YEAR,-10);
+        dates = AutoEntryDates.getList(lastEntry, AutoEntryDates.AutoEntry.YEARLY);
+
+        //1st entry
+        Calendar entry = dates.get(0);
+        //should be 10 years ago
+        assertEquals(cur.get(Calendar.YEAR)-10,entry.get(Calendar.YEAR));
+        //5th entry
+        entry = dates.get(4);
+        //should be 6 years ago
+        assertEquals(cur.get(Calendar.YEAR)-6,entry.get(Calendar.YEAR));
+        //last entry
+        entry = dates.get(dates.size()-1);
+        //should be this year
+        assertEquals(cur.get(Calendar.YEAR),entry.get(Calendar.YEAR));
     }
 
 

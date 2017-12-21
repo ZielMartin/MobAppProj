@@ -62,6 +62,31 @@
 
     <!--RepairAddActivity -->
     <string name="repair_add_title">Reparatur &amp; Service hinzufügen</string>
+    <string name="repair_add_type">Art</string>
+    <string name="repair_add_cost">Gesamtkosten</string>
+    <string name="repair_add_part_cost">Teilekosten</string>
+    <string name="repair_add_labor_cost">Arbeitskosten</string>
+    <string name="repair_add_description">Beschreibung/Ersetzte Teile</string>
+    <string name="repair_add_bill">Rechnung</string>
+
+    <string name="photo_error">Rechnungsfoto konnte nicht erstellt werden</string>
+
+    <string-array name="repair_type">
+        <item>Reparatur (Werkstatt)</item>
+        <item>Reparatur</item>
+        <item>TÜV</item>
+        <item>Inspektion</item>
+        <item>Andere</item>
+    </string-array>
+
+    <string name="repair_add_cb_auto_entry">Automatischer Eintrag</string>
+    <string name="repair_add_cb_auto_entry_with_time">Automatischer Eintrag (%1$s)</string>
+
+    <string name="ad_auto_entry_yearly">Jährlich</string>
+    <string name="ad_auto_entry_everytwoyear">Alle zwei Jahre</string>
+
+    <string name="repair_add_error_cost">Bitte Kosten angeben</string>
+
 
 
     <!-- fragmentOtherCost -->

@@ -1,6 +1,6 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
-import android.os.Bundle;
+import java.util.Calendar;
 
 /**
  * all sub-classes have to call their EntryList-singleton-instance in the contructor and add themself to the list
@@ -16,6 +16,12 @@ import android.os.Bundle;
 
 public abstract class EntrySuper {
 
+    protected Calendar currCalendar;
+    protected AutoEntryDates.AutoEntry autoEntry;
+
+    public EntrySuper(){
+        currCalendar = Calendar.getInstance();
+    }
 
 
     protected abstract void pushToFirebase();
