@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates.AutoEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
@@ -22,11 +23,18 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
     private CheckBox CB_FuelAddFull;
     private CheckBox CB_FuelAddAutoEntry;
 
-    private AutoEntry autoEntry;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+
+            if(savedInstanceState.getString("cbText")!=null){
+                CB_FuelAddAutoEntry.setText(savedInstanceState.getString("cbText"));
+            }
+        }
+
     }
 
     @Override
@@ -50,7 +58,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
         CB_FuelAddAutoEntry = (CheckBox) findViewById(R.id.CB_FuelAddAutoEntry);
         CB_FuelAddAutoEntry.setOnCheckedChangeListener(this);
 
-        autoEntry = null;
+
     }
 
     @Override
@@ -85,71 +93,88 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
         switch(view.getId()){
             case(R.id.fabFuelCheck):
 
-                FuelEntry fe = new FuelEntry();
-                fe.setAutoEntry(autoEntry);
-                fe.setCostPerLitre(editTextToDouble(ET_FuelAddCostPerLitre));
-                fe.setFull(CB_FuelAddFull.isChecked());
-                fe.setKm(editTextToDouble(ET_FuelAddKM));
-                fe.setQuantity(editTextToDouble(ET_FuelAddQuantity));
-                fe.push();
-
                 if(checkInput()){
+                    FuelEntry fe = new FuelEntry();
+                    fe.setAutoEntry(autoEntry);
+                    fe.setCostPerLitre(editTextToDouble(ET_FuelAddCostPerLitre));
+                    fe.setFull(CB_FuelAddFull.isChecked());
+                    fe.setKm(editTextToDouble(ET_FuelAddKM));
+                    fe.setQuantity(editTextToDouble(ET_FuelAddQuantity));
+                    fe.push();
+
                     finish();
                 }
                 break;
         }
     }
 
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("cbText", (String) CB_FuelAddAutoEntry.getText().toString());
+        super.onSaveInstanceState(outState);
+    }
 
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 
-        if(b){
+        //button pressed and autoEntry not set
+        if(b && autoEntry == null){
+            alertDialogAutoEntryPicker();
 
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.ad_auto_entry_title);
 
-            // add a list
-            String[] values = {getString(R.string.ad_auto_entry_daily),
-                    getString(R.string.ad_auto_entry_weekly),
-                    getString(R.string.ad_auto_entry_monthly)
-            };
-            builder.setItems(values, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0: // daily
-                            CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
-                            autoEntry = AutoEntry.DAILY;
-                            break;
-                        case 1: // weekly
-                            CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
-                            autoEntry = AutoEntry.WEEKLY;
-                            break;
-                        case 2: // monthly
-                            CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
-                            autoEntry = AutoEntry.MONTHLY;
-                            break;
-
-                        default:
-                            CB_FuelAddAutoEntry.setChecked(false);
-                            break;
-                    }
-                }
-            });
-
-            // create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }else{
+        }if(!b){
+            autoEntry = null;
             CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
         }
     }
 
+    private void alertDialogAutoEntryPicker() {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.ad_auto_entry_title);
 
+        // add a list
+        String[] values = {getString(R.string.ad_auto_entry_daily),
+                getString(R.string.ad_auto_entry_weekly),
+                getString(R.string.ad_auto_entry_monthly)
+        };
+        builder.setItems(values, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: // daily
+                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
+                        autoEntry = AutoEntry.DAILY;
+                        break;
+                    case 1: // weekly
+                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
+                        autoEntry = AutoEntry.WEEKLY;
+                        break;
+                    case 2: // monthly
+                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
+                        autoEntry = AutoEntry.MONTHLY;
+                        break;
+
+                    default:
+                        CB_FuelAddAutoEntry.setChecked(false);
+                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+                        break;
+                }
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                CB_FuelAddAutoEntry.setChecked(false);
+                CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+            }
+        });
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 
 }

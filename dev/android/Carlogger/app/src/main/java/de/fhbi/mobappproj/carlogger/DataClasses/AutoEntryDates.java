@@ -1,5 +1,7 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.concurrent.TimeUnit;

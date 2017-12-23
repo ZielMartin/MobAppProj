@@ -33,6 +33,15 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            hoursNotification = savedInstanceState.getInt("hoursNotification");
+            TP_TimePicker.setCurrentHour(savedInstanceState.getInt("currHour"));
+            TP_TimePicker.setCurrentMinute(savedInstanceState.getInt("currMin"));
+
+            if(savedInstanceState.getString("cbText")!=null){
+                CB_PushNotification.setText(savedInstanceState.getString("cbText"));
+            }
+        }
     }
 
     @Override
@@ -73,21 +82,30 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
         return true;
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("cbText", (String) CB_PushNotification.getText().toString());
+        outState.putInt("hoursNotification",hoursNotification);
+        outState.putInt("currHour", TP_TimePicker.getCurrentHour());
+        outState.putInt("currMin", TP_TimePicker.getCurrentMinute());
+
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void onClick(View view) {
         switch(view.getId()){
             case(R.id.fabReminderCheck):
-                // Save created Data on Firebase using DataClasses
-                ReminderEntry re = new ReminderEntry();
-                re.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
-                re.setDescription(ET_Description.getText().toString());
-                re.setHoursNotification(hoursNotification);
-                re.setPushNotification(CB_PushNotification.isChecked());
-                re.push();
-
 
                 if(checkInput()){
+                    // Save created Data on Firebase using DataClasses
+                    ReminderEntry re = new ReminderEntry();
+                    re.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
+                    re.setDescription(ET_Description.getText().toString());
+                    re.setHoursNotification(hoursNotification);
+                    re.setPushNotification(CB_PushNotification.isChecked());
+                    re.push();
+
                     finish();
                 }
                 break;
@@ -97,50 +115,64 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
     //Push-Notification AlertDialog
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if ( b )
+        if ( b && hoursNotification == 0 )
         {
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.ad_push_notification_title);
+            alertDialogNotificationPicker();
 
-            // add a list
-            String[] values = {getString(R.string.ad_push_notification_1),
-                                getString(R.string.ad_push_notification_2),
-                                getString(R.string.ad_push_notification_3),
-                                getString(R.string.ad_push_notification_24)};
-            builder.setItems(values, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0: // 1h
-                            CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_1)));
-                            hoursNotification = 1;
-                            break;
-                        case 1: // 2h
-                            CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_2)));
-                            hoursNotification = 2;
-                            break;
-                        case 2: // 3h
-                            CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_3)));
-                            hoursNotification = 3;
-                            break;
-                        case 3: // 24h
-                            CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_24)));
-                            hoursNotification = 24;
-                            break;
-                        default:
-                            CB_PushNotification.setChecked(false);
-                            break;
-                    }
-                }
-            });
-
-            // create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }else{
+        }if(!b){
             CB_PushNotification.setText(getString(R.string.reminder_cb_push));
+            hoursNotification = 0;
         }
+    }
+
+    private void alertDialogNotificationPicker() {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.ad_push_notification_title);
+
+        // add a list
+        String[] values = {getString(R.string.ad_push_notification_1),
+                            getString(R.string.ad_push_notification_2),
+                            getString(R.string.ad_push_notification_3),
+                            getString(R.string.ad_push_notification_24)};
+        builder.setItems(values, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: // 1h
+                        CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_1)));
+                        hoursNotification = 1;
+                        break;
+                    case 1: // 2h
+                        CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_2)));
+                        hoursNotification = 2;
+                        break;
+                    case 2: // 3h
+                        CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_3)));
+                        hoursNotification = 3;
+                        break;
+                    case 3: // 24h
+                        CB_PushNotification.setText(getString(R.string.reminder_cb_push_withTime,getString(R.string.ad_push_notification_24)));
+                        hoursNotification = 24;
+                        break;
+                    default:
+                        CB_PushNotification.setChecked(false);
+                        break;
+                }
+            }
+
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                CB_PushNotification.setChecked(false);
+                CB_PushNotification.setText(getString(R.string.reminder_cb_push));
+            }
+        });
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public Calendar getDateFromDatePicker(DatePicker datePicker, TimePicker timePicker){

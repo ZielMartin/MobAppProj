@@ -18,11 +18,11 @@
 
 
     <!-- fragmentFuel -->
-    <string name="fuelFragment_allCost">Gesamtkosten für Tanken</string>
-    <string name="fuelFragment_monthCost">Kosten Pro Monat</string>
-    <string name="fuelFragment_periodCost">Kosten für Zeitraum</string>
+    <string name="fuelFragment_allCost">Gesamtkosten für Tanken €</string>
+    <string name="fuelFragment_monthCost">Kosten Pro Monat €</string>
+    <string name="fuelFragment_periodCost">Kosten für Zeitraum €</string>
     <string name="fuelFragment_fuelConsumption">Verbrauch (L/100KM)</string>
-    <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
+    <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer €</string>
     <string name="fuelFragment_fuelConsumptionOther">Verbrauch (L/100KM) anderer Fahrer</string>
 
     <!--FuelAddActivity -->
@@ -40,7 +40,7 @@
     <string name="ad_auto_entry_monthly">Monatlich</string>
 
     <string name="fuel_add_error_quantity">Bitte Menge eingeben</string>
-    <string name="fuel_add_error_cost">Bitte Kosten/Liter eingeben</string>
+    <string name="fuel_add_error_cost">Bitte Kosten/Liter eingeben €</string>
 
     <!-- FuelDialogFragmen -->
     <string name="fuelDialogFragment_info">Realistische Verbrauchs-Berechnung nur möglich wenn 2 mal hintereinander eine Vollbetankung
@@ -55,17 +55,17 @@
     <string name="fabAdd_repair_service">Reparatur oder Service</string>
 
     <!-- fragmentRepair -->
-    <string name="repairFragment_allCost">Gesamtkosten für Reparaturen &amp; Service</string>
-    <string name="repairFragment_monthCost">Kosten Pro Monat</string>
-    <string name="repairFragment_periodCost">Kosten für Zeitraum</string>
-    <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
+    <string name="repairFragment_allCost">Gesamtkosten für Reparaturen &amp; Service €</string>
+    <string name="repairFragment_monthCost">Kosten Pro Monat €</string>
+    <string name="repairFragment_periodCost">Kosten für Zeitraum €</string>
+    <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer €</string>
 
     <!--RepairAddActivity -->
     <string name="repair_add_title">Reparatur &amp; Service hinzufügen</string>
     <string name="repair_add_type">Art</string>
-    <string name="repair_add_cost">Gesamtkosten</string>
-    <string name="repair_add_part_cost">Teilekosten</string>
-    <string name="repair_add_labor_cost">Arbeitskosten</string>
+    <string name="repair_add_cost">Gesamtkosten €</string>
+    <string name="repair_add_part_cost">Teilekosten €</string>
+    <string name="repair_add_labor_cost">Arbeitskosten €</string>
     <string name="repair_add_description">Beschreibung/Ersetzte Teile</string>
     <string name="repair_add_bill">Rechnung</string>
 
@@ -91,9 +91,9 @@
 
     <!-- fragmentOtherCost -->
     <string name="otherCostFragment_allCost">Gesamtkosten für Andere Kosten</string>
-    <string name="otherCostFragment_monthCost">Kosten Pro Monat</string>
-    <string name="otherCostFragment_periodCost">Kosten für Zeitraum</string>
-    <string name="otherCostFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
+    <string name="otherCostFragment_monthCost">Kosten Pro Monat €</string>
+    <string name="otherCostFragment_periodCost">Kosten für Zeitraum €</string>
+    <string name="otherCostFragment_monthCostOther">Kosten Pro Monat anderer Fahrer €</string>
 
     <!--OtherCostAddActivity -->
     <string name="other_cost_add_title">Andere Kosten hinzufügen</string>
@@ -121,7 +121,6 @@
     <string name="datePicker_from">Von</string>
     <string name="datePicker_to">Bis</string>
     <string name="datePicker_periodWithDate">Kosten für Zeitraum %1$d.%2$d.%3$d - %4$d.%5$d.%6$d</string>
-    <string name="title_activity_main2">Main2Activity</string>
 
 
     <string name="input_error">Fehlerhafte Eingabe</string>

@@ -96,7 +96,7 @@
 
 
             <CheckBox
-                android:id="@+id/CB_ReminderAddAutoEntry"
+                android:id="@+id/CB_RepairAddAutoEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fuel_add_cb_auto_entry" />

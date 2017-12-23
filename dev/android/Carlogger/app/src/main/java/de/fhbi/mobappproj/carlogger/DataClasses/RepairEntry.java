@@ -8,6 +8,7 @@ import java.io.File;
 
 public class RepairEntry extends EntrySuper {
 
+    private String type;
     private double cost;
     private double partCost;
     private double laborCost;
@@ -21,6 +22,7 @@ public class RepairEntry extends EntrySuper {
         RepairEntryList.getInstance().addEntry(this);
     }
 
+    public void setType(String type){ this.type = type; }
 
     public void setCost(double cost) {
         this.cost = cost;

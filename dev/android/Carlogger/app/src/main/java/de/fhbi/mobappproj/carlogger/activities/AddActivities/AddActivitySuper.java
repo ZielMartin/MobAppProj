@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.R;
 
 
@@ -40,6 +41,8 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
 
     protected File image;
 
+    protected AutoEntryDates.AutoEntry autoEntry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,10 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         this.setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(savedInstanceState!= null && savedInstanceState.containsKey("autoEntry")){
+            autoEntry = (AutoEntryDates.AutoEntry) savedInstanceState.getSerializable("autoEntry");
+        }
 
         initGUIElements();
     }
@@ -85,6 +92,15 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
         }
         return super.dispatchTouchEvent(ev);
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(autoEntry != null){
+            outState.putSerializable("autoEntry", autoEntry);
+        }
+    }
+
 
     protected abstract void initGUIElements();
 

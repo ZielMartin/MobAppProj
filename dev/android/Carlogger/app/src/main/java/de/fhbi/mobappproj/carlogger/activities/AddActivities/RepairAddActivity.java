@@ -3,17 +3,8 @@ package de.fhbi.mobappproj.carlogger.activities.AddActivities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.FileProvider;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,9 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
@@ -37,11 +25,11 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 public class RepairAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
 
     private EditText ET_RepairAddCost, ET_RepairAddPartCost, ET_RepairAddLaborCost, ET_RepairAddDescription;
+    private TextView TV_RepairAddType;
     private Button BTN_RepairAddBill, BTN_RepairAddDeleteBill;
     private ImageView IV_RepairAddBill;
 
-    private AutoEntryDates.AutoEntry autoEntry;
-    private CheckBox CB_ReminderAddAutoEntry;
+    private CheckBox CB_RepairAddAutoEntry;
 
 
 
@@ -54,15 +42,21 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
                 image = new File(savedInstanceState.getString("image"));
                 setPic(IV_RepairAddBill);
             }
+            if(savedInstanceState.getString("cbText")!=null){
+                CB_RepairAddAutoEntry.setText(savedInstanceState.getString("cbText"));
+            }
         }
         if(image != null){
             BTN_RepairAddDeleteBill.setVisibility(View.VISIBLE);
         }
+
     }
 
 
     @Override
     protected void initGUIElements() {
+
+        TV_RepairAddType = (TextView) findViewById(R.id.TV_RepairAddType);
 
         ET_RepairAddCost = (EditText) findViewById(R.id.ET_RepairAddCost);
         ET_RepairAddCost.setOnFocusChangeListener(this);
@@ -86,10 +80,9 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
 
         IV_RepairAddBill = (ImageView) findViewById(R.id.IV_RepairAddBill);
 
-        CB_ReminderAddAutoEntry = (CheckBox) findViewById(R.id.CB_ReminderAddAutoEntry);
-        CB_ReminderAddAutoEntry.setOnCheckedChangeListener(this);
+        CB_RepairAddAutoEntry = (CheckBox) findViewById(R.id.CB_RepairAddAutoEntry);
+        CB_RepairAddAutoEntry.setOnCheckedChangeListener(this);
 
-        autoEntry = null;
 
         //addButton
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabRepairCheck);
@@ -141,6 +134,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         if(image != null){
             outState.putString("image", image.getAbsolutePath());
         }
+        outState.putString("cbText", (String) CB_RepairAddAutoEntry.getText().toString());
         super.onSaveInstanceState(outState);
     }
 
@@ -153,17 +147,18 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         switch(view.getId()){
             case(R.id.fabRepairCheck):
 
-                RepairEntry entry = new RepairEntry();
-                entry.setAutoEntry(autoEntry);
-                entry.setBill(image);
-                entry.setCost(editTextToDouble(ET_RepairAddCost));
-                entry.setDescription(ET_RepairAddDescription.getText().toString());
-                entry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
-                entry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
-                entry.push();
-
-
                 if(checkInput()){
+                    //Create Entry and fill in Data
+                    RepairEntry entry = new RepairEntry();
+                    entry.setType(TV_RepairAddType.getText().toString());
+                    entry.setAutoEntry(autoEntry);
+                    entry.setBill(image);
+                    entry.setCost(editTextToDouble(ET_RepairAddCost));
+                    entry.setDescription(ET_RepairAddDescription.getText().toString());
+                    entry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
+                    entry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
+                    entry.push();
+
                     finish();
                 }
                 break;
@@ -181,55 +176,75 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(b){
 
-            // setup the alert builder
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle(R.string.ad_auto_entry_title);
+        //button pressed and autoEntry not set
+        if(b && autoEntry == null){
 
-            // add a list
-            String[] values = {getString(R.string.ad_auto_entry_daily),
-                    getString(R.string.ad_auto_entry_weekly),
-                    getString(R.string.ad_auto_entry_monthly),
-                    getString(R.string.ad_auto_entry_yearly),
-                    getString(R.string.ad_auto_entry_everytwoyear)};
-            builder.setItems(values, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0: // daily
-                            CB_ReminderAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
-                            autoEntry = AutoEntryDates.AutoEntry.DAILY;
-                            break;
-                        case 1: // weekly
-                            CB_ReminderAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
-                            autoEntry = AutoEntryDates.AutoEntry.WEEKLY;
-                            break;
-                        case 2: // monthly
-                            CB_ReminderAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
-                            autoEntry = AutoEntryDates.AutoEntry.MONTHLY;
-                            break;
-                        case 3: // yearly
-                            CB_ReminderAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_yearly)));
-                            autoEntry = AutoEntryDates.AutoEntry.YEARLY;
-                            break;
-                        case 4: // every two year
-                            CB_ReminderAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_everytwoyear)));
-                            autoEntry = AutoEntryDates.AutoEntry.EVERYTWOYEAR;
-                            break;
+            alertDialogAutoEntryPicker();
 
-                        default:
-                            CB_ReminderAddAutoEntry.setChecked(false);
-                            break;
-                    }
-                }
-            });
+        }if(!b){
 
-            // create and show the alert dialog
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }else{
-            CB_ReminderAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+            autoEntry = null;
+            CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+
         }
+    }
+
+
+
+    private void alertDialogAutoEntryPicker() {
+        // setup the alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.ad_auto_entry_title);
+
+        // add a list
+        String[] values = {getString(R.string.ad_auto_entry_daily),
+                getString(R.string.ad_auto_entry_weekly),
+                getString(R.string.ad_auto_entry_monthly),
+                getString(R.string.ad_auto_entry_yearly),
+                getString(R.string.ad_auto_entry_everytwoyear)};
+        builder.setItems(values, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0: // daily
+                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
+                        autoEntry = AutoEntryDates.AutoEntry.DAILY;
+                        break;
+                    case 1: // weekly
+                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
+                        autoEntry = AutoEntryDates.AutoEntry.WEEKLY;
+                        break;
+                    case 2: // monthly
+                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
+                        autoEntry = AutoEntryDates.AutoEntry.MONTHLY;
+                        break;
+                    case 3: // yearly
+                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_yearly)));
+                        autoEntry = AutoEntryDates.AutoEntry.YEARLY;
+                        break;
+                    case 4: // every two year
+                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_everytwoyear)));
+                        autoEntry = AutoEntryDates.AutoEntry.EVERYTWOYEAR;
+                        break;
+
+                    default:
+                        CB_RepairAddAutoEntry.setChecked(false);
+                        break;
+                }
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                CB_RepairAddAutoEntry.setChecked(false);
+                CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+
+            }
+        });
+
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
