@@ -15,7 +15,6 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
 public class ReminderAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
@@ -75,7 +74,7 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
         String descriptionInput = ET_Description.getText().toString();
         if(descriptionInput == null || descriptionInput.trim().equals("")) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
-            ET_Description.setError(getString(R.string.reminder_error_description));
+            ET_Description.setError(getString(R.string.error_description));
             ET_Description.requestFocus();
             return false;
         }

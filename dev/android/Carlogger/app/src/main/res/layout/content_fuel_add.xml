@@ -89,7 +89,7 @@
                 android:id="@+id/CB_FuelAddAutoEntry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/fuel_add_cb_auto_entry" />
+                android:text="@string/add_cb_auto_entry" />
 
         </LinearLayout>
     </ScrollView>

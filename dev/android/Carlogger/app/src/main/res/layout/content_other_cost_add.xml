@@ -8,4 +8,61 @@
     tools:context="de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAddActivity"
     tools:showIn="@layout/activity_other_cost_add">
 
+    <ScrollView
+        android:id="@+id/otherCostAddSV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:id="@+id/otherCostAddLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TV_OtherCostAddDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other_cost_add_description" />
+
+            <EditText
+                android:id="@+id/ET_OtherCostAddDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusedByDefault="true"
+                android:ems="10"
+                android:selectAllOnFocus="true" />
+
+
+            <TextView
+                android:id="@+id/TV_OtherCostAddCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/other_cost_add_cost" />
+
+            <EditText
+                android:id="@+id/ET_OtherCostAddCost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:digits="0123456789,"
+                android:ems="10"
+                android:inputType="number"
+                android:selectAllOnFocus="true"
+                android:text="0,00" />
+
+
+
+            <CheckBox
+                android:id="@+id/CB_OtherCostAddAutoEntry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/add_cb_auto_entry" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </android.support.constraint.ConstraintLayout>

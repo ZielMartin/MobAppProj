@@ -10,7 +10,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates.AutoEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
@@ -125,7 +124,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
 
         }if(!b){
             autoEntry = null;
-            CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+            CB_FuelAddAutoEntry.setText(getString(R.string.add_cb_auto_entry));
         }
     }
 
@@ -144,21 +143,21 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0: // daily
-                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
+                        CB_FuelAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
                         autoEntry = AutoEntry.DAILY;
                         break;
                     case 1: // weekly
-                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
+                        CB_FuelAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
                         autoEntry = AutoEntry.WEEKLY;
                         break;
                     case 2: // monthly
-                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
+                        CB_FuelAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
                         autoEntry = AutoEntry.MONTHLY;
                         break;
 
                     default:
                         CB_FuelAddAutoEntry.setChecked(false);
-                        CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+                        CB_FuelAddAutoEntry.setText(getString(R.string.add_cb_auto_entry));
                         break;
                 }
             }
@@ -167,7 +166,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
             @Override
             public void onCancel(DialogInterface dialog) {
                 CB_FuelAddAutoEntry.setChecked(false);
-                CB_FuelAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+                CB_FuelAddAutoEntry.setText(getString(R.string.add_cb_auto_entry));
             }
         });
 

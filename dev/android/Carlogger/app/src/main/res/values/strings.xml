@@ -31,13 +31,7 @@
     <string name="fuel_add_cost_per_litre">Kosten/Liter in €</string>
     <string name="fuel_add_km">Kilometerstand</string>
     <string name="fuel_add_cb_full">Vollgetankt</string>
-    <string name="fuel_add_cb_auto_entry">Automatischer Eintrag</string>
-    <string name="fuel_add_cb_auto_entry_with_time">Automatischer Eintrag (%1$s)</string>
 
-    <string name="ad_auto_entry_title">Diesen Eintrag Automatisch einfügen</string>
-    <string name="ad_auto_entry_daily">Täglich</string>
-    <string name="ad_auto_entry_weekly">Wöchentlich</string>
-    <string name="ad_auto_entry_monthly">Monatlich</string>
 
     <string name="fuel_add_error_quantity">Bitte Menge eingeben</string>
     <string name="fuel_add_error_cost">Bitte Kosten/Liter eingeben €</string>
@@ -79,13 +73,8 @@
         <item>Andere</item>
     </string-array>
 
-    <string name="repair_add_cb_auto_entry">Automatischer Eintrag</string>
-    <string name="repair_add_cb_auto_entry_with_time">Automatischer Eintrag (%1$s)</string>
 
-    <string name="ad_auto_entry_yearly">Jährlich</string>
-    <string name="ad_auto_entry_everytwoyear">Alle zwei Jahre</string>
-
-    <string name="repair_add_error_cost">Bitte Kosten angeben</string>
+    <string name="error_cost">Bitte Kosten angeben</string>
 
 
 
@@ -97,6 +86,8 @@
 
     <!--OtherCostAddActivity -->
     <string name="other_cost_add_title">Andere Kosten hinzufügen</string>
+    <string name="other_cost_add_cost">Kosten €</string>
+    <string name="other_cost_add_description">Beschreibung</string>
 
 
     <!-- Reminder -->
@@ -108,13 +99,26 @@
     <string name="reminder_cb_push">Push Notification</string>
     <string name="reminder_cb_push_withTime">Push Notification (%1$s)</string>
 
-    <string name="reminder_error_description">Bitte Beschreibung eingeben</string>
+    <string name="error_description">Bitte Beschreibung eingeben</string>
 
     <string name="ad_push_notification_title">Wann soll die Benachrichtigung erfolgen?</string>
     <string name="ad_push_notification_1">1 Stunde vorher</string>
     <string name="ad_push_notification_2">2 Stunden vorher</string>
     <string name="ad_push_notification_3">3 Stunden vorher</string>
     <string name="ad_push_notification_24">24 Stunden vorher</string>
+
+
+    <!--AutoEntry-->
+    <string name="add_cb_auto_entry">Automatischer Eintrag</string>
+    <string name="add_cb_auto_entry_with_time">Automatischer Eintrag (%1$s)</string>
+
+    <string name="ad_auto_entry_title">Diesen Eintrag Automatisch einfügen</string>
+    <string name="ad_auto_entry_daily">Täglich</string>
+    <string name="ad_auto_entry_weekly">Wöchentlich</string>
+    <string name="ad_auto_entry_monthly">Monatlich</string>
+    <string name="ad_auto_entry_yearly">Jährlich</string>
+    <string name="ad_auto_entry_everytwoyear">Alle zwei Jahre</string>
+
 
 
     <!--DatePickerAlert -->

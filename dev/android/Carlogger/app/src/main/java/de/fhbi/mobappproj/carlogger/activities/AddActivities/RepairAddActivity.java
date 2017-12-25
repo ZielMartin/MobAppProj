@@ -100,21 +100,21 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         Double costInput = editTextToDouble(ET_RepairAddCost);
         if(costInput < 0) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
-            ET_RepairAddCost.setError(getString(R.string.repair_add_error_cost));
+            ET_RepairAddCost.setError(getString(R.string.error_cost));
             ET_RepairAddCost.requestFocus();
             return false;
         }
         Double partCostInput = editTextToDouble(ET_RepairAddPartCost);
         if(partCostInput < 0) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
-            ET_RepairAddPartCost.setError(getString(R.string.repair_add_error_cost));
+            ET_RepairAddPartCost.setError(getString(R.string.error_cost));
             ET_RepairAddPartCost.requestFocus();
             return false;
         }
         Double laborCostInput = editTextToDouble(ET_RepairAddLaborCost);
         if(laborCostInput < 0) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
-            ET_RepairAddLaborCost.setError(getString(R.string.repair_add_error_cost));
+            ET_RepairAddLaborCost.setError(getString(R.string.error_cost));
             ET_RepairAddLaborCost.requestFocus();
             return false;
         }
@@ -185,7 +185,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         }if(!b){
 
             autoEntry = null;
-            CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+            CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry));
 
         }
     }
@@ -208,23 +208,23 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case 0: // daily
-                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
+                        CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_daily)));
                         autoEntry = AutoEntryDates.AutoEntry.DAILY;
                         break;
                     case 1: // weekly
-                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
+                        CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_weekly)));
                         autoEntry = AutoEntryDates.AutoEntry.WEEKLY;
                         break;
                     case 2: // monthly
-                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
+                        CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_monthly)));
                         autoEntry = AutoEntryDates.AutoEntry.MONTHLY;
                         break;
                     case 3: // yearly
-                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_yearly)));
+                        CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_yearly)));
                         autoEntry = AutoEntryDates.AutoEntry.YEARLY;
                         break;
                     case 4: // every two year
-                        CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_everytwoyear)));
+                        CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry_with_time,getString(R.string.ad_auto_entry_everytwoyear)));
                         autoEntry = AutoEntryDates.AutoEntry.EVERYTWOYEAR;
                         break;
 
@@ -238,7 +238,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
             @Override
             public void onCancel(DialogInterface dialog) {
                 CB_RepairAddAutoEntry.setChecked(false);
-                CB_RepairAddAutoEntry.setText(getString(R.string.fuel_add_cb_auto_entry));
+                CB_RepairAddAutoEntry.setText(getString(R.string.add_cb_auto_entry));
 
             }
         });
