@@ -54,8 +54,8 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
     }
 
     @Override
-    protected void setContentView() {
-        super.setContentView(R.layout.activity_other_cost_add);
+    protected void contentView() {
+        setContentView(R.layout.activity_other_cost_add);
     }
 
     @Override

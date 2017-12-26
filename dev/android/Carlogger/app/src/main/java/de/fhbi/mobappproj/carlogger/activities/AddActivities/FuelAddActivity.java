@@ -27,6 +27,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState != null) {
 
             if(savedInstanceState.getString("cbText")!=null){
@@ -61,8 +62,8 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
     }
 
     @Override
-    protected void setContentView() {
-        super.setContentView(R.layout.activity_fuel_add);
+    protected void contentView() {
+        setContentView(R.layout.activity_fuel_add);
     }
 
     @Override

@@ -1,9 +1,5 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 /**
  * Created by Johannes on 16.12.2017.
  */
@@ -46,15 +42,23 @@ public class FuelEntry extends EntrySuper {
         this.full = full;
     }
 
-    public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
-        this.autoEntry = autoEntry;
-    }
 
 
 
 
     @Override
     protected void pushToFirebase() {
+        //TODO fill me
+    }
+
+    @Override
+    public void removeEntry(int index) {
+        removeFromFirebase();
+        FuelEntryList.getInstance().removeEntry(index);
+    }
+
+    @Override
+    protected void removeFromFirebase() {
         //TODO fill me
     }
 

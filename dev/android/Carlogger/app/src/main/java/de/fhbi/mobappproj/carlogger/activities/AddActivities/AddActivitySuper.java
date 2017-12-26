@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -46,7 +45,7 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView();
+        contentView();
 
         //Back Button
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -107,7 +106,7 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     /**
      * abstract to ensure that contentView is setted before GuiElements are initialized (call in onCreate)
      */
-    protected abstract void setContentView();
+    protected abstract void contentView();
 
     protected abstract boolean checkInput();
 

@@ -28,10 +28,6 @@ public class RepairEntry extends EntrySuper {
         this.cost = cost;
     }
 
-    public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
-        this.autoEntry = autoEntry;
-    }
-
     public void setPartCost(double partCost) {
         this.partCost = partCost;
     }
@@ -50,6 +46,17 @@ public class RepairEntry extends EntrySuper {
 
 
 
+    @Override
+    public void removeEntry(int index) {
+        removeFromFirebase();
+        RepairEntryList.getInstance().removeEntry(index);
+
+    }
+
+    @Override
+    protected void removeFromFirebase() {
+        //TODO fill me
+    }
 
     @Override
     protected void pushToFirebase() {

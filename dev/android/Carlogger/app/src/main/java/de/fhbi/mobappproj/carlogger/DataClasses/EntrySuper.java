@@ -1,5 +1,7 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
+import android.os.Parcelable;
+
 import java.util.Calendar;
 
 /**
@@ -26,10 +28,27 @@ public abstract class EntrySuper {
 
     protected abstract void pushToFirebase();
 
+    public abstract void removeEntry(int index);
+
+    protected abstract void removeFromFirebase();
+
     /**
      * check all variables and call pushToFirebase()
      */
     public abstract void push();
 
 
+
+    public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
+        this.autoEntry = autoEntry;
+    }
+
+    public Calendar getCurrCalendar() {
+
+        return currCalendar;
+    }
+
+    public AutoEntryDates.AutoEntry getAutoEntry() {
+        return autoEntry;
+    }
 }

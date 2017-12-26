@@ -1,5 +1,6 @@
 package de.fhbi.mobappproj.carlogger;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;

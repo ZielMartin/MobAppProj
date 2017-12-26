@@ -3,25 +3,16 @@
     android:id="@+id/ReminderFragmentFL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginRight="@dimen/fragment_side_margin"
+    android:layout_marginLeft="@dimen/fragment_side_margin"
     tools:context="de.fhbi.mobappproj.carlogger.fragments.ReminderFragment">
 
 
-    <ScrollView
-        android:id="@+id/ReminderFragmentSV"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RV_ReminderFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical" />
 
-        <LinearLayout
-            android:id="@+id/ReminderFragmentLL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
 
-            <ListView
-                android:id="@+id/ReminderFragmentLV"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="vertical" />
-        </LinearLayout>
-    </ScrollView>
 </FrameLayout>

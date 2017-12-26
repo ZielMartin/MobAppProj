@@ -1,8 +1,10 @@
 package de.fhbi.mobappproj.carlogger;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.TextView;
 
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 
@@ -37,4 +39,5 @@ public class Helper {
             }
         });
     }
+
 }

@@ -29,6 +29,8 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
     private Button BTN_RepairAddBill, BTN_RepairAddDeleteBill;
     private ImageView IV_RepairAddBill;
 
+
+
     private CheckBox CB_RepairAddAutoEntry;
 
 
@@ -90,8 +92,8 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
     }
 
     @Override
-    protected void setContentView() {
-        super.setContentView(R.layout.activity_repair_add);
+    protected void contentView() {
+        setContentView(R.layout.activity_repair_add);
     }
 
 

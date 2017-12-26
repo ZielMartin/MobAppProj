@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -25,6 +26,10 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
     private CheckBox CB_PushNotification;
     private DatePicker DP_DatePicker;
 
+    private ReminderEntry editEntry;
+    private int entryIndex;
+
+
     //how many hours before the Push-Notification should be made
     private int hoursNotification;
 
@@ -39,6 +44,14 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
 
             if(savedInstanceState.getString("cbText")!=null){
                 CB_PushNotification.setText(savedInstanceState.getString("cbText"));
+            }
+        }else{
+            //when editButton is pressed
+            Bundle extras = getIntent().getExtras();
+            if(extras != null){
+                editEntry = extras.getParcelable("entry");
+                setEditEntryValues(editEntry);
+                entryIndex = extras.getInt("entryIndex");
             }
         }
     }
@@ -65,8 +78,8 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
     }
 
     @Override
-    protected void setContentView() {
-        super.setContentView(R.layout.activity_reminder_add);
+    protected void contentView() {
+        setContentView(R.layout.activity_reminder_add);
     }
 
     @Override
@@ -104,6 +117,11 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                     re.setHoursNotification(hoursNotification);
                     re.setPushNotification(CB_PushNotification.isChecked());
                     re.push();
+
+                    //if this is an edit: deletes old and saves new entry
+                    if(editEntry != null){
+                        editEntry.removeEntry(entryIndex);
+                    }
 
                     finish();
                 }
@@ -185,6 +203,19 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
         calendar.set(year, month, day, hour, minute);
 
         return calendar;
+    }
+
+    public void setEditEntryValues(ReminderEntry entry){
+        ET_Description.setText(entry.getDescription());
+        DP_DatePicker.updateDate(entry.getDateTime().get(Calendar.YEAR), entry.getDateTime().get(Calendar.MONTH), entry.getDateTime().get(Calendar.DAY_OF_MONTH));
+        TP_TimePicker.setIs24HourView(true);
+        TP_TimePicker.setCurrentHour(entry.getDateTime().get(Calendar.HOUR_OF_DAY));
+        TP_TimePicker.setCurrentMinute(entry.getDateTime().get(Calendar.MINUTE));
+        if(entry.getHoursNotification()>0){
+            CB_PushNotification.setChecked(true);
+        }else{
+            CB_PushNotification.setChecked(false);
+        }
     }
 
 

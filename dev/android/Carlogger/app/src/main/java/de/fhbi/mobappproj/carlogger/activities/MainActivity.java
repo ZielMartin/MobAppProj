@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 else Log.i(TAG, "got no response");
             }
         }
-
     }
 
     @Override
@@ -213,6 +212,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         fragmentTransaction.commit();
         Log.i(TAG, "fragment switched to " + fragment.getClass());
     }
+
+
 
 
     @Override

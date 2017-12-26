@@ -129,6 +129,13 @@
 
     <string name="input_error">Fehlerhafte Eingabe</string>
 
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="delete">Löschen</string>
+
+
+
 
 
 

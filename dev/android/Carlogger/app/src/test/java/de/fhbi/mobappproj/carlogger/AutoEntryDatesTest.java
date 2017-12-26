@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 

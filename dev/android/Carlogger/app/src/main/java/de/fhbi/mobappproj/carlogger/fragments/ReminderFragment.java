@@ -1,20 +1,36 @@
 package de.fhbi.mobappproj.carlogger.fragments;
 
 import android.content.Context;
+import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
+import java.util.ArrayList;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 
 public class ReminderFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+    private RecyclerView recyclerView;
+    private ReminderAdapter mAdapter;
 
 
     public ReminderFragment() {
@@ -29,13 +45,32 @@ public class ReminderFragment extends Fragment {
 
     }
 
+    private void initRecyclerView(View v){
+        recyclerView = (RecyclerView) v.findViewById(R.id.RV_ReminderFragment);
+
+        ArrayList<ReminderEntry> entryList = ReminderEntryList.getInstance().getAllEntries();
+
+        // specify an adapter
+        mAdapter = new ReminderAdapter(getActivity(),entryList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+        recyclerView.setAdapter(mAdapter);
+
+
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_reminder, container, false);
-
+        initRecyclerView(v);
         return v;
     }
 
@@ -63,7 +98,11 @@ public class ReminderFragment extends Fragment {
         mListener = null;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
 
     /**
      * This interface must be implemented by activities that contain this
@@ -79,6 +118,7 @@ public class ReminderFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 
 }
 

@@ -20,6 +20,18 @@ public class OtherCostEntry extends EntrySuper {
     }
 
     @Override
+    public void removeEntry(int index) {
+        removeFromFirebase();
+        OtherCostEntryList.getInstance().removeEntry(index);
+
+    }
+
+    @Override
+    protected void removeFromFirebase() {
+        //TODO fill me
+    }
+
+    @Override
     public void push() {
         pushToFirebase();
     }
@@ -32,7 +44,4 @@ public class OtherCostEntry extends EntrySuper {
         this.cost = cost;
     }
 
-    public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
-        this.autoEntry = autoEntry;
-    }
 }

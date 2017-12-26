@@ -32,7 +32,10 @@ public abstract class EntryListSuper<EntryType> {
 
     public void addEntry(EntryType entry){
         allEntries.add(entry);
+    }
 
+    public void removeEntry(int index){
+        allEntries.remove(index);
     }
 
     public ArrayList<EntryType> getAllEntries(){
