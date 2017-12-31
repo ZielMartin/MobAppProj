@@ -28,4 +28,6 @@ public class FuelEntryList extends EntryListSuper<FuelEntry> {
     public ArrayList<FuelEntry> getAllEntriesFromFirebase() {
         return null;
     }
+
+
 }

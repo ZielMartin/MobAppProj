@@ -1,5 +1,7 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
+import android.support.annotation.NonNull;
+
 import java.io.File;
 
 /**
@@ -67,5 +69,13 @@ public class RepairEntry extends EntrySuper {
     @Override
     public void push() {
         pushToFirebase();
+    }
+
+
+    @Override
+    public int compareTo(@NonNull EntrySuper entrySuper) {
+        long thisTime = this.createTimeCalendar.getTimeInMillis();
+        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
+        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
     }
 }

@@ -1,7 +1,5 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
-import android.os.Parcelable;
-
 import java.util.Calendar;
 
 /**
@@ -16,13 +14,15 @@ import java.util.Calendar;
  * Created by Johannes on 15.12.2017.
  */
 
-public abstract class EntrySuper {
+public abstract class EntrySuper implements Comparable<EntrySuper> {
 
-    protected Calendar currCalendar;
+
+
+    protected Calendar createTimeCalendar;
     protected AutoEntryDates.AutoEntry autoEntry;
 
     public EntrySuper(){
-        currCalendar = Calendar.getInstance();
+        createTimeCalendar = Calendar.getInstance();
     }
 
 
@@ -43,12 +43,22 @@ public abstract class EntrySuper {
         this.autoEntry = autoEntry;
     }
 
-    public Calendar getCurrCalendar() {
+    public Calendar getCreateTimeCalendar() {
 
-        return currCalendar;
+        return createTimeCalendar;
+    }
+
+    /**
+     * edit createTimeCalendar if this entry is for editing an other
+     * @param createTimeCalendar
+     */
+    public void setCreateTimeCalendar(Calendar createTimeCalendar) {
+        this.createTimeCalendar = createTimeCalendar;
     }
 
     public AutoEntryDates.AutoEntry getAutoEntry() {
         return autoEntry;
     }
+
+
 }

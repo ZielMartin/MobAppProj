@@ -1,5 +1,7 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Johannes on 25.12.2017.
  */
@@ -42,6 +44,13 @@ public class OtherCostEntry extends EntrySuper {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    @Override
+    public int compareTo(@NonNull EntrySuper entrySuper) {
+        long thisTime = this.createTimeCalendar.getTimeInMillis();
+        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
+        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
     }
 
 }

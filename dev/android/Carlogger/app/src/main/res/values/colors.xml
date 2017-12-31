@@ -7,7 +7,7 @@
     <color name="colorStatsBackground">#081c689e</color>
     <color name="colorStatsOtherBackground">#111c689e</color>
 
-    <color name="grey">#DDDDDD</color>
+    <color name="grey">#dddddd</color>
     <color name="light_grey">#EEEEEE</color>
     <color name="white_transparent">#99FFFFFF</color>
     <color name="black">#000</color>

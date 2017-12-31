@@ -30,7 +30,7 @@
                 android:text="@string/fuel_add_quantity" />
 
             <EditText
-                android:id="@+id/ET_FuelAddQuantity"
+                android:id="@+id/ET_FuelAddAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

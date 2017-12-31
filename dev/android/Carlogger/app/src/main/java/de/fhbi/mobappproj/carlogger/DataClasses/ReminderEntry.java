@@ -2,6 +2,7 @@ package de.fhbi.mobappproj.carlogger.DataClasses;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
@@ -94,7 +95,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         dateTime = (Calendar) in.readValue(Calendar.class.getClassLoader());
         pushNotification = in.readByte() != 0x00;
         hoursNotification = in.readInt();
-        currCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
+        createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
     }
 
@@ -109,7 +110,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         dest.writeValue(dateTime);
         dest.writeByte((byte) (pushNotification ? 0x01 : 0x00));
         dest.writeInt(hoursNotification);
-        dest.writeValue(currCalendar);
+        dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
     }
 
@@ -125,5 +126,12 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
             return new ReminderEntry[size];
         }
     };
+
+    @Override
+    public int compareTo(@NonNull EntrySuper entrySuper) {
+        long thisTime = this.createTimeCalendar.getTimeInMillis();
+        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
+        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
+    }
 }
 

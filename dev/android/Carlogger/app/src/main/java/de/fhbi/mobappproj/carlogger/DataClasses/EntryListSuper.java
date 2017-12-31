@@ -38,6 +38,10 @@ public abstract class EntryListSuper<EntryType> {
         allEntries.remove(index);
     }
 
+    public EntryType set(int index, EntryType entry){
+        return allEntries.set(index, entry);
+    }
+
     public ArrayList<EntryType> getAllEntries(){
         return allEntries;
 

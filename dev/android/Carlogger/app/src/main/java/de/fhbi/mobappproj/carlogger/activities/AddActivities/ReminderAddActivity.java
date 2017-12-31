@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
 public class ReminderAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
@@ -110,17 +111,22 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
             case(R.id.fabReminderCheck):
 
                 if(checkInput()){
-                    // Save created Data on Firebase using DataClasses
-                    ReminderEntry re = new ReminderEntry();
-                    re.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
-                    re.setDescription(ET_Description.getText().toString());
-                    re.setHoursNotification(hoursNotification);
-                    re.setPushNotification(CB_PushNotification.isChecked());
-                    re.push();
-
-                    //if this is an edit: deletes old and saves new entry
+                    //if this is an edit: edit the given entry
                     if(editEntry != null){
-                        editEntry.removeEntry(entryIndex);
+                        ReminderEntryList.getInstance().set(entryIndex, editEntry);
+                        editEntry.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
+                        editEntry.setDescription(ET_Description.getText().toString());
+                        editEntry.setHoursNotification(hoursNotification);
+                        editEntry.setPushNotification(CB_PushNotification.isChecked());
+                        editEntry.push();
+                    }else {
+                        // Save created Data on Firebase using DataClasses
+                        ReminderEntry re = new ReminderEntry();
+                        re.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
+                        re.setDescription(ET_Description.getText().toString());
+                        re.setHoursNotification(hoursNotification);
+                        re.setPushNotification(CB_PushNotification.isChecked());
+                        re.push();
                     }
 
                     finish();

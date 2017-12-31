@@ -6,6 +6,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 
 /**
@@ -38,6 +40,14 @@ public class Helper {
                 return false;
             }
         });
+    }
+
+
+    public static String doubleToString(double value){
+        DecimalFormat f = new DecimalFormat("0.##");
+        String str = f.format(value).toString();
+        str = str.replace(".",",");
+        return str;
     }
 
 }

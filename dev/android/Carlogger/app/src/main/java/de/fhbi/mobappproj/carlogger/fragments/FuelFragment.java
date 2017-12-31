@@ -4,6 +4,10 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +18,16 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 
 
+import java.util.ArrayList;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 
@@ -23,7 +35,13 @@ public class FuelFragment extends Fragment implements OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-    private TextView TV_PeriodCost;
+    private RecyclerView recyclerView;
+    private FuelAdapter mAdapter;
+
+    private  ArrayList<FuelEntry> entryList;
+
+    private TextView TV_FuelTotalCostValue, TV_FuelMonthCostValue, TV_FuelPeriodCostValue, TV_FuelConsumptionValue;
+
 
 
     public FuelFragment() {
@@ -55,7 +73,43 @@ public class FuelFragment extends Fragment implements OnClickListener {
         buttonEffect(btn_FuelInfo);
 
 
+        initRecyclerView(v);
+
+        setStatValues(v);
+
+
         return v;
+    }
+
+    private void setStatValues(View v) {
+
+        TV_FuelTotalCostValue = v.findViewById(R.id.TV_FuelTotalCostValue);
+        TV_FuelMonthCostValue = v.findViewById(R.id.TV_FuelMonthCostValue);
+        TV_FuelPeriodCostValue = v.findViewById(R.id.TV_FuelPeriodCostValue);
+        TV_FuelConsumptionValue = v.findViewById(R.id.TV_FuelConsumptionValue);
+
+        //TODO: set Values
+
+    }
+
+    private void initRecyclerView(View v){
+        recyclerView = (RecyclerView) v.findViewById(R.id.RV_FuelFragment);
+
+       entryList = FuelEntryList.getInstance().getAllEntries();
+
+        // specify an adapter
+        mAdapter = new FuelAdapter(getActivity(),entryList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+
+        recyclerView.setAdapter(mAdapter);
+
+
+
     }
 
 
@@ -92,6 +146,12 @@ public class FuelFragment extends Fragment implements OnClickListener {
                         (TextView) this.getView().findViewById(R.id.TV_FuelPeriodCost));
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 
 

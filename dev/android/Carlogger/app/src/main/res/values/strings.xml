@@ -133,6 +133,13 @@
     <string name="no">Nein</string>
     <string name="edit">Bearbeiten</string>
     <string name="delete">Löschen</string>
+    <string name="km">KM</string>
+    <string name="litre">Liter</string>
+    <string name="euro">€</string>
+    <string name="euro_per_litre">€/Liter</string>
+
+
+
 
 
 
