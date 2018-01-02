@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 
@@ -39,7 +40,6 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     protected static final int REQUEST_TAKE_PHOTO = 1;
 
     protected File image;
-
     protected AutoEntryDates.AutoEntry autoEntry;
 
     @Override
@@ -206,6 +206,7 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     protected void deletImage(ImageView iv){
         iv.setImageResource(0);
         image.delete();
+        image = null;
     }
 
 

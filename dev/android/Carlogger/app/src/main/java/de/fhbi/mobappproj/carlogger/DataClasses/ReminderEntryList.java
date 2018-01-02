@@ -21,10 +21,14 @@ public class ReminderEntryList extends EntryListSuper<ReminderEntry> {
     }
 
     @Override
-    public ArrayList<ReminderEntry> getAllEntriesFromFirebase() {
-        //TODO fill me
-        return null;
+    public boolean getAllEntriesFromFirebase() {
+        //create ReminderEntry instances from Firebase-Result. Entries will be auto-inserted to ReminderEntryList on Constructor-call
+
+        //TODO - fill me
+
+        return false;
     }
+
 
 
 

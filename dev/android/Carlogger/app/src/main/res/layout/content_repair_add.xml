@@ -27,27 +27,11 @@
                 android:text="@string/repair_add_type" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/SP_RepairAddType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/repair_type"
                 android:spinnerMode="dialog" />
-
-            <TextView
-                android:id="@+id/TV_RepairAddCost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/repair_add_cost" />
-
-            <EditText
-                android:id="@+id/ET_RepairAddCost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:digits="0123456789,"
-                android:ems="10"
-                android:inputType="number"
-                android:selectAllOnFocus="true"
-                android:text="0,00" />
 
             <TextView
                 android:id="@+id/TV_RepairAddPartCost"

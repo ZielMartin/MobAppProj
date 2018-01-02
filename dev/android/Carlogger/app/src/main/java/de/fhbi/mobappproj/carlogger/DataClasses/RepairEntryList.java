@@ -20,8 +20,11 @@ public class RepairEntryList extends EntryListSuper<RepairEntry> {
     }
 
     @Override
-    public ArrayList<RepairEntry> getAllEntriesFromFirebase() {
-        //TODO fill me
-        return null;
+    public boolean getAllEntriesFromFirebase() {
+        //create RepairEntry instances from Firebase-Result. Entries will be auto-inserted to RepairEntryList on Constructor-call
+
+        //TODO - fill me
+
+        return false;
     }
 }

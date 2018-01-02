@@ -25,8 +25,12 @@ public class FuelEntryList extends EntryListSuper<FuelEntry> {
 
 
     @Override
-    public ArrayList<FuelEntry> getAllEntriesFromFirebase() {
-        return null;
+    public boolean getAllEntriesFromFirebase() {
+        //create FuelEntry instances from Firebase-Result. Entries will be auto-inserted to FuelEntryList on Constructor-call
+
+        //TODO - fill me
+
+        return false;
     }
 
 

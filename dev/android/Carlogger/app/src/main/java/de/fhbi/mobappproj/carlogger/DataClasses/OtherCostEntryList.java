@@ -20,8 +20,11 @@ public class OtherCostEntryList extends EntryListSuper<OtherCostEntry> {
     }
 
     @Override
-    public ArrayList<OtherCostEntry> getAllEntriesFromFirebase() {
-        //TODO fill me
-        return null;
+    public boolean getAllEntriesFromFirebase() {
+        //create OtherCostEntry instances from Firebase-Result. Entries will be auto-inserted to OtherCostEntryList on Constructor-call
+
+        //TODO - fill me
+
+        return false;
     }
 }

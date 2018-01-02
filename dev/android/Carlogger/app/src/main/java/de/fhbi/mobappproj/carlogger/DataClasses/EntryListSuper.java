@@ -11,12 +11,12 @@ import java.util.ArrayList;
  */
 
 
-public abstract class EntryListSuper<EntryType> {
+public abstract class EntryListSuper<EntryType extends EntrySuper> {
 
     //TODO Methods that have same code, save on firebase etc..
 
 
-    private ArrayList<EntryType> allEntries;
+    protected ArrayList<EntryType> allEntries;
 
 
 
@@ -26,7 +26,7 @@ public abstract class EntryListSuper<EntryType> {
 
 
     //different code in each data-class
-    public abstract ArrayList<EntryType> getAllEntriesFromFirebase();
+    public abstract boolean getAllEntriesFromFirebase();
 
 
 
@@ -39,12 +39,12 @@ public abstract class EntryListSuper<EntryType> {
     }
 
     public EntryType set(int index, EntryType entry){
+        entry.updateChangesOnFirebase();
         return allEntries.set(index, entry);
     }
 
     public ArrayList<EntryType> getAllEntries(){
         return allEntries;
-
     }
 
 

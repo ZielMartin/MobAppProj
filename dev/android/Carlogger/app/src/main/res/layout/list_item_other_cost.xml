@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ListItemLL"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/TV_ListItemOtherCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Cost"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/TV_ListItemOtherDateTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DateTime" />
+
+    <TextView
+        android:id="@+id/TV_ListItemOtherDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Description" />
+
+    <TextView
+        android:id="@+id/TV_ListItemOtherAutoEntry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="AutoEntry:" />
+
+    <LinearLayout
+        android:id="@+id/ListItemLLHo3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/BTN_OtherEdit"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/edit"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/BTN_OtherDelete"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete"
+            android:textAllCaps="false"
+            android:textColor="@color/fui_bgEmail" />
+    </LinearLayout>
+
+</LinearLayout>

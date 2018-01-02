@@ -4,6 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +15,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.OtherCostAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 
@@ -20,6 +29,11 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 public class OtherCostFragment extends Fragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
+
+    private RecyclerView recyclerView;
+    private OtherCostAdapter mAdapter;
+
+    private ArrayList<OtherCostEntry> entryList;
 
     public OtherCostFragment() {
         // Required empty public constructor
@@ -43,7 +57,26 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
         btn_DatePicker.setOnClickListener(this);
         buttonEffect(btn_DatePicker);
 
+        initRecyclerView(v);
+
         return v;
+    }
+
+    private void initRecyclerView(View v){
+        recyclerView = (RecyclerView) v.findViewById(R.id.RV_OtherFragment);
+
+        entryList = OtherCostEntryList.getInstance().getAllEntries();
+
+        // specify an adapter
+        mAdapter = new OtherCostAdapter(getActivity(),entryList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+
+        recyclerView.setAdapter(mAdapter);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -88,9 +121,11 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
 
     }
 
-
-
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        mAdapter.notifyDataSetChanged();
+    }
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

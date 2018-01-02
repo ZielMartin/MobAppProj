@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     tools:context="de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/fragOtherLL"
@@ -221,7 +223,16 @@
 
         </TableLayout>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/RV_OtherFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_grey"
+            android:nestedScrollingEnabled="false" />
 
     </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

@@ -5,33 +5,42 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Arrays;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 public class RepairAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
 
-    private EditText ET_RepairAddCost, ET_RepairAddPartCost, ET_RepairAddLaborCost, ET_RepairAddDescription;
-    private TextView TV_RepairAddType;
+    private EditText ET_RepairAddPartCost, ET_RepairAddLaborCost, ET_RepairAddDescription;
+    private Spinner SP_RepairAddType;
     private Button BTN_RepairAddBill, BTN_RepairAddDeleteBill;
     private ImageView IV_RepairAddBill;
 
-
-
     private CheckBox CB_RepairAddAutoEntry;
+
+
+    private RepairEntry editEntry;
+    private int entryIndex;
 
 
 
@@ -47,6 +56,18 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
             if(savedInstanceState.getString("cbText")!=null){
                 CB_RepairAddAutoEntry.setText(savedInstanceState.getString("cbText"));
             }
+        }else{
+            //when editButton is pressed
+            Bundle extras = getIntent().getExtras();
+            if(extras != null){
+                editEntry = extras.getParcelable("entry");
+                setEditEntryValues(editEntry);
+                entryIndex = extras.getInt("entryIndex");
+                if(editEntry.getBill()!=null){
+                    image = editEntry.getBill();
+                    setPic(IV_RepairAddBill);
+                }
+            }
         }
         if(image != null){
             BTN_RepairAddDeleteBill.setVisibility(View.VISIBLE);
@@ -58,10 +79,8 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
     @Override
     protected void initGUIElements() {
 
-        TV_RepairAddType = (TextView) findViewById(R.id.TV_RepairAddType);
+        SP_RepairAddType = (Spinner) findViewById(R.id.SP_RepairAddType);
 
-        ET_RepairAddCost = (EditText) findViewById(R.id.ET_RepairAddCost);
-        ET_RepairAddCost.setOnFocusChangeListener(this);
 
         ET_RepairAddPartCost = (EditText) findViewById(R.id.ET_RepairAddPartCost);
         ET_RepairAddPartCost.setOnFocusChangeListener(this);
@@ -99,13 +118,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
 
     @Override
     protected boolean checkInput() {
-        Double costInput = editTextToDouble(ET_RepairAddCost);
-        if(costInput < 0) {
-            Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
-            ET_RepairAddCost.setError(getString(R.string.error_cost));
-            ET_RepairAddCost.requestFocus();
-            return false;
-        }
+
         Double partCostInput = editTextToDouble(ET_RepairAddPartCost);
         if(partCostInput < 0) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
@@ -150,16 +163,29 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
             case(R.id.fabRepairCheck):
 
                 if(checkInput()){
-                    //Create Entry and fill in Data
-                    RepairEntry entry = new RepairEntry();
-                    entry.setType(TV_RepairAddType.getText().toString());
-                    entry.setAutoEntry(autoEntry);
-                    entry.setBill(image);
-                    entry.setCost(editTextToDouble(ET_RepairAddCost));
-                    entry.setDescription(ET_RepairAddDescription.getText().toString());
-                    entry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
-                    entry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
-                    entry.push();
+                    //if this is an edit: edit the given entry
+                    if(editEntry != null){
+                        RepairEntryList.getInstance().set(entryIndex, editEntry);
+                        editEntry.setType(SP_RepairAddType.getSelectedItem().toString());
+                        editEntry.setAutoEntry(autoEntry);
+                        editEntry.setBill(image);
+                        editEntry.setDescription(ET_RepairAddDescription.getText().toString());
+                        editEntry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
+                        editEntry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
+                        editEntry.push();
+
+                    }else {
+                        //Create Entry and fill in Data
+                        RepairEntry entry = new RepairEntry();
+                        entry.setType(SP_RepairAddType.getSelectedItem().toString());
+                        entry.setAutoEntry(autoEntry);
+                        entry.setBill(image);
+                        entry.setDescription(ET_RepairAddDescription.getText().toString());
+                        entry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
+                        entry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
+                        entry.push();
+
+                    }
 
                     finish();
                 }
@@ -248,5 +274,22 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void setEditEntryValues(RepairEntry entry){
+        //SP_RepairAddType.se  .setText(entry.getType());
+        SP_RepairAddType.setSelection (Arrays.asList(this.getResources().getStringArray(R.array.repair_type)).indexOf(entry.getType()) );
+        ET_RepairAddLaborCost.setText(doubleToString(entry.getLaborCost()));
+        ET_RepairAddPartCost.setText(doubleToString(entry.getPartCost()));
+        ET_RepairAddDescription.setText(entry.getDescription());
+
+        image = entry.getBill();
+
+        if(entry.getAutoEntry() != null){
+            CB_RepairAddAutoEntry.setChecked(true);
+        }else{
+            CB_RepairAddAutoEntry.setChecked(false);
+        }
+
     }
 }

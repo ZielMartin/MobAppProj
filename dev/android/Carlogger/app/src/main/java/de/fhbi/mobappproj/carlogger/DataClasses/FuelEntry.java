@@ -14,6 +14,8 @@ public class FuelEntry extends EntrySuper implements Parcelable {
 
 
 
+    // Calendar createTimeCalendar; - in SuperClass
+    // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private double amount;
     private double costPerLitre;
     private double km;
@@ -25,7 +27,6 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         FuelEntryList.getInstance().addEntry(this);
         amount = 0;
         costPerLitre = 0;
-
     }
 
 
@@ -66,32 +67,35 @@ public class FuelEntry extends EntrySuper implements Parcelable {
 
 
 
-
-    @Override
-    protected void pushToFirebase() {
-        //TODO fill me
-    }
-
-
     @Override
     public void removeEntry(int index) {
         removeFromFirebase();
         FuelEntryList.getInstance().removeEntry(index);
     }
 
+
+    @Override
+    protected void pushToFirebase() {
+        //called when entry was added - add to firebase
+        //TODO fill me
+    }
+
     @Override
     protected void removeFromFirebase() {
+        //called when entry was deleted - delete on firebase to
         //TODO fill me
+    }
+
+    @Override
+    protected void updateChangesOnFirebase() {
+        //called when entry was modified - save changes on firebase
+        //TODO - fill me
     }
 
 
     @Override
     public void push() {
-        if(amount != 0
-                && costPerLitre != 0){
-            pushToFirebase();
-        }
-
+        pushToFirebase();
     }
 
     protected FuelEntry(Parcel in) {

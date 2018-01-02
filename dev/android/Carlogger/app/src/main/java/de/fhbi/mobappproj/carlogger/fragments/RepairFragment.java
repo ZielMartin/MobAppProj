@@ -4,6 +4,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +15,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import java.util.ArrayList;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.RepairAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 
@@ -20,6 +32,11 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 public class RepairFragment extends Fragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
+
+    private RecyclerView recyclerView;
+    private RepairAdapter mAdapter;
+
+    private ArrayList<RepairEntry> entryList;
 
     public RepairFragment() {
         // Required empty public constructor
@@ -43,12 +60,35 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
         buttonEffect(btn_DatePicker);
 
 
+        initRecyclerView(view);
+
         return view;
+    }
+
+    private void initRecyclerView(View v){
+        recyclerView = (RecyclerView) v.findViewById(R.id.RV_RepairFragment);
+
+        entryList = RepairEntryList.getInstance().getAllEntries();
+
+        // specify an adapter
+        mAdapter = new RepairAdapter(getActivity(),entryList);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+
+
+        recyclerView.setAdapter(mAdapter);
+
+
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        mAdapter.notifyDataSetChanged();
     }
 
     // TODO: Rename method, update argument and hook method into UI event

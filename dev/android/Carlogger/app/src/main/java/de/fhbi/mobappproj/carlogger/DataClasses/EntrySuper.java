@@ -32,6 +32,8 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
 
     protected abstract void removeFromFirebase();
 
+    protected abstract void updateChangesOnFirebase();
+
     /**
      * check all variables and call pushToFirebase()
      */

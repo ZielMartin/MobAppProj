@@ -13,6 +13,8 @@ import java.util.Calendar;
 public class ReminderEntry extends EntrySuper implements Parcelable {
 
 
+    // Calendar createTimeCalendar; - in SuperClass
+    // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private String description;
     private Calendar dateTime;
     private boolean pushNotification;
@@ -65,8 +67,21 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
 
 
     @Override
-    public void pushToFirebase() {
+    protected void pushToFirebase() {
+        //called when entry was added - add to firebase
         //TODO fill me
+    }
+
+    @Override
+    protected void removeFromFirebase() {
+        //called when entry was deleted - delete on firebase to
+        //TODO fill me
+    }
+
+    @Override
+    protected void updateChangesOnFirebase() {
+        //called when entry was modified - save changes on firebase
+        //TODO - fill me
     }
 
     @Override
@@ -75,10 +90,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         ReminderEntryList.getInstance().removeEntry(index);
     }
 
-    @Override
-    protected void removeFromFirebase() {
-        //TODO fill me
-    }
+
 
     @Override
     public void push() {

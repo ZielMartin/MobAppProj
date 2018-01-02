@@ -12,12 +12,18 @@ import android.widget.Toast;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.R;
+
+import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 public class OtherCostAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
 
     private EditText ET_OtherCostDescription, ET_OtherCostCost;
     private CheckBox CB_OtherCostAddAutoEntry;
+
+    private OtherCostEntry editEntry;
+    private int entryIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,14 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
 
             if(savedInstanceState.getString("cbText")!=null){
                 CB_OtherCostAddAutoEntry.setText(savedInstanceState.getString("cbText"));
+            }
+        }else{
+            //when editButton is pressed
+            Bundle extras = getIntent().getExtras();
+            if(extras != null){
+                editEntry = extras.getParcelable("entry");
+                setEditEntryValues(editEntry);
+                entryIndex = extras.getInt("entryIndex");
             }
         }
     }
@@ -86,12 +100,20 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
         switch(view.getId()){
             case(R.id.fabOtherCostCheck):
                 if(checkInput()){
+                    if(editEntry != null){
+                        OtherCostEntryList.getInstance().set(entryIndex, editEntry);
+                        editEntry.setCost(editTextToDouble(ET_OtherCostCost));
+                        editEntry.setDescription(ET_OtherCostDescription.getText().toString());
+                        editEntry.setAutoEntry(autoEntry);
+                        editEntry.push();
 
-                    OtherCostEntry entry = new OtherCostEntry();
-                    entry.setCost(editTextToDouble(ET_OtherCostCost));
-                    entry.setDescription(ET_OtherCostDescription.getText().toString());
-                    entry.setAutoEntry(autoEntry);
-                    entry.push();
+                    }else{
+                        OtherCostEntry entry = new OtherCostEntry();
+                        entry.setCost(editTextToDouble(ET_OtherCostCost));
+                        entry.setDescription(ET_OtherCostDescription.getText().toString());
+                        entry.setAutoEntry(autoEntry);
+                        entry.push();
+                    }
 
                     finish();
                 }
@@ -170,5 +192,17 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
         // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    public void setEditEntryValues(OtherCostEntry entry){
+        ET_OtherCostCost.setText(doubleToString(entry.getCost()));
+        ET_OtherCostDescription.setText(entry.getDescription());
+
+        if(entry.getAutoEntry() != null){
+            CB_OtherCostAddAutoEntry.setChecked(true);
+        }else{
+            CB_OtherCostAddAutoEntry.setChecked(false);
+        }
+
     }
 }

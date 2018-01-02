@@ -28,6 +28,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
     private CheckBox CB_FuelAddFull;
     private CheckBox CB_FuelAddAutoEntry;
 
+
     private FuelEntry editEntry;
     private int entryIndex;
 
@@ -55,7 +56,6 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
 
     @Override
     protected void initGUIElements() {
-        //TODO Fill
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabFuelCheck);
         fab.setOnClickListener(this);
 

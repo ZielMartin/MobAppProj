@@ -107,9 +107,6 @@ public class FuelFragment extends Fragment implements OnClickListener {
 
 
         recyclerView.setAdapter(mAdapter);
-
-
-
     }
 
 
