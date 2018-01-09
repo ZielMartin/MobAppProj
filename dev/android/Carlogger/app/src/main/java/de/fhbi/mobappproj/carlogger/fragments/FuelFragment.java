@@ -22,12 +22,10 @@ import java.util.ArrayList;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 
@@ -38,7 +36,7 @@ public class FuelFragment extends Fragment implements OnClickListener {
     private RecyclerView recyclerView;
     private FuelAdapter mAdapter;
 
-    private  ArrayList<FuelEntry> entryList;
+    private ArrayList<FuelEntry> entryList;
 
     private TextView TV_FuelTotalCostValue, TV_FuelMonthCostValue, TV_FuelPeriodCostValue, TV_FuelConsumptionValue;
 
@@ -95,7 +93,7 @@ public class FuelFragment extends Fragment implements OnClickListener {
     private void initRecyclerView(View v){
         recyclerView = (RecyclerView) v.findViewById(R.id.RV_FuelFragment);
 
-       entryList = FuelEntryList.getInstance().getAllEntries();
+        entryList = FuelEntryList.getInstance().getAllEntries();
 
         // specify an adapter
         mAdapter = new FuelAdapter(getActivity(),entryList);

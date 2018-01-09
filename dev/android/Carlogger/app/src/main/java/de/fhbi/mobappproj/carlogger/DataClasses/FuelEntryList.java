@@ -1,12 +1,13 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Johannes on 16.12.2017.
  */
 
-public class FuelEntryList extends EntryListSuper<FuelEntry> {
+public class FuelEntryList extends EntryListSuper<FuelEntry>{
 
 
     //Singleton Instance

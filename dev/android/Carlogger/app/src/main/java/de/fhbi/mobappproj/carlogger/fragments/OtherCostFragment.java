@@ -21,6 +21,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.OtherCostAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;

@@ -24,6 +24,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
 
     public FuelEntry() {
         super();
+        entryType = entryType.FUELENTRY;
         FuelEntryList.getInstance().addEntry(this);
         amount = 0;
         costPerLitre = 0;
@@ -68,13 +69,6 @@ public class FuelEntry extends EntrySuper implements Parcelable {
 
 
     @Override
-    public void removeEntry(int index) {
-        removeFromFirebase();
-        FuelEntryList.getInstance().removeEntry(index);
-    }
-
-
-    @Override
     protected void pushToFirebase() {
         //called when entry was added - add to firebase
         //TODO fill me
@@ -105,6 +99,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         full = in.readByte() != 0x00;
         createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
+        entryType = (EntryType) in.readSerializable();
     }
 
     @Override
@@ -120,6 +115,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         dest.writeByte((byte) (full ? 0x01 : 0x00));
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
+        dest.writeSerializable(entryType);
     }
 
     @SuppressWarnings("unused")
@@ -135,10 +131,5 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         }
     };
 
-    @Override
-    public int compareTo(@NonNull EntrySuper entrySuper) {
-        long thisTime = this.createTimeCalendar.getTimeInMillis();
-        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
-        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
-    }
+
 }

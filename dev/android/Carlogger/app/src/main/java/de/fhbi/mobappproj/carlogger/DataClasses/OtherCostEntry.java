@@ -21,6 +21,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
 
     public OtherCostEntry(){
         super();
+        entryType = entryType.OTHERCOSTENTRY;
         OtherCostEntryList.getInstance().addEntry(this);
     }
 
@@ -50,13 +51,6 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         //TODO - fill me
     }
 
-    @Override
-    public void removeEntry(int index) {
-        removeFromFirebase();
-        OtherCostEntryList.getInstance().removeEntry(index);
-
-    }
-
 
     @Override
     public void push() {
@@ -71,12 +65,6 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         this.cost = cost;
     }
 
-    @Override
-    public int compareTo(@NonNull EntrySuper entrySuper) {
-        long thisTime = this.createTimeCalendar.getTimeInMillis();
-        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
-        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
-    }
 
 
     protected OtherCostEntry(Parcel in) {
@@ -84,6 +72,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         cost = in.readDouble();
         createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
+        entryType = (EntryType) in.readSerializable();
     }
 
     @Override
@@ -99,6 +88,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         dest.writeDouble(cost);
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
+        dest.writeSerializable(entryType);
     }
 
     @SuppressWarnings("unused")

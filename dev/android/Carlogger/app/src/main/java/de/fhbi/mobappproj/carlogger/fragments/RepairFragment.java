@@ -17,13 +17,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.RepairAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;

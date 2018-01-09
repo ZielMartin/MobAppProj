@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import de.fhbi.mobappproj.carlogger.AddMenu;
+import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
 import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
@@ -94,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        changeFragmentTo(new AllFragment());
     }
 
 
@@ -152,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -177,13 +179,20 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         if (id == R.id.nav_fuel) {
             // Handle the fuel action
             changeFragmentTo(new FuelFragment());
+            this.setTitle(R.string.fuelFragment_title);
         } else if (id == R.id.nav_otherCosts) {
             changeFragmentTo(new OtherCostFragment());
+            this.setTitle(R.string.otherCostFragment_title);
         } else if (id == R.id.nav_reminder) {
             changeFragmentTo(new ReminderFragment());
+            this.setTitle(R.string.reminder_fragment_title);
         } else if (id == R.id.nav_repair_service) {
             changeFragmentTo(new RepairFragment());
-        } else if (id == R.id.nav_share) {
+            this.setTitle(R.string.repairFragment_title);
+        }else if(id == R.id.nav_all){
+            changeFragmentTo(new AllFragment());
+            this.setTitle(R.string.nav_all);
+        }else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
 
@@ -208,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         fragmentTransaction.replace(R.id.MainFrame, fragment);
         fragmentTransaction.addToBackStack(null);
+
 
         fragmentTransaction.commit();
         Log.i(TAG, "fragment switched to " + fragment.getClass());

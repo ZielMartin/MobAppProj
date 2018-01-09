@@ -32,16 +32,10 @@ public abstract class EntryListSuper<EntryType extends EntrySuper> {
 
     public void addEntry(EntryType entry){
         allEntries.add(entry);
+        AllEntryList.getInstance().addEntry(entry);
     }
 
-    public void removeEntry(int index){
-        allEntries.remove(index);
-    }
 
-    public EntryType set(int index, EntryType entry){
-        entry.updateChangesOnFirebase();
-        return allEntries.set(index, entry);
-    }
 
     public ArrayList<EntryType> getAllEntries(){
         return allEntries;

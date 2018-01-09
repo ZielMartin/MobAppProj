@@ -23,7 +23,6 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
     private CheckBox CB_OtherCostAddAutoEntry;
 
     private OtherCostEntry editEntry;
-    private int entryIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
             if(extras != null){
                 editEntry = extras.getParcelable("entry");
                 setEditEntryValues(editEntry);
-                entryIndex = extras.getInt("entryIndex");
             }
         }
     }
@@ -101,10 +99,10 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
             case(R.id.fabOtherCostCheck):
                 if(checkInput()){
                     if(editEntry != null){
-                        OtherCostEntryList.getInstance().set(entryIndex, editEntry);
                         editEntry.setCost(editTextToDouble(ET_OtherCostCost));
                         editEntry.setDescription(ET_OtherCostDescription.getText().toString());
                         editEntry.setAutoEntry(autoEntry);
+                        editEntry.updateEntry();
                         editEntry.push();
 
                     }else{
