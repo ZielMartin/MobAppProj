@@ -16,18 +16,22 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
+import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.OtherCostAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class OtherCostFragment extends Fragment implements View.OnClickListener{
+public class OtherCostFragment extends Fragment implements View.OnClickListener, DatePickerDialogUserInterface {
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,6 +39,8 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
     private OtherCostAdapter mAdapter;
 
     private ArrayList<OtherCostEntry> entryList;
+
+    private TextView TV_OtherTotalCostValue, TV_OtherMonthCostValue, TV_OtherPeriodCostValue;
 
     public OtherCostFragment() {
         // Required empty public constructor
@@ -57,6 +63,10 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
         Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_OtherDatePicker);
         btn_DatePicker.setOnClickListener(this);
         buttonEffect(btn_DatePicker);
+
+        TV_OtherTotalCostValue = v.findViewById(R.id.TV_OtherTotalCostValue);
+        TV_OtherMonthCostValue = v.findViewById(R.id.TV_OtherMonthCostValue);
+        TV_OtherPeriodCostValue = v.findViewById(R.id.TV_OtherPeriodCostValue);
 
         initRecyclerView(v);
 
@@ -126,7 +136,20 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         mAdapter.notifyDataSetChanged();
+        setStatValues();
+
     }
+
+    private void setStatValues() {
+        TV_OtherTotalCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
+        TV_OtherMonthCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
+    }
+
+    @Override
+    public void setPeriodCost(Calendar start, Calendar end) {
+        TV_OtherPeriodCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getCostTime(start, end)) + getString(R.string.euro));
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

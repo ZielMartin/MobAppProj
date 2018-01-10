@@ -2,6 +2,7 @@ package de.fhbi.mobappproj.carlogger.listEntryAdapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -181,6 +182,7 @@ public class FuelAdapter extends RecyclerView.Adapter<FuelAdapter.FuelViewHolder
                 public void onClick(View view) {
                     entry.removeEntry();
                     callback.notifyDataSetChanged();
+                    mExpandedPosition = -1;
                 }
             });
         }

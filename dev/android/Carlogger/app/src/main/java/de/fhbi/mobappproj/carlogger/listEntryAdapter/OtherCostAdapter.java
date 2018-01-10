@@ -176,6 +176,7 @@ public class OtherCostAdapter extends RecyclerView.Adapter<OtherCostAdapter.Othe
                 public void onClick(View view) {
                     entry.removeEntry();
                     callback.notifyDataSetChanged();
+                    mExpandedPosition = -1;
                 }
             });
         }

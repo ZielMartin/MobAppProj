@@ -115,6 +115,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
             final boolean isExpanded = position == mExpandedPosition;
             BTN_ReminderEdit.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
             BTN_ReminderDelete.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            TV_ListItemReminderPushNoti.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            TV_ListItemReminderTime.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
             itemView.setActivated(isExpanded);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -155,6 +157,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
                 public void onClick(View view) {
                     entry.removeEntry();
                     callback.notifyDataSetChanged();
+                    mExpandedPosition = -1;
                 }
             });
         }

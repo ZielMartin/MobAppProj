@@ -192,11 +192,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         }else if(id == R.id.nav_all){
             changeFragmentTo(new AllFragment());
             this.setTitle(R.string.nav_all);
-        }else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } else if (id == R.id.loginlogout) {
+        }else if (id == R.id.loginlogout) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user == null) {
                 signIn();

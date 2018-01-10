@@ -27,6 +27,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     protected EntryType entryType;
     protected Calendar createTimeCalendar;
     protected AutoEntryDates.AutoEntry autoEntry;
+    protected double cost;
 
     public EntrySuper(){
         createTimeCalendar = Calendar.getInstance();
@@ -49,6 +50,10 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
 
     public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
         this.autoEntry = autoEntry;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public Calendar getCreateTimeCalendar() {
@@ -113,6 +118,10 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
 
     public AutoEntryDates.AutoEntry getAutoEntry() {
         return autoEntry;
+    }
+
+    public double getCost() {
+        return cost;
     }
 
     @Override

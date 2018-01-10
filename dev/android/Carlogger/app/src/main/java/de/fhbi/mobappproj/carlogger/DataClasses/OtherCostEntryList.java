@@ -1,6 +1,10 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 
 /**
  * Created by Johannes on 25.12.2017.
@@ -27,4 +31,8 @@ public class OtherCostEntryList extends EntryListSuper<OtherCostEntry> {
 
         return false;
     }
+
+
+
+
 }

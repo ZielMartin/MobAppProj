@@ -51,10 +51,16 @@ public class FuelEntry extends EntrySuper implements Parcelable {
 
     public void setAmount(double amount) {
         this.amount = amount;
+        if(costPerLitre != 0){
+            cost = amount * costPerLitre;
+        }
     }
 
     public void setCostPerLitre(double costPerLitre) {
         this.costPerLitre = costPerLitre;
+        if(amount != 0){
+            cost = amount * costPerLitre;
+        }
     }
 
     public void setKm(double km) {
@@ -100,6 +106,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
+        cost = in.readDouble();
     }
 
     @Override
@@ -116,6 +123,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
+        dest.writeDouble(cost);
     }
 
     @SuppressWarnings("unused")

@@ -16,7 +16,6 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
     // Calendar createTimeCalendar; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private String description;
-    private double cost;
 
 
     public OtherCostEntry(){
@@ -29,9 +28,6 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         return description;
     }
 
-    public double getCost() {
-        return cost;
-    }
 
     @Override
     protected void pushToFirebase() {
@@ -61,9 +57,6 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         this.description = description;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
 
 
 

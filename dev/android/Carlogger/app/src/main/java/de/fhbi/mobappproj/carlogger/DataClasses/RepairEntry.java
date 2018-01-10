@@ -36,10 +36,12 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
     public void setPartCost(double partCost) {
         this.partCost = partCost;
+        cost += partCost;
     }
 
     public void setLaborCost(double laborCost) {
         this.laborCost = laborCost;
+        cost += laborCost;
     }
 
     public void setDescription(String description) {

@@ -220,6 +220,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.RepairView
                 public void onClick(View view) {
                     entry.removeEntry();
                     callback.notifyDataSetChanged();
+                    mExpandedPosition = -1;
                 }
             });
         }

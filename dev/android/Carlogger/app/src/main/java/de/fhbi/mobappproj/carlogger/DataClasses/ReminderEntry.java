@@ -107,6 +107,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
+        cost = in.readDouble();
     }
 
     @Override
@@ -123,6 +124,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
+        dest.writeDouble(cost);
     }
 
     @SuppressWarnings("unused")
