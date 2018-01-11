@@ -33,6 +33,7 @@ public class AllEntryList extends EntryListSuper {
     }
 
 
+
     @Override
     public void addEntry(EntrySuper entry){
         allEntries.add(entry);
@@ -45,5 +46,14 @@ public class AllEntryList extends EntryListSuper {
         repairEntries.getAllEntriesFromFirebase();
         otherEntries.getAllEntriesFromFirebase();
         return true;
+    }
+
+    @Override
+    public void clear(){
+        fuelEntries.clear();
+        repairEntries.clear();
+        reminderEntries.clear();
+        otherEntries.clear();
+        allEntries.clear();
     }
 }

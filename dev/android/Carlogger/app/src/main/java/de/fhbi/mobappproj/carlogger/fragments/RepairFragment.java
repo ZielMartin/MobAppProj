@@ -101,7 +101,7 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
 
     private void setStatValues() {
         TV_RepairTotalCostValue.setText(doubleToString(RepairEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
-        TV_RepairMonthCostValue.setText(doubleToString(RepairEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
+        TV_RepairMonthCostValue.setText(doubleToString(RepairEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -26,7 +26,6 @@ import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
@@ -88,7 +87,7 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
     private void setStatValues() {
 
         TV_FuelTotalCostValue.setText(doubleToString(FuelEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
-        TV_FuelMonthCostValue.setText(doubleToString(FuelEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
+        TV_FuelMonthCostValue.setText(doubleToString(FuelEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
         TV_FuelConsumptionValue.setText(doubleToString(FuelEntryList.getInstance().getConsumtion()) + getString(R.string.euro));
 
 

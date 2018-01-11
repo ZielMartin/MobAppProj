@@ -1,7 +1,5 @@
 package de.fhbi.mobappproj.carlogger.fragments;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -110,7 +108,7 @@ public class AllFragment extends Fragment implements View.OnClickListener, DateP
 
     private void setStatValues() {
         TV_AllTotalCostValue.setText(doubleToString(AllEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
-        TV_AllMonthCostValue.setText(doubleToString(AllEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
+        TV_AllMonthCostValue.setText(doubleToString(AllEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
     }
 
     @Override

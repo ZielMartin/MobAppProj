@@ -57,12 +57,12 @@ public abstract class EntryListSuper<EntryType extends EntrySuper> {
         return cost;
     }
 
-    public double getCostPerMonth(){
+    public double getCostPerMonth(Calendar today){
         double cost = 0;
 
         if(!allEntries.isEmpty()) {
             Calendar first = Collections.min(allEntries).getCreateTimeCalendar();
-            Calendar today = Calendar.getInstance();
+
 
             int diffYear = today.get(Calendar.YEAR) - first.get(Calendar.YEAR);
             int diffMonth = diffYear * 12 + today.get(Calendar.MONTH) - first.get(Calendar.MONTH);
@@ -75,18 +75,19 @@ public abstract class EntryListSuper<EntryType extends EntrySuper> {
     public double getCostTime(Calendar start, Calendar end) {
         double cost = 0;
 
-        long diff = end.getTimeInMillis() - start.getTimeInMillis();
-
         Collections.sort(allEntries);
 
         for(EntryType entry : allEntries){
-            if(entry.getCreateTimeCalendar().compareTo(start) >= 0 && entry.getCreateTimeCalendar().compareTo(start) <= diff){
+            if(entry.getCreateTimeCalendar().compareTo(start) >= 0 && entry.getCreateTimeCalendar().compareTo(end) <= 0){
                 cost += entry.getCost();
             }
         }
 
-        Log.d("getCostPerMonth", cost+"");
         return cost;
+    }
+
+    public void clear(){
+        allEntries.clear();
     }
 
 

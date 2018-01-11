@@ -62,10 +62,12 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     }
 
     /**
+     * createTimeCalendar is setted in the Constructor
      * edit createTimeCalendar if this entry is for editing an other
+     * or for test usage
      * @param createTimeCalendar
      */
-    public void setCreateTimeCalendar(Calendar createTimeCalendar) {
+    public void editCreateTimeCalendar(Calendar createTimeCalendar) {
         this.createTimeCalendar = createTimeCalendar;
     }
 

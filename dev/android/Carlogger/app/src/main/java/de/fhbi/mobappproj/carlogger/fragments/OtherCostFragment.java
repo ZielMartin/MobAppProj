@@ -18,13 +18,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.OtherCostAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
@@ -142,7 +140,7 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener,
 
     private void setStatValues() {
         TV_OtherTotalCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
-        TV_OtherMonthCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
+        TV_OtherMonthCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
     }
 
     @Override
