@@ -37,7 +37,7 @@ import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
 import de.fhbi.mobappproj.carlogger.fragments.ReminderFragment;
 import de.fhbi.mobappproj.carlogger.fragments.RepairFragment;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final int RC_SIGN_IN = 123;
     private static final String TAG = "MainActivity";
 
