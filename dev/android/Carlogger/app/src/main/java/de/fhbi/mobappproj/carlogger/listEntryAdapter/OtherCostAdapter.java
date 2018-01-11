@@ -13,10 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAddActivity;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAddActivity;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
@@ -25,21 +25,52 @@ import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
  * Created by Johannes on 26.12.2017.
  */
 
-public class OtherCostAdapter extends RecyclerView.Adapter<OtherCostAdapter.ViewHolder> {
+public class OtherCostAdapter extends RecyclerView.Adapter<OtherCostAdapter.OtherCostViewHolder> {
 
     private ArrayList<OtherCostEntry> entries;
     private Context mContext;
-    private int mExpandedPosition;
     private ViewGroup recyclerView;
 
+    public OtherCostAdapter(Context context, ArrayList<OtherCostEntry> items) {
+        GenericViewHolder.mExpandedPosition = -1;
+        this.mContext = context;
+        entries = items;
+    }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public OtherCostViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(R.layout.list_item_other_cost, parent, false);
+        return new OtherCostViewHolder(itemView, mContext, this);
+
+    }
+
+    @Override
+    public void onBindViewHolder(OtherCostViewHolder holder, int position) {
+        holder.setDataOnView(position, entries.get(position));
+    }
+
+
+
+    @Override
+    public int getItemCount() {
+        return entries.size();
+    }
+
+    public static class OtherCostViewHolder extends GenericViewHolder {
 
         public TextView TV_ListItemOtherCost, TV_ListItemOtherDateTime, TV_ListItemOtherDescription, TV_ListItemOtherAutoEntry;
         public Button BTN_OtherEdit, BTN_OtherDelete;
 
-        public ViewHolder(View v) {
+        private OtherCostEntry entry;
+        private Context mContext;
+
+        private RecyclerView.Adapter callback;
+
+        public OtherCostViewHolder(View v, Context mContext, RecyclerView.Adapter callback) {
             super(v);
+            this.mContext = mContext;
+            this.callback = callback;
             TV_ListItemOtherCost = (TextView) v.findViewById(R.id.TV_ListItemOtherCost);
             TV_ListItemOtherDateTime = (TextView) v.findViewById(R.id.TV_ListItemOtherDateTime);
             TV_ListItemOtherDescription = (TextView) v.findViewById(R.id.TV_ListItemOtherDescription);
@@ -50,147 +81,104 @@ public class OtherCostAdapter extends RecyclerView.Adapter<OtherCostAdapter.View
             //get delete Button
             BTN_OtherDelete = (Button) v.findViewById(R.id.BTN_OtherDelete);
         }
-    }
+
+        @Override
+        public void setDataOnView(int position, EntrySuper entrySuper) {
+
+            this.entry = (OtherCostEntry) entrySuper;
+
+            TV_ListItemOtherCost.setText(doubleToString(entry.getCost()) + " " + mContext.getString(R.string.euro));
+            TV_ListItemOtherDescription.setText(entry.getDescription());
+            setDateTimeText(entry);
 
 
+            setAutoEntryText(entry);
 
+            //configure expanding entry
+            setUpExpandable(position);
+        }
 
+        private void setDateTimeText(OtherCostEntry entry) {
+            //format date and time
+            Calendar calendar = entry.getCreateTimeCalendar();
+            SimpleDateFormat dateFormat = new SimpleDateFormat(
+                    "dd. MMM yyyy HH:mm");
 
-    public OtherCostAdapter(Context context, ArrayList<OtherCostEntry> items) {
-        this.mContext = context;
-        entries = items;
-        mExpandedPosition = -1;
-    }
+            TV_ListItemOtherDateTime.setText(dateFormat.format(calendar.getTime()));
+        }
 
-
-
-    @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_other_cost, parent, false);
-
-        recyclerView = parent;
-        return new ViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-
-        OtherCostEntry entry = entries.get(position);
-
-        holder.TV_ListItemOtherCost.setText(doubleToString(entry.getCost())+" "+mContext.getString(R.string.euro));
-        holder.TV_ListItemOtherDescription.setText(entry.getDescription());
-        setDateTimeText(holder, entry);
-
-
-        setAutoEntryText(holder, entry);
-
-        //configure expanding entry
-        setUpExpandable(holder, position);
-
-
-    }
-
-    private void setDateTimeText(ViewHolder holder, OtherCostEntry entry) {
-        //format date and time
-        Calendar calendar = entry.getCreateTimeCalendar();
-        SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "dd. MMM yyyy HH:mm");
-
-        holder.TV_ListItemOtherDateTime.setText(dateFormat.format(calendar.getTime()));
-    }
-
-
-
-    private void setAutoEntryText(ViewHolder holder, OtherCostEntry entry) {
-        if(entry.getAutoEntry()!=null) {
-            switch (entry.getAutoEntry()) {
-                case DAILY:
-                    holder.TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_daily)));
-                    break;
-                case WEEKLY:
-                    holder.TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_weekly)));
-                    break;
-                case MONTHLY:
-                    holder.TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_monthly)));
-                    break;
-                case YEARLY:
-                    holder.TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_yearly)));
-                    break;
-                case EVERYTWOYEAR:
-                    holder.TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_everytwoyear)));
-                    break;
+        private void setAutoEntryText(OtherCostEntry entry) {
+            if (entry.getAutoEntry() != null) {
+                switch (entry.getAutoEntry()) {
+                    case DAILY:
+                        TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_daily)));
+                        break;
+                    case WEEKLY:
+                        TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_weekly)));
+                        break;
+                    case MONTHLY:
+                        TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_monthly)));
+                        break;
+                    case YEARLY:
+                        TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_yearly)));
+                        break;
+                    case EVERYTWOYEAR:
+                        TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry_with_time, mContext.getString(R.string.ad_auto_entry_everytwoyear)));
+                        break;
+                }
+            } else {
+                TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry) + ": " + mContext.getString(R.string.no));
             }
-        }else{
-            holder.TV_ListItemOtherAutoEntry.setText(mContext.getString(R.string.add_cb_auto_entry)+": "+mContext.getString(R.string.no));
+        }
+
+        private String getFuelCost(FuelEntry entry) {
+            double fuelCost = entry.getCostPerLitre() * entry.getAmount();
+            return doubleToString(fuelCost);
+        }
+
+
+        private void setUpExpandable(int position) {
+            //expand entry
+            final boolean isExpanded = position == mExpandedPosition;
+            BTN_OtherEdit.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            BTN_OtherDelete.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            TV_ListItemOtherDescription.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            TV_ListItemOtherAutoEntry.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+            itemView.setActivated(isExpanded);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mExpandedPosition = isExpanded ? -1 : position;
+
+                    callback.notifyDataSetChanged();
+                }
+            });
+            setUpButtons(position);
+
+
+        }
+
+        private void setUpButtons(int position) {
+            //action for edit button
+            BTN_OtherEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), OtherCostAddActivity.class);
+                    intent.putExtra("entry", entry);
+                    view.getContext().startActivity(intent);
+                }
+            });
+
+            //action for delete Button
+            BTN_OtherDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    entry.removeEntry();
+                    callback.notifyDataSetChanged();
+                    mExpandedPosition = -1;
+                }
+            });
         }
     }
-
-    private String getFuelCost(FuelEntry entry){
-        double fuelCost = entry.getCostPerLitre() * entry.getAmount();
-        return doubleToString(fuelCost);
-    }
-
-
-
-    private void setUpExpandable(ViewHolder holder, int position) {
-        //expand entry
-        final boolean isExpanded = position==mExpandedPosition;
-        holder.BTN_OtherEdit.setVisibility(isExpanded? View.VISIBLE:View.GONE);
-        holder.BTN_OtherDelete.setVisibility(isExpanded? View.VISIBLE:View.GONE);
-        holder.TV_ListItemOtherDescription.setVisibility(isExpanded? View.VISIBLE:View.GONE);
-        holder.TV_ListItemOtherAutoEntry.setVisibility(isExpanded? View.VISIBLE:View.GONE);
-
-        holder.itemView.setActivated(isExpanded);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mExpandedPosition = isExpanded ? -1:position;
-
-                notifyDataSetChanged();
-            }
-        });
-        setUpButtons(holder, position);
-
-
-    }
-
-    private void setUpButtons(ViewHolder holder, int position) {
-        //action for edit button
-        holder.BTN_OtherEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), OtherCostAddActivity.class);
-                intent.putExtra("entry", entries.get(position));
-                intent.putExtra("entryIndex", position);
-                view.getContext().startActivity(intent);
-            }
-        });
-
-        //action for delete Button
-        holder.BTN_OtherDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                entries.remove(position);
-                notifyDataSetChanged();
-            }
-        });
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemCount() {
-        return entries.size();
-    }
-
-
-
-
-
-
-
 }

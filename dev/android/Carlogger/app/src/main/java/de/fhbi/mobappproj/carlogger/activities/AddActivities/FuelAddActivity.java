@@ -30,7 +30,6 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
 
 
     private FuelEntry editEntry;
-    private int entryIndex;
 
 
     @Override
@@ -48,7 +47,6 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
             if(extras != null){
                 editEntry = extras.getParcelable("entry");
                 setEditEntryValues(editEntry);
-                entryIndex = extras.getInt("entryIndex");
             }
         }
 
@@ -112,12 +110,12 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
                 if(checkInput()){
                     //if this is an edit: edit the given entry
                     if(editEntry != null){
-                        FuelEntryList.getInstance().set(entryIndex, editEntry);
                         editEntry.setAutoEntry(autoEntry);
                         editEntry.setCostPerLitre(editTextToDouble(ET_FuelAddCostPerLitre));
                         editEntry.setFull(CB_FuelAddFull.isChecked());
                         editEntry.setKm(editTextToDouble(ET_FuelAddKM));
                         editEntry.setAmount(editTextToDouble(ET_FuelAddAmount));
+                        editEntry.updateEntry();
                         editEntry.push();
                     }else{
                         FuelEntry fe = new FuelEntry();

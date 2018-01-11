@@ -1,7 +1,6 @@
 package de.fhbi.mobappproj.carlogger.fragments;
 
 import android.content.Context;
-import android.graphics.Movie;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -10,11 +9,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
-import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -22,6 +18,7 @@ import java.util.ArrayList;
 import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 

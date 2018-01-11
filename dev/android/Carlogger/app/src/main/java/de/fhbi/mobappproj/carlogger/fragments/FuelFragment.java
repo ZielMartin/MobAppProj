@@ -19,26 +19,27 @@ import android.app.AlertDialog;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
+import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
-public class FuelFragment extends Fragment implements OnClickListener {
+public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialogUserInterface {
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recyclerView;
     private FuelAdapter mAdapter;
 
-    private  ArrayList<FuelEntry> entryList;
+    private ArrayList<FuelEntry> entryList;
 
     private TextView TV_FuelTotalCostValue, TV_FuelMonthCostValue, TV_FuelPeriodCostValue, TV_FuelConsumptionValue;
 
@@ -72,30 +73,34 @@ public class FuelFragment extends Fragment implements OnClickListener {
         btn_FuelInfo.setOnClickListener(this);
         buttonEffect(btn_FuelInfo);
 
+        TV_FuelPeriodCostValue = v.findViewById(R.id.TV_FuelPeriodCostValue);
+        TV_FuelTotalCostValue = v.findViewById(R.id.TV_FuelTotalCostValue);
+        TV_FuelMonthCostValue = v.findViewById(R.id.TV_FuelMonthCostValue);
+        TV_FuelConsumptionValue = v.findViewById(R.id.TV_FuelConsumptionValue);
 
         initRecyclerView(v);
 
-        setStatValues(v);
 
 
         return v;
     }
 
-    private void setStatValues(View v) {
+    private void setStatValues() {
 
-        TV_FuelTotalCostValue = v.findViewById(R.id.TV_FuelTotalCostValue);
-        TV_FuelMonthCostValue = v.findViewById(R.id.TV_FuelMonthCostValue);
-        TV_FuelPeriodCostValue = v.findViewById(R.id.TV_FuelPeriodCostValue);
-        TV_FuelConsumptionValue = v.findViewById(R.id.TV_FuelConsumptionValue);
+        TV_FuelTotalCostValue.setText(doubleToString(FuelEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
+        TV_FuelMonthCostValue.setText(doubleToString(FuelEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
+        TV_FuelConsumptionValue.setText(doubleToString(FuelEntryList.getInstance().getConsumtion()) + getString(R.string.euro));
 
-        //TODO: set Values
 
+    }
+    public void setPeriodCost(Calendar start, Calendar end){
+        TV_FuelPeriodCostValue.setText(doubleToString(FuelEntryList.getInstance().getCostTime(start, end)) + getString(R.string.euro));
     }
 
     private void initRecyclerView(View v){
         recyclerView = (RecyclerView) v.findViewById(R.id.RV_FuelFragment);
 
-       entryList = FuelEntryList.getInstance().getAllEntries();
+        entryList = FuelEntryList.getInstance().getAllEntries();
 
         // specify an adapter
         mAdapter = new FuelAdapter(getActivity(),entryList);
@@ -149,6 +154,7 @@ public class FuelFragment extends Fragment implements OnClickListener {
     public void onResume() {
         super.onResume();
         mAdapter.notifyDataSetChanged();
+        setStatValues();
     }
 
 

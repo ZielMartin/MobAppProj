@@ -16,20 +16,20 @@ import android.widget.TextView;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
+import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.RepairAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
+import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class RepairFragment extends Fragment implements View.OnClickListener{
+public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialogUserInterface {
 
     private OnFragmentInteractionListener mListener;
 
@@ -37,6 +37,8 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
     private RepairAdapter mAdapter;
 
     private ArrayList<RepairEntry> entryList;
+
+    private TextView TV_RepairTotalCostValue, TV_RepairMonthCostValue, TV_RepairPeriodCostValue;
 
     public RepairFragment() {
         // Required empty public constructor
@@ -58,6 +60,10 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
         Button btn_DatePicker = (Button) view.findViewById(R.id.BTN_RepairDatePicker);
         btn_DatePicker.setOnClickListener(this);
         buttonEffect(btn_DatePicker);
+
+        TV_RepairTotalCostValue = view.findViewById(R.id.TV_RepairTotalCostValue);
+        TV_RepairMonthCostValue = view.findViewById(R.id.TV_RepairMonthCostValue);
+        TV_RepairPeriodCostValue = view.findViewById(R.id.TV_RepairPeriodCostValue);
 
 
         initRecyclerView(view);
@@ -89,6 +95,13 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         mAdapter.notifyDataSetChanged();
+        setStatValues();
+
+    }
+
+    private void setStatValues() {
+        TV_RepairTotalCostValue.setText(doubleToString(RepairEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
+        TV_RepairMonthCostValue.setText(doubleToString(RepairEntryList.getInstance().getCostPerMonth()) + getString(R.string.euro));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -127,6 +140,11 @@ public class RepairFragment extends Fragment implements View.OnClickListener{
                 break;
         }
 
+    }
+
+    @Override
+    public void setPeriodCost(Calendar start, Calendar end) {
+        TV_RepairPeriodCostValue.setText(doubleToString(RepairEntryList.getInstance().getCostTime(start, end)) + getString(R.string.euro));
     }
 
 

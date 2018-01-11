@@ -5,6 +5,11 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_all"
+            android:icon="@drawable/ic_nav_all"
+            android:title="@string/nav_all"
+            android:visible="true" />
+        <item
             android:id="@+id/nav_repair_service"
             android:icon="@drawable/ic_menu_manage"
             android:title="@string/navigation_drawer_repair_service"
@@ -22,19 +27,6 @@
             android:icon="@drawable/ic_action_cash"
             android:title="@string/navigation_drawer_other_costs" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
     <item
         android:id="@+id/loginlogout"

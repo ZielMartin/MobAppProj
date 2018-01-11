@@ -27,6 +27,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
     public RepairEntry() {
         super();
+        entryType = entryType.REPAIRENTRY;
         RepairEntryList.getInstance().addEntry(this);
     }
 
@@ -35,10 +36,12 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
     public void setPartCost(double partCost) {
         this.partCost = partCost;
+        cost += partCost;
     }
 
     public void setLaborCost(double laborCost) {
         this.laborCost = laborCost;
+        cost += laborCost;
     }
 
     public void setDescription(String description) {
@@ -75,13 +78,6 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
 
     @Override
-    public void removeEntry(int index) {
-        removeFromFirebase();
-        RepairEntryList.getInstance().removeEntry(index);
-
-    }
-
-    @Override
     protected void pushToFirebase() {
         //called when entry was added - add to firebase
         //TODO fill me
@@ -106,12 +102,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     }
 
 
-    @Override
-    public int compareTo(@NonNull EntrySuper entrySuper) {
-        long thisTime = this.createTimeCalendar.getTimeInMillis();
-        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
-        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
-    }
+
 
     protected RepairEntry(Parcel in) {
         type = in.readString();
@@ -124,6 +115,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         if(filePathForParcel != null){
             bill = new File(filePathForParcel);
         }
+        entryType = (EntryType) in.readSerializable();
     }
 
     @Override
@@ -141,6 +133,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         dest.writeString(filePathForParcel);
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
+        dest.writeSerializable(entryType);
     }
 
     @SuppressWarnings("unused")

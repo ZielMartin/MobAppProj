@@ -14,7 +14,7 @@ public class AutoEntryDates {
         DAILY , WEEKLY, MONTHLY, YEARLY, EVERYTWOMONTH, EVERYTHREEMONTH, EVERYTWOYEAR
     }
 
-    private static int DAILYINT = 1, WEEKLYINT = 7, MONTHLYINT = 30, YEARLYINT = 365, EVERYTWOMONTH = 60, EVERYTHREEMONTH = 90, EVERYTWOYEAR = 730;
+    private static final int DAILYINT = 1, WEEKLYINT = 7, MONTHLYINT = 30, YEARLYINT = 365, EVERYTWOMONTH = 60, EVERYTHREEMONTH = 90, EVERYTWOYEAR = 730;
 
     public static ArrayList<Calendar> getList(Calendar lastEntryCalendar, AutoEntry entry){
         switch (entry){

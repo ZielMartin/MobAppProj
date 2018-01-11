@@ -3,6 +3,9 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <string name="nav_all">Übersicht</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -11,24 +14,24 @@
     <string name="navigation_drawer_reminder">Erinnerungen</string>
     <string name="navigation_drawer_other_costs">Andere Kosten</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_fuel_fragment">Hello fuel fragment</string>
     <string name="hello_repair_fragment">Hello repair fragment</string>
 
 
     <!-- fragmentFuel -->
-    <string name="fuelFragment_allCost">Gesamtkosten für Tanken €</string>
-    <string name="fuelFragment_monthCost">Kosten Pro Monat €</string>
-    <string name="fuelFragment_periodCost">Kosten für Zeitraum €</string>
+    <string name="fuelFragment_title">Tanken</string>
+    <string name="fuelFragment_allCost">Gesamtkosten für Tanken</string>
+    <string name="fuelFragment_monthCost">Kosten Pro Monat</string>
+    <string name="fuelFragment_periodCost">Kosten für Zeitraum</string>
     <string name="fuelFragment_fuelConsumption">Verbrauch (L/100KM)</string>
-    <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer €</string>
+    <string name="fuelFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
     <string name="fuelFragment_fuelConsumptionOther">Verbrauch (L/100KM) anderer Fahrer</string>
 
     <!--FuelAddActivity -->
     <string name="fuel_add_title">Tankfüllung hinzufügen</string>
     <string name="fuel_add_quantity">Menge in Liter</string>
-    <string name="fuel_add_cost_per_litre">Kosten/Liter in €</string>
+    <string name="fuel_add_cost_per_litre">Kosten/Liter in</string>
     <string name="fuel_add_km">Kilometerstand</string>
     <string name="fuel_add_cb_full">Vollgetankt</string>
 
@@ -49,17 +52,18 @@
     <string name="fabAdd_repair_service">Reparatur oder Service</string>
 
     <!-- fragmentRepair -->
-    <string name="repairFragment_allCost">Gesamtkosten für Reparaturen &amp; Service €</string>
-    <string name="repairFragment_monthCost">Kosten Pro Monat €</string>
-    <string name="repairFragment_periodCost">Kosten für Zeitraum €</string>
-    <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer €</string>
+    <string name="repairFragment_title">Reparaturen &amp; Service</string>
+    <string name="repairFragment_allCost">Gesamtkosten für Reparaturen &amp; Service</string>
+    <string name="repairFragment_monthCost">Kosten Pro Monat</string>
+    <string name="repairFragment_periodCost">Kosten für Zeitraum</string>
+    <string name="repairFragment_monthCostOther">Kosten Pro Monat anderer Fahrer</string>
 
     <!--RepairAddActivity -->
     <string name="repair_add_title">Reparatur &amp; Service hinzufügen</string>
     <string name="repair_add_type">Art</string>
-    <string name="repair_add_cost">Gesamtkosten €</string>
-    <string name="repair_add_part_cost">Teilekosten €</string>
-    <string name="repair_add_labor_cost">Arbeitskosten €</string>
+    <string name="repair_add_cost">Gesamtkosten</string>
+    <string name="repair_add_part_cost">Teilekosten</string>
+    <string name="repair_add_labor_cost">Arbeitskosten</string>
     <string name="repair_add_description">Beschreibung/Ersetzte Teile</string>
     <string name="repair_add_bill">Rechnung</string>
 
@@ -77,20 +81,21 @@
     <string name="error_cost">Bitte Kosten angeben</string>
 
 
-
     <!-- fragmentOtherCost -->
+    <string name="otherCostFragment_title">Andere Kosten</string>
     <string name="otherCostFragment_allCost">Gesamtkosten für Andere Kosten</string>
-    <string name="otherCostFragment_monthCost">Kosten Pro Monat €</string>
-    <string name="otherCostFragment_periodCost">Kosten für Zeitraum €</string>
+    <string name="otherCostFragment_monthCost">Kosten Pro Monat</string>
+    <string name="otherCostFragment_periodCost">Kosten für Zeitraum</string>
     <string name="otherCostFragment_monthCostOther">Kosten Pro Monat anderer Fahrer €</string>
 
     <!--OtherCostAddActivity -->
     <string name="other_cost_add_title">Andere Kosten hinzufügen</string>
-    <string name="other_cost_add_cost">Kosten €</string>
+    <string name="other_cost_add_cost">Kosten</string>
     <string name="other_cost_add_description">Beschreibung</string>
 
 
     <!-- Reminder -->
+    <string name="reminder_fragment_title">Erinnerungen</string>
 
 
     <!--ReminderAddActivity-->
@@ -120,7 +125,6 @@
     <string name="ad_auto_entry_everytwoyear">Alle zwei Jahre</string>
 
 
-
     <!--DatePickerAlert -->
     <string name="datePicker_from">Von</string>
     <string name="datePicker_to">Bis</string>
@@ -138,13 +142,7 @@
     <string name="euro">€</string>
     <string name="euro_per_litre">€/Liter</string>
 
-
-
-
-
-
-
-
+    <string name="allFragment_allCost">Gesamtkosten €</string>
 
 
 </resources>

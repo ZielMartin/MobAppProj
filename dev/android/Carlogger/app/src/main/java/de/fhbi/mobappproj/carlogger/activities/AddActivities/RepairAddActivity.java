@@ -40,7 +40,6 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
 
 
     private RepairEntry editEntry;
-    private int entryIndex;
 
 
 
@@ -62,7 +61,6 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
             if(extras != null){
                 editEntry = extras.getParcelable("entry");
                 setEditEntryValues(editEntry);
-                entryIndex = extras.getInt("entryIndex");
                 if(editEntry.getBill()!=null){
                     image = editEntry.getBill();
                     setPic(IV_RepairAddBill);
@@ -165,13 +163,13 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
                 if(checkInput()){
                     //if this is an edit: edit the given entry
                     if(editEntry != null){
-                        RepairEntryList.getInstance().set(entryIndex, editEntry);
                         editEntry.setType(SP_RepairAddType.getSelectedItem().toString());
                         editEntry.setAutoEntry(autoEntry);
                         editEntry.setBill(image);
                         editEntry.setDescription(ET_RepairAddDescription.getText().toString());
                         editEntry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
                         editEntry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
+                        editEntry.updateEntry();
                         editEntry.push();
 
                     }else {

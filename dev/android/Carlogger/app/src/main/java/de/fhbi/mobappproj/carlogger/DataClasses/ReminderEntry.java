@@ -23,6 +23,8 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
 
 
     public ReminderEntry() {
+        super();
+        entryType = entryType.REMINDERENTRY;
         ReminderEntryList.getInstance().addEntry(this);
     }
 
@@ -84,11 +86,6 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         //TODO - fill me
     }
 
-    @Override
-    public void removeEntry(int index) {
-        removeFromFirebase();
-        ReminderEntryList.getInstance().removeEntry(index);
-    }
 
 
 
@@ -109,6 +106,8 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         hoursNotification = in.readInt();
         createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
+        entryType = (EntryType) in.readSerializable();
+        cost = in.readDouble();
     }
 
     @Override
@@ -124,6 +123,8 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         dest.writeInt(hoursNotification);
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
+        dest.writeSerializable(entryType);
+        dest.writeDouble(cost);
     }
 
     @SuppressWarnings("unused")
@@ -139,11 +140,6 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         }
     };
 
-    @Override
-    public int compareTo(@NonNull EntrySuper entrySuper) {
-        long thisTime = this.createTimeCalendar.getTimeInMillis();
-        long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
-        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
-    }
+
 }
 

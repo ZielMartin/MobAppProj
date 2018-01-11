@@ -28,7 +28,6 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
     private DatePicker DP_DatePicker;
 
     private ReminderEntry editEntry;
-    private int entryIndex;
 
 
     //how many hours before the Push-Notification should be made
@@ -52,7 +51,6 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
             if(extras != null){
                 editEntry = extras.getParcelable("entry");
                 setEditEntryValues(editEntry);
-                entryIndex = extras.getInt("entryIndex");
             }
         }
     }
@@ -113,11 +111,11 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                 if(checkInput()){
                     //if this is an edit: edit the given entry
                     if(editEntry != null){
-                        ReminderEntryList.getInstance().set(entryIndex, editEntry);
                         editEntry.setDateTime(getDateFromDatePicker(DP_DatePicker, TP_TimePicker));
                         editEntry.setDescription(ET_Description.getText().toString());
                         editEntry.setHoursNotification(hoursNotification);
                         editEntry.setPushNotification(CB_PushNotification.isChecked());
+                        editEntry.updateEntry();
                         editEntry.push();
                     }else {
                         // Save created Data on Firebase using DataClasses

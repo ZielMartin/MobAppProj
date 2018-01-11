@@ -20,6 +20,7 @@ public class DatePickerAlert implements DatePickerDialog.OnDateSetListener {
 
     private Button callingBTN;
     private Fragment callingFragment;
+    private DatePickerDialogUserInterface callerFragmentInterface;
     private TextView callingTextview;
 
     /**
@@ -31,6 +32,7 @@ public class DatePickerAlert implements DatePickerDialog.OnDateSetListener {
     public DatePickerAlert(Button callingBTN, Fragment callingFragment, TextView callingTextview){
         this.callingFragment = callingFragment;
         this.callingTextview = callingTextview;
+        callerFragmentInterface = (DatePickerDialogUserInterface) callingFragment;
         show();
     }
 
@@ -65,7 +67,20 @@ public class DatePickerAlert implements DatePickerDialog.OnDateSetListener {
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth, int yearEnd, int monthOfYearEnd, int dayOfMonthEnd) {
         if(this.callingTextview != null){
-            this.callingTextview.setText(callingFragment.getString(R.string.datePicker_periodWithDate, dayOfMonth, monthOfYear, year, dayOfMonthEnd, monthOfYearEnd, yearEnd));
+
+            Calendar start = Calendar.getInstance();
+            start.set(year, monthOfYear, dayOfMonth);
+
+            Calendar end = Calendar.getInstance();
+            end.set(yearEnd, monthOfYearEnd, dayOfMonthEnd);
+
+            if(start.getTimeInMillis() <= end.getTimeInMillis()){
+                this.callerFragmentInterface.setPeriodCost(start, end);
+                this.callingTextview.setText(callingFragment.getString(R.string.datePicker_periodWithDate, dayOfMonth, monthOfYear+1, year, dayOfMonthEnd, monthOfYearEnd+1, yearEnd));
+            }else{
+                this.callerFragmentInterface.setPeriodCost(end, start);
+                this.callingTextview.setText(callingFragment.getString(R.string.datePicker_periodWithDate, dayOfMonthEnd, monthOfYearEnd+1, yearEnd, dayOfMonth, monthOfYear+1, year));
+            }
         }
     }
 
