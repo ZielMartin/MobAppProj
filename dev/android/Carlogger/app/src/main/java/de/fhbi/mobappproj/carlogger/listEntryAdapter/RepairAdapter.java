@@ -16,8 +16,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAddActivity;
 

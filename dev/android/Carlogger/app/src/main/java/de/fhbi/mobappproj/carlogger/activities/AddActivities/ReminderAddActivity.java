@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,8 +14,7 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 public class ReminderAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {

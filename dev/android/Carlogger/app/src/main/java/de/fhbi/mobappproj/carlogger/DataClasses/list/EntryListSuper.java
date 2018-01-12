@@ -1,10 +1,10 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
-
-import android.util.Log;
+package de.fhbi.mobappproj.carlogger.DataClasses.list;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 
 /**Each Class that represents an Entry-list has to use these Methods
  * sub-classes should be singleton and give their EntryType to this class - example: ReminderEntryList

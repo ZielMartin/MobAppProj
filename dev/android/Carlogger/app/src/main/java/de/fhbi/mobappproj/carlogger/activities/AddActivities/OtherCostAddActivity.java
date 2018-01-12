@@ -11,8 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;

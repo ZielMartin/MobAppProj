@@ -1,6 +1,6 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
+package de.fhbi.mobappproj.carlogger.DataClasses.list;
 
-import java.util.ArrayList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
 
 /**
  * Singleton Pattern

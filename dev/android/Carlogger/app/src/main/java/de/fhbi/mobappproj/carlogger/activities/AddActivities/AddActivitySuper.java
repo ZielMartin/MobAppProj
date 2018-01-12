@@ -26,8 +26,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
-import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 

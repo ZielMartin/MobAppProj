@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,17 +12,13 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.util.Arrays;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;

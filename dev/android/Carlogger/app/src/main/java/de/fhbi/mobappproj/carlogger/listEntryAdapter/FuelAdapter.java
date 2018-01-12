@@ -2,7 +2,6 @@ package de.fhbi.mobappproj.carlogger.listEntryAdapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,8 +14,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAddActivity;
 

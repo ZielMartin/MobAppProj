@@ -1,12 +1,9 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
-
-import android.util.Log;
+package de.fhbi.mobappproj.carlogger.DataClasses.list;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 
 /**
  * Created by Johannes on 16.12.2017.

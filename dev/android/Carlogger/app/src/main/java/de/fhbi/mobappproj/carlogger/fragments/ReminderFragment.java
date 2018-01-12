@@ -15,10 +15,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 

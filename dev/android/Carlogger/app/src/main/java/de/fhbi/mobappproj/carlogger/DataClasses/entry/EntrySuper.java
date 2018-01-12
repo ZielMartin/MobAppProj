@@ -1,9 +1,15 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
+package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.Calendar;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 
 /**
  * all sub-classes have to call their EntryList-singleton-instance in the contructor and add themself to the list
@@ -30,6 +36,8 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     protected double cost;
     protected boolean lastEntry;
 
+
+
     public EntrySuper(){
         lastEntry = true;
         createTimeCalendar = Calendar.getInstance();
@@ -41,7 +49,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
 
     protected abstract void removeFromFirebase();
 
-    protected abstract void updateChangesOnFirebase();
+    public abstract void updateChangesOnFirebase();
 
     /**
      * check all variables and call pushToFirebase()
@@ -49,19 +57,6 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     public abstract void push();
 
 
-
-    public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
-        this.autoEntry = autoEntry;
-    }
-
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
-
-    public Calendar getCreateTimeCalendar() {
-
-        return createTimeCalendar;
-    }
 
     /**
      * createTimeCalendar is setted in the Constructor
@@ -120,12 +115,33 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
         }
     }
 
+    public void setAutoEntry(AutoEntryDates.AutoEntry autoEntry) {
+        this.autoEntry = autoEntry;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public Calendar getCreateTimeCalendar() {
+
+        return createTimeCalendar;
+    }
+
     public AutoEntryDates.AutoEntry getAutoEntry() {
         return autoEntry;
     }
 
     public double getCost() {
         return cost;
+    }
+
+    public EntryType getEntryType() {
+        return entryType;
+    }
+
+    public void setEntryType(EntryType entryType) {
+        this.entryType = entryType;
     }
 
     public void setLastEntry(boolean lastEntry) {

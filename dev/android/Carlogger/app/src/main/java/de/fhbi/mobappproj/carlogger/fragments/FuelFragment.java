@@ -21,8 +21,8 @@ import android.app.AlertDialog;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;

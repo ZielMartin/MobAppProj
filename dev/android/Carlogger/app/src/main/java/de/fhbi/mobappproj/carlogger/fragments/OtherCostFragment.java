@@ -18,8 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;

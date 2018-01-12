@@ -1,10 +1,13 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
-
-import android.util.Log;
+package de.fhbi.mobappproj.carlogger.DataClasses.list;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 
 /**
  * Created by Johannes on 09.01.2018.
@@ -74,7 +77,7 @@ public class AllEntryList extends EntryListSuper {
 
         for (EntrySuper entry : lastAutoEntries) {
             entry.setLastEntry(false);
-            ArrayList<Calendar> calList = AutoEntryDates.getList(entry.createTimeCalendar, entry.autoEntry);
+            ArrayList<Calendar> calList = AutoEntryDates.getList(entry.getCreateTimeCalendar(), entry.getAutoEntry());
 
             if(calList.size() > 0){
                 entry.setLastEntry(false);
@@ -83,7 +86,7 @@ public class AllEntryList extends EntryListSuper {
 
             for (int i = 0; i < calList.size(); i++) {
 
-                switch (entry.entryType) {
+                switch (entry.getEntryType()) {
                     case FUELENTRY:
                         FuelEntry fe = (FuelEntry) entry;
                         FuelEntry newFe = new FuelEntry(fe);

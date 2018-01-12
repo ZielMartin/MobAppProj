@@ -10,12 +10,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.Calendar;
-
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates.AutoEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;

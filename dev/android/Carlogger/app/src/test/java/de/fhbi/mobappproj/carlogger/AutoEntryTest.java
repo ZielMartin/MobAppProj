@@ -1,16 +1,13 @@
 package de.fhbi.mobappproj.carlogger;
 
-import android.util.Log;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.AllEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 
 import static junit.framework.Assert.assertEquals;
 

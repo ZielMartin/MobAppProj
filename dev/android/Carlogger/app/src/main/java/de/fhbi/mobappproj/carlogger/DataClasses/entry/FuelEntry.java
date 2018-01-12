@@ -1,10 +1,12 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
+package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
 import java.util.Calendar;
+
+import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 
 /**
  * Created by Johannes on 16.12.2017.
@@ -96,7 +98,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
     }
 
     @Override
-    protected void updateChangesOnFirebase() {
+    public void updateChangesOnFirebase() {
         //called when entry was modified - save changes on firebase
         //TODO - fill me
     }

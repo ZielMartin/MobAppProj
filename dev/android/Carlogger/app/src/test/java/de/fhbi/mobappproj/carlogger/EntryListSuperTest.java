@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.AllEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;

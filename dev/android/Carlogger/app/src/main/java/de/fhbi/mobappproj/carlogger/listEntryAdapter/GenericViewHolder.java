@@ -3,8 +3,7 @@ package de.fhbi.mobappproj.carlogger.listEntryAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 
 /**
  * Created by Johannes on 09.01.2018.

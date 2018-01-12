@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.AllEntryList;
-import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.OtherCostEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.ReminderEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 /**
