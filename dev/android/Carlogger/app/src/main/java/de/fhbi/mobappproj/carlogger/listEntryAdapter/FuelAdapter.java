@@ -54,6 +54,9 @@ public class FuelAdapter extends RecyclerView.Adapter<FuelAdapter.FuelViewHolder
         return entries.size();
     }
 
+
+
+
     public static class FuelViewHolder extends GenericViewHolder {
 
         public TextView TV_ListItemFuelCost, TV_ListItemFuelAmount, TV_ListItemFuelDateTime, TV_ListItemFuelCostPerLitre, TV_ListItemFuelKM, TV_ListItemFuelFull, TV_ListItemFuelAutoEntry;

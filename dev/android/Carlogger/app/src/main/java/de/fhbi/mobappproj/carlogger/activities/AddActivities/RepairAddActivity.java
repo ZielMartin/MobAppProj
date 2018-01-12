@@ -170,7 +170,6 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
                         editEntry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
                         editEntry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
                         editEntry.updateEntry();
-                        editEntry.push();
 
                     }else {
                         //Create Entry and fill in Data

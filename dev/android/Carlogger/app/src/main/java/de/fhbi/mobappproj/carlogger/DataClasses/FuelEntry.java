@@ -30,6 +30,15 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         costPerLitre = 0;
     }
 
+    public FuelEntry(FuelEntry fe) {
+        super();
+        entryType = entryType.FUELENTRY;
+        FuelEntryList.getInstance().addEntry(this);
+        autoEntry = fe.autoEntry;
+        amount = fe.amount;
+        costPerLitre = fe.costPerLitre;
+    }
+
 
     public double getAmount() {
         return amount;
@@ -107,6 +116,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         cost = in.readDouble();
+        lastEntry = in.readByte() != 0x00;
     }
 
     @Override
@@ -124,6 +134,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeDouble(cost);
+        dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));
     }
 
     @SuppressWarnings("unused")

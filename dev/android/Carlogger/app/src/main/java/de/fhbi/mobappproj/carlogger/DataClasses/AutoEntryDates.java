@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class AutoEntryDates {
 
     public enum AutoEntry {
-        DAILY , WEEKLY, MONTHLY, YEARLY, EVERYTWOMONTH, EVERYTHREEMONTH, EVERYTWOYEAR
+        DAILY , WEEKLY, MONTHLY, YEARLY, EVERYTWOMONTH, EVERYTHREEMONTH, EVERYTWOYEAR;
     }
 
     private static final int DAILYINT = 1, WEEKLYINT = 7, MONTHLYINT = 30, YEARLYINT = 365, EVERYTWOMONTH = 60, EVERYTHREEMONTH = 90, EVERYTWOYEAR = 730;
@@ -56,7 +56,6 @@ public class AutoEntryDates {
             Calendar newCal = (Calendar) lastEntryCalendar.clone();
             newCal.add(Calendar.DAY_OF_MONTH,i);
             list.add(newCal);
-            //System.out.println(newCal.getTime()+"  entries: "+days/intervall+"  intervall: "+intervall+"   i: "+i);
         }
 
 

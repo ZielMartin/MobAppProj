@@ -103,7 +103,6 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
                         editEntry.setDescription(ET_OtherCostDescription.getText().toString());
                         editEntry.setAutoEntry(autoEntry);
                         editEntry.updateEntry();
-                        editEntry.push();
 
                     }else{
                         OtherCostEntry entry = new OtherCostEntry();
@@ -135,7 +134,8 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
     }
 
 
-    private void alertDialogAutoEntryPicker() {
+
+    protected void alertDialogAutoEntryPicker() {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.ad_auto_entry_title);
@@ -192,7 +192,8 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
         dialog.show();
     }
 
-    public void setEditEntryValues(OtherCostEntry entry){
+
+    protected void setEditEntryValues(OtherCostEntry entry){
         ET_OtherCostCost.setText(doubleToString(entry.getCost()));
         ET_OtherCostDescription.setText(entry.getDescription());
 

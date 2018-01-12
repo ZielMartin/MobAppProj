@@ -24,6 +24,15 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         OtherCostEntryList.getInstance().addEntry(this);
     }
 
+    public OtherCostEntry(OtherCostEntry oe){
+        super();
+        entryType = entryType.OTHERCOSTENTRY;
+        OtherCostEntryList.getInstance().addEntry(this);
+
+        autoEntry = oe.autoEntry;
+        description = oe.description;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -66,6 +75,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
+        lastEntry = in.readByte() != 0x00;
     }
 
     @Override
@@ -82,6 +92,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
+        dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));
     }
 
     @SuppressWarnings("unused")

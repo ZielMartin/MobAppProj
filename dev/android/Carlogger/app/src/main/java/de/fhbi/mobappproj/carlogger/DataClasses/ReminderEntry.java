@@ -30,6 +30,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
 
 
 
+
     public String getDescription() {
         return description;
     }
@@ -108,6 +109,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         cost = in.readDouble();
+        lastEntry = in.readByte() != 0x00;
     }
 
     @Override
@@ -125,6 +127,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeDouble(cost);
+        dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));
     }
 
     @SuppressWarnings("unused")

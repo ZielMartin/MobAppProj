@@ -116,7 +116,6 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                         editEntry.setHoursNotification(hoursNotification);
                         editEntry.setPushNotification(CB_PushNotification.isChecked());
                         editEntry.updateEntry();
-                        editEntry.push();
                     }else {
                         // Save created Data on Firebase using DataClasses
                         ReminderEntry re = new ReminderEntry();
@@ -196,7 +195,7 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
         dialog.show();
     }
 
-    public Calendar getDateFromDatePicker(DatePicker datePicker, TimePicker timePicker){
+    private Calendar getDateFromDatePicker(DatePicker datePicker, TimePicker timePicker){
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth();
         int year =  datePicker.getYear();
@@ -209,7 +208,7 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
         return calendar;
     }
 
-    public void setEditEntryValues(ReminderEntry entry){
+    private void setEditEntryValues(ReminderEntry entry){
         ET_Description.setText(entry.getDescription());
         DP_DatePicker.updateDate(entry.getDateTime().get(Calendar.YEAR), entry.getDateTime().get(Calendar.MONTH), entry.getDateTime().get(Calendar.DAY_OF_MONTH));
         TP_TimePicker.setIs24HourView(true);

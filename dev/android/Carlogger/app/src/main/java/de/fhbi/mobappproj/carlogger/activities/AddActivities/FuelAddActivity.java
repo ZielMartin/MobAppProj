@@ -116,7 +116,6 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
                         editEntry.setKm(editTextToDouble(ET_FuelAddKM));
                         editEntry.setAmount(editTextToDouble(ET_FuelAddAmount));
                         editEntry.updateEntry();
-                        editEntry.push();
                     }else{
                         FuelEntry fe = new FuelEntry();
                         fe.setAutoEntry(autoEntry);
@@ -158,7 +157,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
         }
     }
 
-    private void alertDialogAutoEntryPicker() {
+    protected void alertDialogAutoEntryPicker() {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.ad_auto_entry_title);
@@ -209,7 +208,8 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
      * sets values to the editing Entry
      * @param entry
      */
-    public void setEditEntryValues(FuelEntry entry){
+
+    protected void setEditEntryValues(FuelEntry entry){
         ET_FuelAddAmount.setText(doubleToString(entry.getAmount()));
         ET_FuelAddCostPerLitre.setText(doubleToString(entry.getCostPerLitre()));
         ET_FuelAddKM.setText(doubleToString(entry.getKm()));

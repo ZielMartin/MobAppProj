@@ -31,6 +31,19 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         RepairEntryList.getInstance().addEntry(this);
     }
 
+    public RepairEntry(RepairEntry re) {
+        super();
+        entryType = entryType.REPAIRENTRY;
+        RepairEntryList.getInstance().addEntry(this);
+
+        autoEntry = re.autoEntry;
+        type = re.type;
+        partCost = re.partCost;
+        laborCost = re.laborCost;
+        description = re.description;
+        bill = re.bill;
+    }
+
     public void setType(String type){ this.type = type; }
 
 
@@ -116,6 +129,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
             bill = new File(filePathForParcel);
         }
         entryType = (EntryType) in.readSerializable();
+        lastEntry = in.readByte() != 0x00;
     }
 
     @Override
@@ -134,6 +148,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         dest.writeValue(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
+        dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));
     }
 
     @SuppressWarnings("unused")

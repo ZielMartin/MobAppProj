@@ -17,7 +17,6 @@ import java.util.Collections;
 
 public abstract class EntryListSuper<EntryType extends EntrySuper> {
 
-    //TODO Methods that have same code, save on firebase etc..
 
 
     protected ArrayList<EntryType> allEntries;
@@ -85,6 +84,8 @@ public abstract class EntryListSuper<EntryType extends EntrySuper> {
 
         return cost;
     }
+
+
 
     public void clear(){
         allEntries.clear();

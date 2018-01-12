@@ -28,8 +28,10 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     protected Calendar createTimeCalendar;
     protected AutoEntryDates.AutoEntry autoEntry;
     protected double cost;
+    protected boolean lastEntry;
 
     public EntrySuper(){
+        lastEntry = true;
         createTimeCalendar = Calendar.getInstance();
     }
 
@@ -124,6 +126,15 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
 
     public double getCost() {
         return cost;
+    }
+
+    public void setLastEntry(boolean lastEntry) {
+        this.lastEntry = lastEntry;
+    }
+
+    public boolean isLastEntry() {
+
+        return lastEntry;
     }
 
     @Override

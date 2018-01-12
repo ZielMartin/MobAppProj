@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
@@ -109,6 +110,8 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     protected abstract void contentView();
 
     protected abstract boolean checkInput();
+
+
 
     protected void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -208,8 +211,6 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
         image.delete();
         image = null;
     }
-
-
 
 
 }
