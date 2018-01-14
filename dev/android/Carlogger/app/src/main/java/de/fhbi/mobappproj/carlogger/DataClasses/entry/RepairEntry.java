@@ -2,12 +2,16 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
+import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 
 /**
  * Created by Johannes on 21.12.2017.
@@ -15,6 +19,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 
 public class RepairEntry extends EntrySuper implements Parcelable {
 
+    private static final String TAG = "RepairEntry";
     // Calendar createTimeCalendar; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private String type;
@@ -94,8 +99,9 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
     @Override
     protected void pushToFirebase() {
-        //called when entry was added - add to firebase
-        //TODO fill me
+        FirebaseAccess access = FirebaseAccess.getInstance();
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        access.push("users/" + id + "/cars", this);
     }
 
     @Override

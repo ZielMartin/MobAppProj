@@ -2,6 +2,8 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
@@ -31,6 +33,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
 
 
     protected EntryType entryType;
+    @Exclude
     protected Calendar createTimeCalendar;
     protected AutoEntryDates.AutoEntry autoEntry;
     protected double cost;
@@ -123,6 +126,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
         this.cost = cost;
     }
 
+    @Exclude
     public Calendar getCreateTimeCalendar() {
 
         return createTimeCalendar;
