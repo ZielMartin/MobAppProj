@@ -148,6 +148,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
         this.lastEntry = lastEntry;
     }
 
+
     public boolean isLastEntry() {
 
         return lastEntry;

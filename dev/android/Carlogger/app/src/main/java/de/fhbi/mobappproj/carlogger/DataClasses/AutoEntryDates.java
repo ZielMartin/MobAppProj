@@ -57,9 +57,6 @@ public class AutoEntryDates {
             newCal.add(Calendar.DAY_OF_MONTH,i);
             list.add(newCal);
         }
-
-
-
         return list;
     }
 
