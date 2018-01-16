@@ -1,7 +1,7 @@
 package de.fhbi.mobappproj.carlogger.activities;
 
-import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,60 +17,53 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.github.clans.fab.FloatingActionMenu;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Arrays;
-import java.util.List;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import de.fhbi.mobappproj.carlogger.AddMenu;
+import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
 import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
-import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
 import de.fhbi.mobappproj.carlogger.fragments.ReminderFragment;
 import de.fhbi.mobappproj.carlogger.fragments.RepairFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    private static final int RC_SIGN_IN = 123;
+    public static final int RC_SIGN_IN = 123;
     private static final String TAG = "MainActivity";
-
-    // Choose authentication providers
-    //TODO: fix Rejecting re-init on previously-failed class java.lang.Class<com.firebase.ui.auth.provider.TwitterProvider>: java.lang.NoClassDefFoundError: Failed resolution of: Lcom/twitter/sdk/android/core/Callback
-    private static List<AuthUI.IdpConfig> providers = Arrays.asList(
-            new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build(),
-            new AuthUI.IdpConfig.Builder(AuthUI.GOOGLE_PROVIDER).build());
-
+    public static final int RC_LOGIN_ACTIVITY = 555;
 
     //Plus-Button for entry adding
     private AddMenu menuAdd;
 
-
-
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private FragmentManager fragmentManager = getFragmentManager();
+    private boolean pressedBackAlready = false;
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            IdpResponse response = IdpResponse.fromResultIntent(data);
 
-            if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Log.i(TAG, "user logged in: " + user.getDisplayName());
-                // ...
-            } else {
-                // Sign in failed, check response for error code
-                if (response != null)
-                    Log.i(TAG, "login failed. response: " + response.toString());
-                else Log.i(TAG, "got no response");
+
+        } else if (requestCode == RC_LOGIN_ACTIVITY) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -100,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -111,39 +103,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStop();
     }
 
-    private void signIn() {
-
-
-        // Create and launch sign-in intent
-        Intent signinIntent = AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setAvailableProviders(providers)
-                .build();
-
-        startActivityForResult(signinIntent, RC_SIGN_IN);
-    }
-
-    private void signOut() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        AuthUI authUI = AuthUI.getInstance();
-
-        Task logoutTask = authUI.signOut(this);
-
-        logoutTask.addOnCompleteListener(new OnCompleteListener<Void>() {
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful())
-                    Log.i(TAG, "user logged out: " + user.getDisplayName());
-            }
-        });
-
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (fragmentManager.getBackStackEntryCount() == 0) {
+            if (pressedBackAlready) {
+                super.onBackPressed();
+                return;
+            }
+            this.pressedBackAlready = true;
+            Toast.makeText(this, R.string.pressBackAgain, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(() -> pressedBackAlready = false, 2000);
+
         } else {
             super.onBackPressed();
         }
@@ -155,6 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -189,17 +163,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_repair_service) {
             changeFragmentTo(new RepairFragment());
             this.setTitle(R.string.repairFragment_title);
-        }else if(id == R.id.nav_all){
+        } else if (id == R.id.nav_all) {
             changeFragmentTo(new AllFragment());
             this.setTitle(R.string.nav_all);
-        }else if (id == R.id.loginlogout) {
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user == null) {
-                signIn();
-                item.setTitle("Logout");
+        } else if (id == R.id.loginlogout) {
+            if(firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
+                if(firebaseAuth.getCurrentUser() != null)
+                    firebaseAuth.signOut();
+                Intent loginIntent = new Intent(this, LoginActivity.class);
+                this.startActivityForResult(loginIntent, RC_LOGIN_ACTIVITY);
             } else {
-                signOut();
-                item.setTitle("Login");
+                firebaseAuth.signOut();
+                firebaseAuth.signInAnonymously().addOnCompleteListener(t -> Log.d(TAG, "logged in user anonymously"));
             }
         }
 
@@ -209,18 +184,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void changeFragmentTo(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.MainFrame, fragment);
-        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.addToBackStack(null);
 
 
         fragmentTransaction.commit();
-        Log.i(TAG, "fragment switched to " + fragment.getClass());
+        Log.v(TAG, "fragment switched to " + fragment.getClass());
     }
 
 
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                            Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
+//                            updateUI(null);
+                        }
+                    }
+                });
+    }
 
     @Override
     public void onClick(View view) {

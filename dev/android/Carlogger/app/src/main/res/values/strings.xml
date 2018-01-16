@@ -143,6 +143,24 @@
     <string name="euro_per_litre">€/Liter</string>
 
     <string name="allFragment_allCost">Gesamtkosten</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="loginDialog_title">Mit Google anmelden</string>
+    <string name="pressBackAgain">Tippen Sie ein zweites Mal auf Zurück zum beenden</string>
+
+    <!--<string name="default_web_client_id" translatable="false">409691608244-01q2bthn0ihc8r78tldk6j2p3u3cudth.apps.googleusercontent.com</string>-->
 
 
 </resources>

@@ -126,6 +126,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
 
     protected RepairEntry(Parcel in) {
+        key = in.readString();
         type = in.readString();
         partCost = in.readDouble();
         laborCost = in.readDouble();
@@ -148,6 +149,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(key);
         dest.writeString(type);
         dest.writeDouble(partCost);
         dest.writeDouble(laborCost);

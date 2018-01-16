@@ -6,8 +6,8 @@ import com.google.firebase.database.Exclude;
 
 import java.util.Calendar;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
@@ -16,12 +16,12 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 /**
  * all sub-classes have to call their EntryList-singleton-instance in the contructor and add themself to the list
  * and pushToFirebase() in push(), after checking the variables are setted.
- *
+ * <p>
  * variables should be setted with setters to avoid long parameter-lists
- *
+ * <p>
  * example: ReminderEntry
  * usage example: ReminderAddActivity
- *
+ * <p>
  * Created by Johannes on 15.12.2017.
  */
 
@@ -30,7 +30,8 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     public enum EntryType {FUELENTRY, REPAIRENTRY, REMINDERENTRY, OTHERCOSTENTRY}
 
 
-
+    @Exclude
+    protected String key;
 
     protected EntryType entryType;
     @Exclude
@@ -40,8 +41,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     protected boolean lastEntry;
 
 
-
-    public EntrySuper(){
+    public EntrySuper() {
         lastEntry = true;
         createTimeCalendar = Calendar.getInstance();
     }
@@ -60,11 +60,11 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     public abstract void push();
 
 
-
     /**
      * createTimeCalendar is setted in the Constructor
      * edit createTimeCalendar if this entry is for editing an other
      * or for test usage
+     *
      * @param createTimeCalendar
      */
     public void editCreateTimeCalendar(Calendar createTimeCalendar) {
@@ -72,10 +72,10 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     }
 
 
-    public void removeEntry(){
+    public void removeEntry() {
         removeFromFirebase();
         AllEntryList.getInstance().getAllEntries().remove(this);
-        switch(this.entryType){
+        switch (this.entryType) {
             case FUELENTRY:
                 FuelEntryList.getInstance().getAllEntries().remove(this);
             case REPAIRENTRY:
@@ -88,30 +88,30 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     }
 
 
-    public void updateEntry(){
+    public void updateEntry() {
         updateChangesOnFirebase();
         int index = AllEntryList.getInstance().getAllEntries().indexOf(this);
-        if(index >= 0 ){
+        if (index >= 0) {
             AllEntryList.getInstance().getAllEntries().set(index, this);
-            switch(this.entryType){
+            switch (this.entryType) {
                 case FUELENTRY:
                     index = FuelEntryList.getInstance().getAllEntries().indexOf(this);
-                    if(index >= 0){
+                    if (index >= 0) {
                         FuelEntryList.getInstance().getAllEntries().set(index, (FuelEntry) this);
                     }
                 case REPAIRENTRY:
                     index = RepairEntryList.getInstance().getAllEntries().indexOf(this);
-                    if(index >= 0){
+                    if (index >= 0) {
                         RepairEntryList.getInstance().getAllEntries().set(index, (RepairEntry) this);
                     }
                 case REMINDERENTRY:
                     index = ReminderEntryList.getInstance().getAllEntries().indexOf(this);
-                    if(index >= 0){
+                    if (index >= 0) {
                         ReminderEntryList.getInstance().getAllEntries().set(index, (ReminderEntry) this);
                     }
                 case OTHERCOSTENTRY:
                     index = OtherCostEntryList.getInstance().getAllEntries().indexOf(this);
-                    if(index >= 0){
+                    if (index >= 0) {
                         OtherCostEntryList.getInstance().getAllEntries().set(index, (OtherCostEntry) this);
                     }
             }
@@ -125,6 +125,8 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     public void setCost(double cost) {
         this.cost = cost;
     }
+
+    public void setKey(String key) { this.key = key; }
 
     @Exclude
     public Calendar getCreateTimeCalendar() {
@@ -144,6 +146,9 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
         return entryType;
     }
 
+    @Exclude
+    public String getKey() { return this.key; }
+
     public void setEntryType(EntryType entryType) {
         this.entryType = entryType;
     }
@@ -161,7 +166,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
     public int compareTo(@NonNull EntrySuper entrySuper) {
         long thisTime = this.createTimeCalendar.getTimeInMillis();
         long anotherTime = entrySuper.createTimeCalendar.getTimeInMillis();
-        return (thisTime<anotherTime ? -1 : (thisTime==anotherTime ? 0 : 1));
+        return (thisTime < anotherTime ? -1 : (thisTime == anotherTime ? 0 : 1));
     }
 
     @Override
@@ -171,7 +176,7 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
             return false;
         }
         EntrySuper other = (EntrySuper) o;
-        return createTimeCalendar.getTimeInMillis() == other.createTimeCalendar.getTimeInMillis();
+        return this.key == other.key;
     }
 
     @Override
