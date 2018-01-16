@@ -51,8 +51,10 @@ public class FuelEntryList extends EntryListSuper<FuelEntry>{
 
         for(FuelEntry entry : allEntries){
             if(entry.isFull()){
+                //first Entry with Full
                 tempIndex = allEntries.indexOf(entry);
                 if(allEntries.size()-1 > tempIndex){
+                    //next Entry is Full
                     if(allEntries.get(tempIndex+1).isFull()){
                         double diffKM = allEntries.get(tempIndex+1).getKm() - allEntries.get(tempIndex).getKm();
                         double diffLitre = allEntries.get(tempIndex + 1).getAmount();

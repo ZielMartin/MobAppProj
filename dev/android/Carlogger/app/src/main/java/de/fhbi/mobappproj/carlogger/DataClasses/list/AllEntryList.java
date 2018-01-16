@@ -66,24 +66,27 @@ public class AllEntryList extends EntryListSuper {
 
 
     public void setAutoEntries() {
+        //list of Entries with attribute last == true
         ArrayList<EntrySuper> lastAutoEntries = new ArrayList<>();
-
+        //fill list
         for (Object o : allEntries) {
             EntrySuper entry = (EntrySuper) o;
-            if (entry.isLastEntry()) {
+            if (entry.isLastEntry() && entry.getAutoEntry() != null) {
                 lastAutoEntries.add(entry);
             }
         }
 
+        //loop through all Entries with last == true
         for (EntrySuper entry : lastAutoEntries) {
-            entry.setLastEntry(false);
             ArrayList<Calendar> calList = AutoEntryDates.getList(entry.getCreateTimeCalendar(), entry.getAutoEntry());
 
             if(calList.size() > 0){
+                // not anymore last
                 entry.setLastEntry(false);
                 entry.updateChangesOnFirebase();
             }
 
+            //create Entry for each Date
             for (int i = 0; i < calList.size(); i++) {
 
                 switch (entry.getEntryType()) {
@@ -116,8 +119,6 @@ public class AllEntryList extends EntryListSuper {
 
             }
         }
-
-
     }
 
 }
