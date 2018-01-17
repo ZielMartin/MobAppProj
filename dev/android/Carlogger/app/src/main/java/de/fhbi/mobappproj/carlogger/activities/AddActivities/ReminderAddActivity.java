@@ -2,8 +2,10 @@ package de.fhbi.mobappproj.carlogger.activities.AddActivities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -16,6 +18,10 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.activities.MainActivity;
+import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmReceiver;
+import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmUtil;
+import de.fhbi.mobappproj.carlogger.reminderNotification.NotificationUtil;
 
 public class ReminderAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
 
@@ -114,6 +120,17 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                         editEntry.setHoursNotification(hoursNotification);
                         editEntry.setPushNotification(CB_PushNotification.isChecked());
                         editEntry.updateEntry();
+
+
+                        if(editEntry.isPushNotification()) {
+                            Calendar calendar = (Calendar) editEntry.getDateTime().clone();
+                            calendar.add(Calendar.HOUR, -hoursNotification);
+
+                            AlarmUtil.setAlarm(this, editEntry, calendar);
+                        }else{
+                            AlarmUtil.cancelAlarm(this, editEntry);
+                        }
+
                     }else {
                         // Save created Data on Firebase using DataClasses
                         ReminderEntry re = new ReminderEntry();
@@ -122,6 +139,20 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                         re.setHoursNotification(hoursNotification);
                         re.setPushNotification(CB_PushNotification.isChecked());
                         re.push();
+
+                        if(re.isPushNotification()) {
+                            Calendar calendar = (Calendar) re.getDateTime().clone();
+                            calendar.add(Calendar.HOUR, -hoursNotification);
+
+
+
+                            //Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+                            //alarmIntent.putExtra("reminder", re);
+
+                            AlarmUtil.setAlarm(this, re, calendar);
+
+                        }
+
                     }
 
                     finish();
