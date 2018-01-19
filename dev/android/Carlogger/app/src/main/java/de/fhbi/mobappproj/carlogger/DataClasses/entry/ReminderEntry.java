@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
@@ -22,7 +24,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
     // Calendar createTimeCalendar; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private String description;
-    private Calendar dateTime;
+    private long dateTime;
     private boolean pushNotification;
     private int hoursNotification;
 
@@ -41,8 +43,11 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         return description;
     }
 
+    @Exclude
     public Calendar getDateTime() {
-        return dateTime;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(dateTime);
+        return calendar;
     }
 
     public boolean isPushNotification() {
@@ -57,8 +62,9 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         this.description = description;
     }
 
+    @Exclude
     public void setDateTime(Calendar dateTime) {
-        this.dateTime = dateTime;
+        this.dateTime = dateTime.getTimeInMillis();
     }
 
     public void setPushNotification(boolean pushNotification) {
@@ -98,7 +104,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
 
     @Override
     public void push() {
-        if(description != null && dateTime != null){
+        if(description != null && dateTime != 0){
             pushToFirebase();
         }
     }
@@ -108,10 +114,10 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
 
     protected ReminderEntry(Parcel in) {
         description = in.readString();
-        dateTime = (Calendar) in.readValue(Calendar.class.getClassLoader());
+        dateTime = in.readLong();
         pushNotification = in.readByte() != 0x00;
         hoursNotification = in.readInt();
-        createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
+        createTimeCalendar = in.readLong();
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         cost = in.readDouble();
@@ -126,10 +132,10 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(description);
-        dest.writeValue(dateTime);
+        dest.writeLong(dateTime);
         dest.writeByte((byte) (pushNotification ? 0x01 : 0x00));
         dest.writeInt(hoursNotification);
-        dest.writeValue(createTimeCalendar);
+        dest.writeLong(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeDouble(cost);

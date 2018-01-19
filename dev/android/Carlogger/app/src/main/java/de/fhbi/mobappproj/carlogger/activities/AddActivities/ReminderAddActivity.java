@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmReceiver;
@@ -53,7 +54,7 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
             //when editButton is pressed
             Bundle extras = getIntent().getExtras();
             if(extras != null){
-                editEntry = extras.getParcelable("entry");
+                editEntry = ReminderEntryList.getInstance().getAllEntries().get(extras.getInt("entryIndex"));
                 setEditEntryValues(editEntry);
             }
         }
@@ -120,7 +121,6 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                         editEntry.setHoursNotification(hoursNotification);
                         editEntry.setPushNotification(CB_PushNotification.isChecked());
                         editEntry.updateEntry();
-
 
                         if(editEntry.isPushNotification()) {
                             Calendar calendar = (Calendar) editEntry.getDateTime().clone();

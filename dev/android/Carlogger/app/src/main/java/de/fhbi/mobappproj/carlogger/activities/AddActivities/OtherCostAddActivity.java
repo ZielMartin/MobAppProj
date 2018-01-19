@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
@@ -35,7 +36,7 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
             //when editButton is pressed
             Bundle extras = getIntent().getExtras();
             if(extras != null){
-                editEntry = extras.getParcelable("entry");
+                editEntry = OtherCostEntryList.getInstance().getAllEntries().get(extras.getInt("entryIndex"));
                 setEditEntryValues(editEntry);
             }
         }

@@ -2,11 +2,10 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.Exclude;
 
-import java.io.File;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
@@ -26,10 +25,8 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     private double partCost;
     private double laborCost;
     private String description;
-    private File bill;
-
-    //workaround for not parcelable File. Save filePath and open file again after CREATOR call
-    private String filePathForParcel;
+    @Exclude
+    private String billPath;
 
 
     public RepairEntry() {
@@ -48,7 +45,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         partCost = re.partCost;
         laborCost = re.laborCost;
         description = re.description;
-        bill = re.bill;
+        billPath = re.billPath;
     }
 
     public void setType(String type){ this.type = type; }
@@ -68,11 +65,9 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         this.description = description;
     }
 
-    public void setBill(File bill) {
-        this.bill = bill;
-        if(bill != null){
-            this.filePathForParcel = bill.getAbsolutePath();
-        }
+    public void setBillPath(String billPath) {
+       this.billPath = billPath;
+
     }
 
     public String getType() {
@@ -91,8 +86,8 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         return description;
     }
 
-    public File getBill() {
-        return bill;
+    public String getBillPath() {
+        return billPath;
     }
 
 
@@ -131,12 +126,9 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         partCost = in.readDouble();
         laborCost = in.readDouble();
         description = in.readString();
-        filePathForParcel = in.readString();
-        createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
+        billPath = in.readString();
+        createTimeCalendar = in.readLong();
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
-        if(filePathForParcel != null){
-            bill = new File(filePathForParcel);
-        }
         entryType = (EntryType) in.readSerializable();
         lastEntry = in.readByte() != 0x00;
     }
@@ -154,8 +146,8 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         dest.writeDouble(partCost);
         dest.writeDouble(laborCost);
         dest.writeString(description);
-        dest.writeString(filePathForParcel);
-        dest.writeValue(createTimeCalendar);
+        dest.writeString(billPath);
+        dest.writeLong(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));

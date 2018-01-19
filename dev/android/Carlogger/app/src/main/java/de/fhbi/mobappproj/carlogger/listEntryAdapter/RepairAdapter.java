@@ -18,6 +18,7 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAddActivity;
 
@@ -113,7 +114,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.RepairView
 
         private void setPic(ImageView iv, RepairEntry entry) {
 
-            if (entry.getBill() != null) {
+            if (entry.getBillPath() != null) {
                 // Get the dimensions of the View
                 int targetW = iv.getMaxWidth();
                 int targetH = iv.getMaxHeight();
@@ -121,7 +122,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.RepairView
                 // Get the dimensions of the bitmap
                 BitmapFactory.Options bmOptions = new BitmapFactory.Options();
                 bmOptions.inJustDecodeBounds = true;
-                BitmapFactory.decodeFile(entry.getBill().getAbsolutePath(), bmOptions);
+                BitmapFactory.decodeFile(entry.getBillPath(), bmOptions);
                 int photoW = bmOptions.outWidth;
                 int photoH = bmOptions.outHeight;
 
@@ -133,7 +134,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.RepairView
                 bmOptions.inSampleSize = scaleFactor;
                 bmOptions.inPurgeable = true;
 
-                Bitmap bitmap = BitmapFactory.decodeFile(entry.getBill().getAbsolutePath(), bmOptions);
+                Bitmap bitmap = BitmapFactory.decodeFile(entry.getBillPath(), bmOptions);
                 iv.setImageBitmap(bitmap);
             } else {
                 iv.setImageResource(0);
@@ -209,7 +210,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.RepairView
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), RepairAddActivity.class);
-                    intent.putExtra("entry", entry);
+                    intent.putExtra("entryIndex", ReminderEntryList.getInstance().getAllEntries().indexOf(entry));
                     view.getContext().startActivity(intent);
                 }
             });

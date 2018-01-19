@@ -19,6 +19,8 @@ import java.util.Arrays;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
@@ -54,10 +56,10 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
             //when editButton is pressed
             Bundle extras = getIntent().getExtras();
             if(extras != null){
-                editEntry = extras.getParcelable("entry");
+                editEntry = RepairEntryList.getInstance().getAllEntries().get(extras.getInt("entryIndex"));
                 setEditEntryValues(editEntry);
-                if(editEntry.getBill()!=null){
-                    image = editEntry.getBill();
+                if(editEntry.getBillPath()!=null){
+                    image = new File(editEntry.getBillPath());
                     setPic(IV_RepairAddBill);
                 }
             }
@@ -160,7 +162,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
                     if(editEntry != null){
                         editEntry.setType(SP_RepairAddType.getSelectedItem().toString());
                         editEntry.setAutoEntry(autoEntry);
-                        editEntry.setBill(image);
+                        editEntry.setBillPath(image != null ? image.getAbsolutePath() : null);
                         editEntry.setDescription(ET_RepairAddDescription.getText().toString());
                         editEntry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
                         editEntry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
@@ -171,7 +173,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
                         RepairEntry entry = new RepairEntry();
                         entry.setType(SP_RepairAddType.getSelectedItem().toString());
                         entry.setAutoEntry(autoEntry);
-                        entry.setBill(image);
+                        entry.setBillPath(image != null ? image.getAbsolutePath() : null);
                         entry.setDescription(ET_RepairAddDescription.getText().toString());
                         entry.setLaborCost(editTextToDouble(ET_RepairAddLaborCost));
                         entry.setPartCost(editTextToDouble(ET_RepairAddPartCost));
@@ -275,7 +277,9 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         ET_RepairAddPartCost.setText(doubleToString(entry.getPartCost()));
         ET_RepairAddDescription.setText(entry.getDescription());
 
-        image = entry.getBill();
+        if(entry.getBillPath() != null){
+            image = new File(entry.getBillPath());
+        }
 
         if(entry.getAutoEntry() != null){
             CB_RepairAddAutoEntry.setChecked(true);

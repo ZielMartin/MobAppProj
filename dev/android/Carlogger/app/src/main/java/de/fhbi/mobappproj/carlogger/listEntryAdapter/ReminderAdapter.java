@@ -3,6 +3,7 @@ package de.fhbi.mobappproj.carlogger.listEntryAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAddActivity;
 
@@ -146,7 +148,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
                 public void onClick(View view) {
                     //view.getContext().startActivity(new Intent(view.getContext(), ReminderAddActivity.class));
                     Intent intent = new Intent(view.getContext(), ReminderAddActivity.class);
-                    intent.putExtra("entry", entry);
+                    intent.putExtra("entryIndex", ReminderEntryList.getInstance().getAllEntries().indexOf(entry));
                     view.getContext().startActivity(intent);
                 }
             });

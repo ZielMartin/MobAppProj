@@ -1,6 +1,7 @@
 package de.fhbi.mobappproj.carlogger.activities.AddActivities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,7 +32,7 @@ import de.fhbi.mobappproj.carlogger.R;
 
 /**
  * Superclass for all AddActivities
- *
+ * <p>
  * EditTexts in SubClasses have to set their instance as OnFocusChangedListener to hide the Keyboard when they lost focus
  */
 public abstract class AddActivitySuper extends AppCompatActivity implements View.OnFocusChangeListener, View.OnClickListener {
@@ -51,13 +52,12 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
         this.setSupportActionBar(toolbar);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(savedInstanceState!= null && savedInstanceState.containsKey("autoEntry")){
+        if (savedInstanceState != null && savedInstanceState.containsKey("autoEntry")) {
             autoEntry = (AutoEntryDates.AutoEntry) savedInstanceState.getSerializable("autoEntry");
         }
 
         initGUIElements();
     }
-
 
 
     //Back-Button action
@@ -81,8 +81,8 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
             if (view != null && view instanceof EditText) {
                 Rect r = new Rect();
                 view.getGlobalVisibleRect(r);
-                int rawX = (int)ev.getRawX();
-                int rawY = (int)ev.getRawY();
+                int rawX = (int) ev.getRawX();
+                int rawY = (int) ev.getRawY();
                 if (!r.contains(rawX, rawY)) {
                     view.clearFocus();
                 }
@@ -94,7 +94,7 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        if(autoEntry != null){
+        if (autoEntry != null) {
             outState.putSerializable("autoEntry", autoEntry);
         }
     }
@@ -110,20 +110,18 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
     protected abstract boolean checkInput();
 
 
-
     protected void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     //parsing string with comma to double
-    protected double editTextToDouble(EditText et){
+    protected double editTextToDouble(EditText et) {
         String regexp = "^[0-9]\\d*(\\,\\d+)?$";
 
         if (et.getText().toString().trim().matches(regexp)) {
-            return Double.parseDouble(et.getText().toString().trim().replace(",","."));
-        }
-        else{
+            return Double.parseDouble(et.getText().toString().trim().replace(",", "."));
+        } else {
             return -1;
         }
     }
@@ -134,7 +132,6 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
             hideKeyboard(view);
         }
     }
-
 
 
     protected void dispatchTakePictureIntent() {
@@ -158,8 +155,9 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
         }
-    }
 
+
+    }
 
 
     private File createImageFile() throws IOException {
@@ -167,19 +165,13 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-
+        image = new File(storageDir,imageFileName+".jpg");
         return image;
     }
 
     protected void setPic(ImageView iv) {
 
-        if(image != null) {
+        if (image != null) {
             // Get the dimensions of the View
             int targetW = iv.getMaxWidth();
             int targetH = iv.getMaxHeight();
@@ -204,7 +196,7 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
         }
     }
 
-    protected void deletImage(ImageView iv){
+    protected void deletImage(ImageView iv) {
         iv.setImageResource(0);
         image.delete();
         image = null;

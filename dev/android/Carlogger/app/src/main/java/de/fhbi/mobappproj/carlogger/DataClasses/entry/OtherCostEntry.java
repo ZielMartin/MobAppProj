@@ -74,7 +74,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
     protected OtherCostEntry(Parcel in) {
         description = in.readString();
         cost = in.readDouble();
-        createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
+        createTimeCalendar = in.readLong();
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         lastEntry = in.readByte() != 0x00;
@@ -91,7 +91,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(description);
         dest.writeDouble(cost);
-        dest.writeValue(createTimeCalendar);
+        dest.writeLong(createTimeCalendar);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));

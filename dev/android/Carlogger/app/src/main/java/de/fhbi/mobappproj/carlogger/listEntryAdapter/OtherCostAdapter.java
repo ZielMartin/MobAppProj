@@ -16,6 +16,7 @@ import java.util.Calendar;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAddActivity;
 
@@ -165,7 +166,7 @@ public class OtherCostAdapter extends RecyclerView.Adapter<OtherCostAdapter.Othe
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), OtherCostAddActivity.class);
-                    intent.putExtra("entry", entry);
+                    intent.putExtra("entryIndex", OtherCostEntryList.getInstance().getAllEntries().indexOf(entry));
                     view.getContext().startActivity(intent);
                 }
             });

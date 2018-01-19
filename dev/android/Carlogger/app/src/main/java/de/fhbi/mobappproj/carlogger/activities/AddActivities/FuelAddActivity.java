@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates.AutoEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
@@ -41,7 +43,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
             //when editButton is pressed
             Bundle extras = getIntent().getExtras();
             if(extras != null){
-                editEntry = extras.getParcelable("entry");
+                editEntry = FuelEntryList.getInstance().getAllEntries().get(extras.getInt("entryIndex"));
                 setEditEntryValues(editEntry);
             }
         }
