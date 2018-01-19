@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View header = navigationView.getHeaderView(0);
         Button button_chooseCar = header.findViewById(R.id.button_chooseCar);
-        
         button_chooseCar.setOnClickListener(view -> {
             Log.i(TAG, "chooseCar");
         });
