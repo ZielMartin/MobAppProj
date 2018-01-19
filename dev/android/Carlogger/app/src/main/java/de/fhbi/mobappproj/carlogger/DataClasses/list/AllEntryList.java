@@ -46,6 +46,7 @@ public class AllEntryList extends EntryListSuper {
 
     @Override
     public boolean getAllEntriesFromFirebase() {
+        clear();
         fuelEntries.getAllEntriesFromFirebase();
         reminderEntries.getAllEntriesFromFirebase();
         repairEntries.getAllEntriesFromFirebase();

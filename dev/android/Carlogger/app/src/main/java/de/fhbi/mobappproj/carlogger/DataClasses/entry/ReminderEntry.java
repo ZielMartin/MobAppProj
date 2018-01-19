@@ -1,5 +1,6 @@
 package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
+import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,6 +8,9 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.activities.MainActivity;
+import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmReceiver;
+import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmUtil;
 
 /**
  * Created by Johannes on 15.12.2017.
