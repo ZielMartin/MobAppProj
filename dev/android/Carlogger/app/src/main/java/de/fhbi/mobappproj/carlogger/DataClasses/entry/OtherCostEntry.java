@@ -3,8 +3,6 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Calendar;
-
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 
@@ -15,7 +13,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 public class OtherCostEntry extends EntrySuper implements Parcelable {
 
 
-    // Calendar createTimeCalendar; - in SuperClass
+    // Calendar createTime; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private String description;
 
@@ -74,7 +72,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
     protected OtherCostEntry(Parcel in) {
         description = in.readString();
         cost = in.readDouble();
-        createTimeCalendar = in.readLong();
+        createTime = in.readLong();
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         lastEntry = in.readByte() != 0x00;
@@ -91,7 +89,7 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(description);
         dest.writeDouble(cost);
-        dest.writeLong(createTimeCalendar);
+        dest.writeLong(createTime);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));

@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.Exclude;
 
-import java.util.Calendar;
-
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
@@ -19,13 +17,12 @@ import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 public class RepairEntry extends EntrySuper implements Parcelable {
 
     private static final String TAG = "RepairEntry";
-    // Calendar createTimeCalendar; - in SuperClass
+    // Calendar createTime; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private String type;
     private double partCost;
     private double laborCost;
     private String description;
-    @Exclude
     private String billPath;
 
 
@@ -127,7 +124,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         laborCost = in.readDouble();
         description = in.readString();
         billPath = in.readString();
-        createTimeCalendar = in.readLong();
+        createTime = in.readLong();
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         lastEntry = in.readByte() != 0x00;
@@ -147,7 +144,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         dest.writeDouble(laborCost);
         dest.writeString(description);
         dest.writeString(billPath);
-        dest.writeLong(createTimeCalendar);
+        dest.writeLong(createTime);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeByte((byte) (lastEntry ? 0x01 : 0x00));

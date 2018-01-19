@@ -94,7 +94,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.Remind
 
             TV_ListItemReminderTitle.setText(entry.getDescription());
             //format date and time
-            Calendar calendar = entry.getDateTime();
+            Calendar calendar = entry.getDateTimeCalendar();
             SimpleDateFormat dateFormat = new SimpleDateFormat(
                     "dd. MMM yyyy");
             SimpleDateFormat timeFormat = new SimpleDateFormat(
