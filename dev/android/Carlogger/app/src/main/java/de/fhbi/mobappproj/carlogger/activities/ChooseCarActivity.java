@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import de.fhbi.mobappproj.carlogger.DataClasses.CarStructure;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCars;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
@@ -38,6 +39,8 @@ public class ChooseCarActivity extends AppCompatActivity {
 
         allCarsAccess = new AllCarsAccess(getResources());
         new CreateContent().doInBackground();
+
+
 
     }
 
@@ -90,6 +93,10 @@ public class ChooseCarActivity extends AppCompatActivity {
 
             allCarsList = new LinkedList<>();
             allCarsList.addAll(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
+
+            //Temporary!!
+            CarStructure structure = new CarStructure(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
+            structure.handleData();
 
             Log.i(TAG, "created linkedlist of length: " + allCarsList.size());
 
