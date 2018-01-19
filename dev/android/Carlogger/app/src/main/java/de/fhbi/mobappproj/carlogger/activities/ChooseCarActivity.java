@@ -3,7 +3,11 @@ package de.fhbi.mobappproj.carlogger.activities;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.ListViewCompat;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
@@ -21,13 +25,15 @@ import de.fhbi.mobappproj.carlogger.DataClasses.CarStructure;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCars;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.CarAdapter;
 
 public class ChooseCarActivity extends AppCompatActivity {
 
     private static final String TAG = ChooseCarActivity.class.getSimpleName();
 
     private AllCarsAccess allCarsAccess = null;
-    private ListViewCompat listView = null;
+    private RecyclerView recyclerView;
+    private CarAdapter mAdapter;
     private LinkedList<AllCars> allCarsList;
 
     @Override
@@ -35,7 +41,13 @@ public class ChooseCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_car);
 
-        listView = findViewById(R.id.chooseCarContent);
+        recyclerView = (RecyclerView) findViewById(R.id.RV_ChooseCar);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+
 
         allCarsAccess = new AllCarsAccess(getResources());
         new CreateContent().doInBackground();
@@ -88,15 +100,14 @@ public class ChooseCarActivity extends AppCompatActivity {
             }
             Log.i(TAG, "done waiting");
 
-            ListViewCompat listView = findViewById(R.id.chooseCarContent);
-
 
             allCarsList = new LinkedList<>();
             allCarsList.addAll(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
 
-            //Temporary!!
+            //Temporary!!-------------------------------------------------------------------------------------
             CarStructure structure = new CarStructure(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
             structure.handleData();
+            //------------------------------------------------------------------------------------------------
 
             Log.i(TAG, "created linkedlist of length: " + allCarsList.size());
 
@@ -109,8 +120,7 @@ public class ChooseCarActivity extends AppCompatActivity {
     }
 
     private void updateListView(List<AllCars> list) {
-        ArrayAdapter<AllCars> adapter = new ArrayAdapter<>(ChooseCarActivity.this,
-                android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(adapter);
+        mAdapter = new CarAdapter(this, list);
+        recyclerView.setAdapter(mAdapter);
     }
 }
