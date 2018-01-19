@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptionsExtension;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final int RC_GOOGLE_SIGNIN = 555;
     private static final String TAG = "LoginActivity";
+    private GoogleSignInOptions gso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +30,24 @@ public class LoginActivity extends AppCompatActivity {
         this.setContentView(R.layout.activity_login);
         setTitle(R.string.loginDialog_title);
 
-        SignInButton signInButton = findViewById(R.id.sign_in_button);
 
-        signInButton.setOnClickListener(v -> signIn(v));
-    }
-
-    private void signIn(View view) {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(this.getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+
+        SignInButton signInButton = findViewById(R.id.sign_in_button);
+
+        signInButton.setOnClickListener(v -> signIn(v));
+
+        if(GoogleSignIn.getLastSignedInAccount(this) != null) {
+            GoogleSignIn.getClient(this, gso).signOut().addOnCompleteListener(task -> {
+               Log.i(TAG, "google user signed out");
+            });
+        }
+    }
+
+    private void signIn(View view) {
         Intent signInIntent = GoogleSignIn.getClient(this, gso).getSignInIntent();
         this.startActivityForResult(signInIntent, RC_GOOGLE_SIGNIN);
     }

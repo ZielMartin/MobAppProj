@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -39,7 +40,6 @@ import de.fhbi.mobappproj.carlogger.fragments.ReminderFragment;
 import de.fhbi.mobappproj.carlogger.fragments.RepairFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
-    public static final int RC_SIGN_IN = 123;
     private static final String TAG = "MainActivity";
     public static final int RC_LOGIN_ACTIVITY = 555;
 
@@ -54,10 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
-
-
-        } else if (requestCode == RC_LOGIN_ACTIVITY) {
+        if (requestCode == RC_LOGIN_ACTIVITY) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
@@ -65,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } catch (ApiException e) {
                 e.printStackTrace();
             }
+        } else {
+            Log.w(TAG, "unknown requestCode");
         }
     }
 
@@ -86,8 +85,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        MenuItem logoutLogin = navigationView.getMenu().findItem(R.id.loginlogout);
+
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+        if (currentUser.isAnonymous())
+            logoutLogin.setTitle(getString(R.string.login));
+        else
+            logoutLogin.setTitle(getString(R.string.logout));
+
+        View header = navigationView.getHeaderView(0);
+        Button button_chooseCar = header.findViewById(R.id.button_chooseCar);
+        
+        button_chooseCar.setOnClickListener(view -> {
+            Log.i(TAG, "chooseCar");
+        });
 
         changeFragmentTo(new AllFragment());
     }
@@ -126,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -143,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -167,14 +184,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeFragmentTo(new AllFragment());
             this.setTitle(R.string.nav_all);
         } else if (id == R.id.loginlogout) {
-            if(firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
-                if(firebaseAuth.getCurrentUser() != null)
-                    firebaseAuth.signOut();
+            if (firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
                 Intent loginIntent = new Intent(this, LoginActivity.class);
                 this.startActivityForResult(loginIntent, RC_LOGIN_ACTIVITY);
             } else {
                 firebaseAuth.signOut();
-                firebaseAuth.signInAnonymously().addOnCompleteListener(t -> Log.d(TAG, "logged in user anonymously"));
+
+                firebaseAuth.signInAnonymously().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        NavigationView navigationView = findViewById(R.id.nav_view);
+                        MenuItem logoutItem = navigationView.getMenu().findItem(R.id.loginlogout);
+                        logoutItem.setTitle(getString(R.string.login));
+                        Log.d(TAG, "logged in user anonymously");
+                    } else {
+
+                    }
+                });
             }
         }
 
@@ -200,6 +225,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+
+        firebaseAuth.getCurrentUser().linkWithCredential(credential)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "linkWithCredential:success");
+                        FirebaseUser user = task.getResult().getUser();
+                    } else {
+                        Log.w(TAG, "linkWithCredential:failure (probably already linked)", task.getException());
+//                        Toast.makeText(MainActivity.this, "Authentication failed.",
+//                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        if (firebaseAuth.getCurrentUser() != null)
+            firebaseAuth.signOut();
+
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -208,6 +249,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                            NavigationView navigationView = findViewById(R.id.nav_view);
+                            MenuItem loginItem = navigationView.getMenu().findItem(R.id.loginlogout);
+                            loginItem.setTitle(getString(R.string.logout));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

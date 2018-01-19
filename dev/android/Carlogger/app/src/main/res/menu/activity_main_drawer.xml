@@ -27,9 +27,8 @@
             android:icon="@drawable/ic_action_cash"
             android:title="@string/navigation_drawer_other_costs" />
     </group>
-
     <item
         android:id="@+id/loginlogout"
-        android:title="Login/Logout" />
+        android:title="@string/login_logout" />
 
 </menu>

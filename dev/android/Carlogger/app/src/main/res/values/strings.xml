@@ -159,6 +159,10 @@
     </string>
     <string name="loginDialog_title">Mit Google anmelden</string>
     <string name="pressBackAgain">Tippen Sie ein zweites Mal auf Zurück zum beenden</string>
+    <string name="login">Einloggen</string>
+    <string name="logout">Ausloggen</string>
+    <string name="login_logout">Login/Logout</string>
+    <string name="chooseCar">Auto wählen</string>
 
     <!--<string name="default_web_client_id" translatable="false">409691608244-01q2bthn0ihc8r78tldk6j2p3u3cudth.apps.googleusercontent.com</string>-->
 

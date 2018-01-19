@@ -8,4 +8,5 @@
     <dimen name="fragment_side_margin">5dp</dimen>
     <dimen name="text_size_big">18sp</dimen>
     <dimen name="dialog_padding">25dp</dimen>
+    <dimen name="fab_padding">6dp</dimen>
 </resources>

@@ -8,4 +8,5 @@ public interface DataAccess {
     void update(String path, Object object);
     void push(String path, Object object);
     void delete(String path, Object object);
+    String getUid();
 }
