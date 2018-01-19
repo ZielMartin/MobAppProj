@@ -3,8 +3,6 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.Calendar;
-
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 
@@ -16,7 +14,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
 
 
 
-    // Calendar createTimeCalendar; - in SuperClass
+    // Calendar createTime; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
     private double amount;
     private double costPerLitre;
@@ -114,7 +112,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         costPerLitre = in.readDouble();
         km = in.readDouble();
         full = in.readByte() != 0x00;
-        createTimeCalendar = (Calendar) in.readValue(Calendar.class.getClassLoader());
+        createTime = in.readLong();
         autoEntry = (AutoEntryDates.AutoEntry) in.readValue(AutoEntryDates.AutoEntry.class.getClassLoader());
         entryType = (EntryType) in.readSerializable();
         cost = in.readDouble();
@@ -132,7 +130,7 @@ public class FuelEntry extends EntrySuper implements Parcelable {
         dest.writeDouble(costPerLitre);
         dest.writeDouble(km);
         dest.writeByte((byte) (full ? 0x01 : 0x00));
-        dest.writeValue(createTimeCalendar);
+        dest.writeLong(createTime);
         dest.writeValue(autoEntry);
         dest.writeSerializable(entryType);
         dest.writeDouble(cost);

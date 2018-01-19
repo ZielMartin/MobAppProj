@@ -27,7 +27,7 @@ public class BootReceiver extends BroadcastReceiver {
         for (ReminderEntry reminder : ReminderEntryList.getInstance().getAllEntries()) {
             if(reminder.isPushNotification()) {
                 Intent alarmIntent = new Intent(context, AlarmReceiver.class);
-                Calendar calendar = (Calendar) reminder.getDateTime().clone();
+                Calendar calendar = (Calendar) reminder.getDateTimeCalendar().clone();
                 calendar.add(Calendar.HOUR, -reminder.getHoursNotification());
                 AlarmUtil.setAlarm(context, reminder, calendar);
             }

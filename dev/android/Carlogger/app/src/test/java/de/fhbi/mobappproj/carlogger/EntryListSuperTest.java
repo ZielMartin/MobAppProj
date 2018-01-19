@@ -88,7 +88,7 @@ public class EntryListSuperTest {
 
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(2017, 01, 01);
+        calendar.set(2017, 01, 02);
         fe1.editCreateTimeCalendar(calendar);
 
 

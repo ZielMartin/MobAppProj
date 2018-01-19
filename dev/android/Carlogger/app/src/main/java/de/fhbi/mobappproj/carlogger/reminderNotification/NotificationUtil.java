@@ -7,21 +7,14 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.net.Uri;
+
 import android.os.Build;
-import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAddActivity;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 
 /**
@@ -46,7 +39,7 @@ public class NotificationUtil {
         Notification.Builder builder = new Notification.Builder(context)
                 .setSmallIcon(R.drawable.ic_action_calendar)
                 .setContentTitle(reminder.getDescription())
-                .setContentText(dateFormat.format(reminder.getDateTime().getTime()))
+                .setContentText(dateFormat.format(reminder.getDateTimeCalendar().getTime()))
                 .setContentIntent(pending);
 
         long[] pattern = {0, 300, 0};

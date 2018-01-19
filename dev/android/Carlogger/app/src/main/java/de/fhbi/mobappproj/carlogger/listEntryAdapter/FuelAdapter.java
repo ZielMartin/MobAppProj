@@ -16,6 +16,7 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAddActivity;
 
@@ -173,7 +174,7 @@ public class FuelAdapter extends RecyclerView.Adapter<FuelAdapter.FuelViewHolder
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), FuelAddActivity.class);
-                    intent.putExtra("entry", entry);
+                    intent.putExtra("entryIndex", FuelEntryList.getInstance().getAllEntries().indexOf(entry));
                     view.getContext().startActivity(intent);
                 }
             });

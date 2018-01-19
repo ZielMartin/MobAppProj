@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmReceiver;
@@ -53,7 +54,7 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
             //when editButton is pressed
             Bundle extras = getIntent().getExtras();
             if(extras != null){
-                editEntry = extras.getParcelable("entry");
+                editEntry = ReminderEntryList.getInstance().getAllEntries().get(extras.getInt("entryIndex"));
                 setEditEntryValues(editEntry);
             }
         }
@@ -121,9 +122,8 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                         editEntry.setPushNotification(CB_PushNotification.isChecked());
                         editEntry.updateEntry();
 
-
                         if(editEntry.isPushNotification()) {
-                            Calendar calendar = (Calendar) editEntry.getDateTime().clone();
+                            Calendar calendar = (Calendar) editEntry.getDateTimeCalendar().clone();
                             calendar.add(Calendar.HOUR, -hoursNotification);
 
                             AlarmUtil.setAlarm(this, editEntry, calendar);
@@ -141,7 +141,7 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
                         re.push();
 
                         if(re.isPushNotification()) {
-                            Calendar calendar = (Calendar) re.getDateTime().clone();
+                            Calendar calendar = (Calendar) re.getDateTimeCalendar().clone();
                             calendar.add(Calendar.HOUR, -hoursNotification);
 
 
@@ -239,10 +239,10 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
 
     private void setEditEntryValues(ReminderEntry entry){
         ET_Description.setText(entry.getDescription());
-        DP_DatePicker.updateDate(entry.getDateTime().get(Calendar.YEAR), entry.getDateTime().get(Calendar.MONTH), entry.getDateTime().get(Calendar.DAY_OF_MONTH));
+        DP_DatePicker.updateDate(entry.getDateTimeCalendar().get(Calendar.YEAR), entry.getDateTimeCalendar().get(Calendar.MONTH), entry.getDateTimeCalendar().get(Calendar.DAY_OF_MONTH));
         TP_TimePicker.setIs24HourView(true);
-        TP_TimePicker.setCurrentHour(entry.getDateTime().get(Calendar.HOUR_OF_DAY));
-        TP_TimePicker.setCurrentMinute(entry.getDateTime().get(Calendar.MINUTE));
+        TP_TimePicker.setCurrentHour(entry.getDateTimeCalendar().get(Calendar.HOUR_OF_DAY));
+        TP_TimePicker.setCurrentMinute(entry.getDateTimeCalendar().get(Calendar.MINUTE));
         if(entry.getHoursNotification()>0){
             CB_PushNotification.setChecked(true);
         }else{
