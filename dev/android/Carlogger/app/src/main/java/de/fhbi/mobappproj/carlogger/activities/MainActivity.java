@@ -33,6 +33,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 
 import de.fhbi.mobappproj.carlogger.AddMenu;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
 import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
 import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
@@ -100,7 +101,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View header = navigationView.getHeaderView(0);
         Button button_chooseCar = header.findViewById(R.id.button_chooseCar);
         button_chooseCar.setOnClickListener(view -> {
-            Log.i(TAG, "chooseCar");
+            Intent intent = new Intent(this, ChooseCarActivity.class);
+            startActivity(intent);
         });
 
         changeFragmentTo(new AllFragment());

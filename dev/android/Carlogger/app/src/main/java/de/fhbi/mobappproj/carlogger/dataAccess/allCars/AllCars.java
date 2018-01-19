@@ -39,4 +39,17 @@ public class AllCars {
     public String getKraftstoff() {
         return kraftstoff;
     }
+
+    @Override
+    public String toString() {
+        return "AllCars{" +
+                "hsn='" + hsn + '\'' +
+                ", tsn='" + tsn + '\'' +
+                ", cm3='" + cm3 + '\'' +
+                ", baujahre='" + baujahre + '\'' +
+                ", ps='" + ps + '\'' +
+                ", name='" + name + '\'' +
+                ", kraftstoff='" + kraftstoff + '\'' +
+                '}';
+    }
 }

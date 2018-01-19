@@ -10,7 +10,7 @@ public class CarAccess {
     private static CarAccess instance = null;
     private Car currentCar;
 
-    private CarAccess() {
+    public CarAccess() {
     }
 
     public static CarAccess getInstance() {
