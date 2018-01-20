@@ -41,7 +41,7 @@ public class ChooseCarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_car);
 
-        recyclerView = (RecyclerView) findViewById(R.id.RV_ChooseCar);
+        recyclerView = (RecyclerView) findViewById(R.id.RV_ChooseCar );
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -105,8 +105,8 @@ public class ChooseCarActivity extends AppCompatActivity {
             allCarsList.addAll(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
 
             //Temporary!!-------------------------------------------------------------------------------------
-            CarStructure structure = new CarStructure(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
-            structure.handleData();
+            //CarStructure structure = new CarStructure(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
+            //structure.handleData();
             //------------------------------------------------------------------------------------------------
 
             Log.i(TAG, "created linkedlist of length: " + allCarsList.size());

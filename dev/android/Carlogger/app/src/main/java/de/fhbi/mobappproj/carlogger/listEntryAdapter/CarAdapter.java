@@ -35,7 +35,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
 
     public CarAdapter(Context context, List<AllCars> items) {
-        GenericViewHolder.mExpandedPosition = -1;
         this.mContext = context;
         entries = items;
     }
