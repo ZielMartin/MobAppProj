@@ -19,7 +19,6 @@ import java.util.Arrays;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 

@@ -2,6 +2,7 @@ package de.fhbi.mobappproj.carlogger.DataClasses;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCars;
  * Created by Johannes on 19.01.2018.
  */
 
-public class CarStructure {
+public class CarStructure implements Serializable{
 
     private static final String TAG = "CarStructure";
 
@@ -39,6 +40,7 @@ public class CarStructure {
      * do here database stuff
      */
     public void handleData(){
+
         for(CarManufacturer manufacturer : allManufacturer.values()){
             Log.d(TAG, manufacturer.getName());
             for(CarModell modell : manufacturer.getAllModells().values()){
@@ -74,6 +76,8 @@ public class CarStructure {
                                 allManufacturer.get(manufacturer).getAllModells().get(modell).getAllCarVariant().put(variant, newVariant);
                                 loop = true;
                             }
+                        }else{
+                            Log.d("asdfgg", car.toString());
                         }
                     } else {
                         CarModell newModell = new CarModell();
