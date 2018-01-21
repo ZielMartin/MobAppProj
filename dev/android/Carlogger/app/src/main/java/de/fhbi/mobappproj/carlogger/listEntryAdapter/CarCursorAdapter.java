@@ -78,14 +78,14 @@ public class CarCursorAdapter extends RecyclerViewCursorAdapter<CarCursorAdapter
 
         public void setDataOnView(Cursor cursor) {
             //TODO: replace entry with cursor
-            AllCars entry = cursor; //???
-            TV_ListItemName.setText(entry.getName());
-            TV_ListItemFuel.setText(mContext.getString(R.string.car_info_fuel) + " " + entry.getKraftstoff());
-            TV_ListItemPower.setText(mContext.getString(R.string.car_info_power) + " " + entry.getPs());
-            TV_ListItemcm3.setText(mContext.getString(R.string.car_info_cm3) + " " + entry.getCm3());
-            TV_ListItemProductionYears.setText(entry.getBaujahre());
-            TV_ListItemHsn.setText(mContext.getString(R.string.car_info_hsn) + " " + entry.getHsn());
-            TV_ListItemTsn.setText(mContext.getString(R.string.car_info_tsn) + " " + entry.getTsn());
+//            AllCars entry = cursor; //???
+//            TV_ListItemName.setText(entry.getName());
+//            TV_ListItemFuel.setText(mContext.getString(R.string.car_info_fuel) + " " + entry.getKraftstoff());
+//            TV_ListItemPower.setText(mContext.getString(R.string.car_info_power) + " " + entry.getPs());
+//            TV_ListItemcm3.setText(mContext.getString(R.string.car_info_cm3) + " " + entry.getCm3());
+//            TV_ListItemProductionYears.setText(entry.getBaujahre());
+//            TV_ListItemHsn.setText(mContext.getString(R.string.car_info_hsn) + " " + entry.getHsn());
+//            TV_ListItemTsn.setText(mContext.getString(R.string.car_info_tsn) + " " + entry.getTsn());
 
 
             itemView.setOnClickListener(new View.OnClickListener() {

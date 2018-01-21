@@ -1,59 +1,54 @@
 package de.fhbi.mobappproj.carlogger.activities;
 
-import android.os.AsyncTask;
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.ListViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import org.apache.commons.collections4.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import de.fhbi.mobappproj.carlogger.DataClasses.CarStructure;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCars;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
-import de.fhbi.mobappproj.carlogger.listEntryAdapter.CarAdapter;
 
 public class ChooseCarActivity extends AppCompatActivity {
 
     private static final String TAG = ChooseCarActivity.class.getSimpleName();
 
     private AllCarsAccess allCarsAccess = null;
-    private RecyclerView recyclerView;
-    private CarAdapter mAdapter;
-    private LinkedList<AllCars> allCarsList;
+    private ListViewCompat listView = null;
+    private CursorAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_car);
+        allCarsAccess = new AllCarsAccess(this);
+        Cursor cursor = allCarsAccess.rawQuery(AllCarsAccess.QUERY_ALL);
+        listView = findViewById(R.id.LV_chooseCar);
+        adapter = new MyCursorAdapter(this, cursor);
+        listView.setAdapter(new MyCursorAdapter(this, cursor));
+    }
 
-        recyclerView = (RecyclerView) findViewById(R.id.RV_ChooseCar );
+    @Override
+    protected void onStart() {
+        super.onStart();
+        allCarsAccess = new AllCarsAccess(this);
+    }
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
-
-        allCarsAccess = new AllCarsAccess(getResources());
-        new CreateContent().doInBackground();
-
-
-
+    @Override
+    protected void onStop() {
+        super.onStop();
+        allCarsAccess.close();
+        allCarsAccess = null;
     }
 
     @Override
@@ -72,13 +67,10 @@ public class ChooseCarActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<AllCars> list = new ArrayList<>(CollectionUtils.select(
-                        allCarsList, o -> o.getName().toLowerCase().contains(newText.toLowerCase())
-                ));
-
-                updateListView(list);
-
-                Log.i(TAG, "queryTextChange:\t" + newText);
+                Cursor cursor = allCarsAccess.getNameLike(newText);
+                adapter.changeCursor(cursor);
+                listView.setAdapter(adapter);
+                Log.i(TAG, "queryTextChange:\t" + newText + "\tcursorCount: " + cursor.getCount());
                 return false;
             }
         });
@@ -88,39 +80,54 @@ public class ChooseCarActivity extends AppCompatActivity {
 //        return super.onCreateOptionsMenu(menu);
     }
 
-    private class CreateContent extends AsyncTask<Void, Void, Void> {
+    private class MyCursorAdapter extends CursorAdapter {
+        public MyCursorAdapter(Context context, Cursor c) {
+            super(context, c, 0);
+        }
 
         @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                allCarsAccess.start().join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                return null;
-            }
-            Log.i(TAG, "done waiting");
-
-
-            allCarsList = new LinkedList<>();
-            allCarsList.addAll(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
-
-            //Temporary!!-------------------------------------------------------------------------------------
-            //CarStructure structure = new CarStructure(ChooseCarActivity.this.allCarsAccess.getAllCarsList());
-            //structure.handleData();
-            //------------------------------------------------------------------------------------------------
-
-            Log.i(TAG, "created linkedlist of length: " + allCarsList.size());
-
-            updateListView(allCarsList);
-
-            Log.i(TAG, "done");
-
-            return null;
+        public View newView(Context context, Cursor cursor, ViewGroup parent) {
+            View itemView = LayoutInflater.from(context).inflate(R.layout.list_item_car, parent, false);
+//            itemView.setOnClickListener(view -> {
+//                Log.i(TAG, "Clicked item");
+//            });
+            return itemView;
         }
-    }
 
-    private void updateListView(List<AllCars> list) {
-        mAdapter = new CarAdapter(this, list);
-        recyclerView.setAdapter(mAdapter);
+        @Override
+        public void bindView(View view, Context context, Cursor cursor) {
+            TextView TV_ListItemName, TV_ListItemFuel, TV_ListItemPower, TV_ListItemcm3, TV_ListItemProductionYears, TV_ListItemHsn, TV_ListItemTsn;
+
+            TV_ListItemName = view.findViewById(R.id.TV_ListItemName);
+            TV_ListItemFuel = view.findViewById(R.id.TV_ListItemFuel);
+            TV_ListItemPower = view.findViewById(R.id.TV_ListItemPower);
+            TV_ListItemcm3 = view.findViewById(R.id.TV_ListItemcm3);
+            TV_ListItemProductionYears = view.findViewById(R.id.TV_ListItemProductionYears);
+            TV_ListItemHsn = view.findViewById(R.id.TV_ListItemHsn);
+            TV_ListItemTsn = view.findViewById(R.id.TV_ListItemTsn);
+
+            String baujahre = cursor.getString(cursor.getColumnIndexOrThrow("baujahre"));
+            String cm3 = cursor.getString(cursor.getColumnIndexOrThrow("cm3"));
+            Integer hsn = cursor.getInt(cursor.getColumnIndexOrThrow("hsn"));
+            String kraftstoff = cursor.getString(cursor.getColumnIndexOrThrow("kraftstoff"));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            String ps = cursor.getString(cursor.getColumnIndexOrThrow("ps"));
+            String tsn = cursor.getString(cursor.getColumnIndexOrThrow("tsn"));
+
+            TV_ListItemName.setText(name);
+            TV_ListItemFuel.setText(context.getString(R.string.car_info_fuel) + kraftstoff);
+            TV_ListItemPower.setText(context.getString(R.string.car_info_cm3) + ps);
+            TV_ListItemcm3.setText(context.getString(R.string.car_info_power) + cm3);
+            TV_ListItemProductionYears.setText(context.getString(R.string.car_info_production_years) + baujahre);
+            TV_ListItemHsn.setText(context.getString(R.string.car_info_hsn) + hsn);
+            TV_ListItemTsn.setText(context.getString(R.string.car_info_tsn) + tsn);
+
+            view.setTag(R.integer.tag_allCars_id, cursor.getInt(cursor.getColumnIndex("_id")));
+
+            view.setOnClickListener(v -> {
+                Log.i(TAG, "Clicked Car with _id: " + v.getTag(R.integer.tag_allCars_id));
+            });
+
+        }
     }
 }

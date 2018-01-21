@@ -6,12 +6,6 @@
     android:orientation="vertical"
     tools:context="de.fhbi.mobappproj.carlogger.activities.ChooseCarActivity">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/RV_ChooseCar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--/>-->
-
     <android.support.v7.widget.ListViewCompat
         android:layout_height="match_parent"
         android:layout_width="match_parent"

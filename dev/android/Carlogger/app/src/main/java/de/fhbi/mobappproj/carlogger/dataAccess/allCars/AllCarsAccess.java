@@ -1,33 +1,40 @@
 package de.fhbi.mobappproj.carlogger.dataAccess.allCars;
 
-import android.content.res.Resources;
-
-import java.util.List;
-
-import de.fhbi.mobappproj.carlogger.R;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by martin on 19.01.18.
  */
-
 public class AllCarsAccess {
-    private List<AllCars> allCarsList = null;
-    Resources resources = null;
 
-    public AllCarsAccess(Resources resources) {
-        this.resources = resources;
+    public static final String QUERY_ALL = "SELECT * FROM cars";
+    public static final String QUERY_NAME = "SELECT * FROM cars WHERE name LIKE '%' || ? || '%'";
+
+    private SQLiteDatabase database = null;
+
+    public AllCarsAccess(Context context) {
+        String pathToDB = context.getDatabasePath("cars.sqlite").getPath();
+        database = SQLiteDatabase.openDatabase(pathToDB, null, SQLiteDatabase.OPEN_READONLY);
     }
 
-    public List<AllCars> getAllCarsList() {
-        return allCarsList;
+    public Cursor rawQuery(String query) {
+        Cursor cursor = database.rawQuery(query, null);
+        return cursor;
     }
 
-    public Thread start() {
-        Thread thread = new Thread(() ->{
-            JSONResourceReader reader = new JSONResourceReader(resources, R.raw.all_cars);
-            allCarsList = reader.constructUsingGson(AllCarsList.class).getCars();
-        });
-        thread.start();
-        return thread;
+    public Cursor rawQuery(String query, String[] selectionArgs) {
+        Cursor cursor = database.rawQuery(query, selectionArgs);
+        return cursor;
+    }
+
+    public Cursor getNameLike(String name) {
+        Cursor cursor = database.rawQuery(QUERY_NAME, new String[]{name});
+        return cursor;
+    }
+
+    public void close() {
+        database.close();
     }
 }

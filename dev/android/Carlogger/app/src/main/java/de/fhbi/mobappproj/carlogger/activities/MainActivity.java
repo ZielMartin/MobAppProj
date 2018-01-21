@@ -31,9 +31,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 import de.fhbi.mobappproj.carlogger.AddMenu;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
 import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
 import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
@@ -104,6 +108,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, ChooseCarActivity.class);
             startActivity(intent);
         });
+
+
+        File file = getDatabasePath("cars.sqlite");
+        File dir = file.getParentFile();
+        try {
+            if (dir.mkdirs() || dir.isDirectory()) {
+                CopyRAWtoSDCard(R.raw.all_cars, file.getAbsolutePath());
+                Log.v(TAG, "successfully copied " + file.getAbsolutePath());
+            } else {
+                Log.e(TAG, "!mkdirs()" + dir.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            Log.e(TAG, "failed copying " + file.getAbsolutePath(), e);
+        }
 
         changeFragmentTo(new AllFragment());
     }
@@ -267,5 +285,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onClick(View view) {
 
+    }
+
+    private void CopyRAWtoSDCard(int id, String path) throws IOException {
+        InputStream in = getResources().openRawResource(id);
+        FileOutputStream out = new FileOutputStream(path);
+        byte[] buff = new byte[1024];
+        int read = 0;
+        try {
+            while ((read = in.read(buff)) > 0) {
+                out.write(buff, 0, read);
+            }
+        } finally {
+            in.close();
+            out.close();
+        }
     }
 }
