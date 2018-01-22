@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import de.fhbi.mobappproj.carlogger.Helper;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
 
@@ -126,6 +127,7 @@ public class ChooseCarActivity extends AppCompatActivity {
 
             view.setOnClickListener(v -> {
                 Log.i(TAG, "Clicked Car with _id: " + v.getTag(R.integer.tag_allCars_id));
+
             });
 
         }
