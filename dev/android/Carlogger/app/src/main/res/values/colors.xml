@@ -12,4 +12,6 @@
     <color name="white_transparent">#99FFFFFF</color>
     <color name="black">#000</color>
     <color name="red_primary">#fa0000</color>
+
+    <color name="fui_bgEmail">#D0021B</color>
 </resources>

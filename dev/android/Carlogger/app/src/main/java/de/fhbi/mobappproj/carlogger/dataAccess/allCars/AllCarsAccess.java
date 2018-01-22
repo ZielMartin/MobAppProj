@@ -3,6 +3,7 @@ package de.fhbi.mobappproj.carlogger.dataAccess.allCars;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 /**
  * Created by martin on 19.01.18.
@@ -15,8 +16,7 @@ public class AllCarsAccess {
     private SQLiteDatabase database = null;
 
     public AllCarsAccess(Context context) {
-        String pathToDB = context.getDatabasePath("cars.sqlite").getPath();
-        database = SQLiteDatabase.openDatabase(pathToDB, null, SQLiteDatabase.OPEN_READONLY);
+        database = new CarsOpenHelper(context).getReadableDatabase();
     }
 
     public Cursor rawQuery(String query) {
@@ -36,5 +36,30 @@ public class AllCarsAccess {
 
     public void close() {
         database.close();
+    }
+
+    private class CarsOpenHelper extends SQLiteOpenHelper {
+
+        public CarsOpenHelper(Context context) {
+            super(context, "cars.sqlite", null, 3);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        }
+
+
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+        this.close();
     }
 }
