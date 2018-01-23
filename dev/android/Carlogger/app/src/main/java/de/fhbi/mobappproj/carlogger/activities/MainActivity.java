@@ -161,10 +161,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (userIsInteracting) {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("SELECTEDCAR", CarList.getInstance().getCars().get(position).getKey());
+                    editor.putLong("SELECTEDCARKEY", CarList.getInstance().getCars().get(position).getTimeKey());
                     editor.apply();
 
-                    Log.d("SELECTEDCAR", CarList.getInstance().getCars().get(position).getName());
+                    Log.d("SELECTEDCARKEY", CarList.getInstance().getCars().get(position).getName());
 
                     //TODO - Refresh data. car has changed
 
@@ -172,17 +172,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putLong("SELECTEDCARKEY", 0);
+                editor.apply();
 
+                Log.d("SELECTEDCARKEY", "0");
             }
         });
 
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String selected = prefs.getString("SELECTEDCAR", "");
+        long selected = prefs.getLong("SELECTEDCARKEY", 0);
 
 
         for(Car car : CarList.getInstance().getCars()){
-            if(car.getKey().equals(selected)){
+            if(car.getTimeKey() == selected){
                 spinner.setSelection(CarList.getInstance().getCars().indexOf(car), true);
 
             }
@@ -205,17 +210,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onResume();
         dataAdapter.notifyDataSetChanged();
 
+        checkSharedPref();
+
+
+    }
+
+    private void checkSharedPref() {
         //sometimes setOnItemSelectedListener() doesnt fire, check if right car is selected
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String selected = prefs.getString("SELECTEDCAR", "");
-        if(spinner.getSelectedItem() != null && !selected.equals(spinner.getSelectedItem().toString()) ){
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString("SELECTEDCAR", selected);
-            editor.apply();
+        long selected = prefs.getLong("SELECTEDCARKEY", 0);
+        boolean found = false;
+        if(spinner.getSelectedItem() != null){
+            for(Car car : CarList.getInstance().getCars()){
+                if(car.getTimeKey() == selected){
+                    found = true;
+                }
+            }
+            if(!found) {
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putLong("SELECTEDCARKEY", selected);
+                editor.apply();
 
-            Log.d("SELECTEDCAR", selected);
+                Log.d("SELECTEDCARKEY", selected + "");
+            }
         }
-
     }
 
     @Override

@@ -2,7 +2,6 @@ package de.fhbi.mobappproj.carlogger.activities.AddActivities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -10,7 +9,6 @@ import android.widget.Toast;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
-import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.R;
 
 
@@ -98,11 +96,11 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
                     //if this is an edit: edit the given entry
                     if(editEntry != null){
                         editEntry.setName(ET_CarAddNameValue.getText().toString());
-                        editEntry.setKey(ET_CarAddHsnTsnValue.getText().toString());
+                        editEntry.setHSNTSN(ET_CarAddHsnTsnValue.getText().toString());
                         editEntry.update();
                     }else{
                         Car car = new Car();
-                        car.setKey(ET_CarAddHsnTsnValue.getText().toString());
+                        car.setHSNTSN(ET_CarAddHsnTsnValue.getText().toString());
                         car.setName(ET_CarAddNameValue.getText().toString());
                         car.pushToFirebase();
                     }
@@ -126,7 +124,7 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
     protected void setEditEntryValues(){
             if(editEntry != null){
                 ET_CarAddNameValue.setText(editEntry.getName());
-                ET_CarAddHsnTsnValue.setText(editEntry.getKey());
+                ET_CarAddHsnTsnValue.setText(editEntry.getHSNTSN());
             }else{
                 ET_CarAddHsnTsnValue.setText(key);
                 ET_CarAddNameValue.setText(name);

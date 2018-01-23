@@ -2,7 +2,6 @@ package de.fhbi.mobappproj.carlogger.dataAccess.entryAccess;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 
 /**
@@ -27,7 +26,7 @@ public class RepairEntryAccess extends EntryAccess {
     public void push(EntrySuper entry) {
         String id = dataAccess.getUid();
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        dataAccess.push("users/" + id + "/cars/" + currentCar.getKey(), entry);
+        dataAccess.push("users/" + id + "/cars/" + currentCar.getHSNTSN(), entry);
     }
 
     @Override

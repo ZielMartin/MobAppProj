@@ -1,15 +1,19 @@
 package de.fhbi.mobappproj.carlogger.DataClasses;
 
+import java.util.Calendar;
+
 /**
  * Created by martin on 18.01.18.
  */
 
 public class Car {
 
-    private String key;
+    private String HSNTSN;
     private String name;
+    private long timeKey;
 
     public Car() {
+        timeKey = Calendar.getInstance().getTimeInMillis();
         CarList.getInstance().getCars().add(this);
     }
 
@@ -17,12 +21,16 @@ public class Car {
         CarList.getInstance().getCars().remove(this);
     }
 
-    public String getKey() {
-        return key;
+    public String getHSNTSN() {
+        return HSNTSN;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setHSNTSN(String HSNTSN) {
+        this.HSNTSN = HSNTSN;
+    }
+
+    public long getTimeKey() {
+        return timeKey;
     }
 
     public String getName() {
@@ -53,13 +61,13 @@ public class Car {
             return false;
         }
         Car other = (Car) o;
-        //return this.key == other.key;
-        return this.getKey() == other.getKey();
+        //return this.HSNTSN == other.HSNTSN;
+        return this.getHSNTSN() == other.getHSNTSN();
     }
 
     @Override
     public int hashCode() {
-        return (int) getKey().hashCode();
+        return (int) getHSNTSN().hashCode();
     }
 
     @Override

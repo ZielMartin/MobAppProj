@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.activities.CarActivity;
+import de.fhbi.mobappproj.carlogger.activities.ChooseCarActivity;
 
 /**
  * Created by Johannes on 23.01.2018.
@@ -21,12 +22,12 @@ public class MyApplication extends Application {
 
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String selected = prefs.getString("SELECTEDCAR", "");
+        long selected = prefs.getLong("SELECTEDCARKEY", 0);
 
         //select car if none is selected
-        if(selected.equals("")){
-            Intent intent = new Intent(this, CarActivity.class);
-            startActivity(intent);
+        if(selected == 0){
+            Intent intent = new Intent(this, ChooseCarActivity.class);
+            this.startActivity(intent);
         }
 
         AllEntryList.getInstance().getAllEntriesFromFirebase();

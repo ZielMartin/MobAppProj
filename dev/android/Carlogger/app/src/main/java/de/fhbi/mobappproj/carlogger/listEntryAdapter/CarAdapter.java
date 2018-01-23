@@ -17,8 +17,6 @@ import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.CarAddActivity;
 
-import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
-
 /**
  * Created by Johannes on 09.01.2018.
  */
@@ -88,7 +86,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         public void setDataOnView(int position, Car entry) {
             this.entry = entry;
             TV_ListItemCarName.setText(entry.getName());
-            TV_ListItemCarKey.setText(entry.getKey());
+            TV_ListItemCarKey.setText(entry.getHSNTSN());
 
             //configure expanding entry
             setUpExpandable(position);

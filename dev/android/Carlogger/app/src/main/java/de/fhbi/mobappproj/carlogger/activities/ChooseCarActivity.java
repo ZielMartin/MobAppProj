@@ -118,8 +118,8 @@ public class ChooseCarActivity extends AppCompatActivity {
 
             TV_ListItemName.setText(name);
             TV_ListItemFuel.setText(context.getString(R.string.car_info_fuel) + kraftstoff);
-            TV_ListItemPower.setText(context.getString(R.string.car_info_cm3) + ps);
-            TV_ListItemcm3.setText(context.getString(R.string.car_info_power) + cm3);
+            TV_ListItemPower.setText(context.getString(R.string.car_info_power) + ps);
+            TV_ListItemcm3.setText(context.getString(R.string.car_info_cm3) + cm3);
             TV_ListItemProductionYears.setText(baujahre);
             TV_ListItemHsn.setText(context.getString(R.string.car_info_hsn) + hsn);
             TV_ListItemTsn.setText(context.getString(R.string.car_info_tsn) + tsn);
