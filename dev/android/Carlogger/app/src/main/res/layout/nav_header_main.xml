@@ -20,14 +20,21 @@
         <!--app:srcCompat="@mipmap/ic_launcher_round" />-->
 
     <Button
+        android:id="@+id/button_chooseCar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
-        android:padding="@dimen/fab_padding"
-        android:id="@+id/button_chooseCar"
         android:background="@drawable/transparent"
         android:drawableLeft="@drawable/ic_navbar_car"
-        android:text="@string/chooseCar"
-        android:textSize="@dimen/text_size_big"/>
+        android:padding="@dimen/fab_padding"
+        android:text="@string/add_edit_car"
+        android:textSize="@dimen/text_size_big" />
+
+    <Spinner
+        android:id="@+id/SP_HeaderMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
 
 </LinearLayout>

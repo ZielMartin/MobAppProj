@@ -10,17 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
-import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
-import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.Car;
+import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAddActivity;
-import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCars;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.CarAddActivity;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
@@ -29,19 +24,19 @@ import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
  */
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
-    private List<AllCars> entries;
+    private ArrayList<Car> entries;
     private Context mContext;
 
 
-
-    public CarAdapter(Context context, List<AllCars> items) {
+    public CarAdapter(Context context, ArrayList<Car> items) {
+        GenericViewHolder.mExpandedPosition = -1;
         this.mContext = context;
         entries = items;
     }
     @Override
     public CarViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemView = inflater.inflate(R.layout.list_item_car, parent, false);
+        View itemView = inflater.inflate(R.layout.list_item_car_edit, parent, false);
         return new CarViewHolder(itemView, mContext, this);
 
     }
@@ -61,57 +56,51 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
 
     public static class CarViewHolder extends RecyclerView.ViewHolder {
+        static int mExpandedPosition = -1;
 
-        public TextView TV_ListItemName, TV_ListItemFuel, TV_ListItemPower, TV_ListItemcm3, TV_ListItemProductionYears, TV_ListItemHsn, TV_ListItemTsn;
-
+        public TextView TV_ListItemCarName, TV_ListItemCarKey;
+        public Button BTN_CarEdit, BTN_CarDelete;
 
 
         private Context mContext;
         private RecyclerView.Adapter callback;
 
-        protected static int mExpandedPosition;
-
-        private AllCars entry;
+        private Car entry;
 
         public CarViewHolder(View v, Context mContext, RecyclerView.Adapter callback) {
             super(v);
             this.mContext = mContext;
             this.callback = callback;
-            TV_ListItemName = (TextView) v.findViewById(R.id.TV_ListItemName);
-            TV_ListItemFuel = (TextView) v.findViewById(R.id.TV_ListItemFuel);
-            TV_ListItemPower = (TextView) v.findViewById(R.id.TV_ListItemPower);
-            TV_ListItemcm3 = (TextView) v.findViewById(R.id.TV_ListItemcm3);
-            TV_ListItemProductionYears = (TextView) v.findViewById(R.id.TV_ListItemProductionYears);
-            TV_ListItemHsn = (TextView) v.findViewById(R.id.TV_ListItemHsn);
-            TV_ListItemTsn = (TextView) v.findViewById(R.id.TV_ListItemTsn);
+            TV_ListItemCarName = (TextView) v.findViewById(R.id.TV_ListItemCarName);
+            TV_ListItemCarKey = (TextView) v.findViewById(R.id.TV_ListItemCarKey);
+
+
+            // Get Edit Button
+            BTN_CarEdit = (Button) v.findViewById(R.id.BTN_CarEdit);
+            //get delete Button
+            BTN_CarDelete = (Button) v.findViewById(R.id.BTN_CarDelete);
+
+
 
         }
 
 
-        public void setDataOnView(int position, AllCars entry) {
+        public void setDataOnView(int position, Car entry) {
             this.entry = entry;
-            TV_ListItemName.setText(entry.getName());
-            TV_ListItemFuel.setText(mContext.getString(R.string.car_info_fuel) + " " + entry.getKraftstoff());
-            TV_ListItemPower.setText(mContext.getString(R.string.car_info_power) + " " + entry.getPs());
-            TV_ListItemcm3.setText(mContext.getString(R.string.car_info_cm3) + " " + entry.getCm3());
-            TV_ListItemProductionYears.setText(entry.getBaujahre());
-            TV_ListItemHsn.setText(mContext.getString(R.string.car_info_hsn) + " " + entry.getHsn());
-            TV_ListItemTsn.setText(mContext.getString(R.string.car_info_tsn) + " " + entry.getTsn());
-
+            TV_ListItemCarName.setText(entry.getName());
+            TV_ListItemCarKey.setText(entry.getKey());
 
             //configure expanding entry
             setUpExpandable(position);
         }
 
 
-
-
         private void setUpExpandable(int position) {
             //expand entry
             final boolean isExpanded = position == mExpandedPosition;
-            TV_ListItemTsn.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-            TV_ListItemHsn.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-            TV_ListItemProductionYears.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            BTN_CarEdit.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+            BTN_CarDelete.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
 
             itemView.setActivated(isExpanded);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -122,10 +111,32 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
                     callback.notifyDataSetChanged();
                 }
             });
+            setUpButtons(position);
 
 
         }
 
+        private void setUpButtons(int position) {
+            //action for edit button
+            BTN_CarEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(view.getContext(), CarAddActivity.class);
+                    intent.putExtra("entryIndex", CarList.getInstance().getCars().indexOf(entry));
+                    view.getContext().startActivity(intent);
+                }
+            });
+
+            //action for delete Button
+            BTN_CarDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    entry.remove();
+                    callback.notifyDataSetChanged();
+                    mExpandedPosition = -1;
+                }
+            });
+        }
 
 
     }

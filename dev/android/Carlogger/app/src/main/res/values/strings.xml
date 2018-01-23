@@ -165,6 +165,10 @@
     <string name="chooseCar">Auto wählen</string>
     <string name="action_search">action_search</string>
 
+    <string name="add_car">Auto hinzufügen</string>
+    <string name="add_edit_car">Auto hinzufügen/bearbeiten</string>
+    <string name="delete_car">Auto entfernen</string>
+
 
     <!-- car -->
     <string name="car_info_hsn">HSN: </string>
@@ -174,6 +178,11 @@
     <string name="car_info_production_years">Zeitraum: </string>
     <string name="car_info_power">Leistung: </string>
     <string name="car_info_fuel">Kraftstoff: </string>
+
+    <string name="car_add_hsntsn">HSN/TSN</string>
+    <string name="car_add_name">Name</string>
+
+
     <!--<string name="default_web_client_id" translatable="false">409691608244-01q2bthn0ihc8r78tldk6j2p3u3cudth.apps.googleusercontent.com</string>-->
 
 

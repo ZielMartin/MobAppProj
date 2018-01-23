@@ -1,6 +1,7 @@
 package de.fhbi.mobappproj.carlogger.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
@@ -16,8 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import de.fhbi.mobappproj.carlogger.Helper;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.CarAddActivity;
 import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCarsAccess;
 
 public class ChooseCarActivity extends AppCompatActivity {
@@ -99,7 +100,7 @@ public class ChooseCarActivity extends AppCompatActivity {
         public void bindView(View view, Context context, Cursor cursor) {
             TextView TV_ListItemName, TV_ListItemFuel, TV_ListItemPower, TV_ListItemcm3, TV_ListItemProductionYears, TV_ListItemHsn, TV_ListItemTsn;
 
-            TV_ListItemName = view.findViewById(R.id.TV_ListItemName);
+            TV_ListItemName = view.findViewById(R.id.TV_ListItemCarName);
             TV_ListItemFuel = view.findViewById(R.id.TV_ListItemFuel);
             TV_ListItemPower = view.findViewById(R.id.TV_ListItemPower);
             TV_ListItemcm3 = view.findViewById(R.id.TV_ListItemcm3);
@@ -119,7 +120,7 @@ public class ChooseCarActivity extends AppCompatActivity {
             TV_ListItemFuel.setText(context.getString(R.string.car_info_fuel) + kraftstoff);
             TV_ListItemPower.setText(context.getString(R.string.car_info_cm3) + ps);
             TV_ListItemcm3.setText(context.getString(R.string.car_info_power) + cm3);
-            TV_ListItemProductionYears.setText(context.getString(R.string.car_info_production_years) + baujahre);
+            TV_ListItemProductionYears.setText(baujahre);
             TV_ListItemHsn.setText(context.getString(R.string.car_info_hsn) + hsn);
             TV_ListItemTsn.setText(context.getString(R.string.car_info_tsn) + tsn);
 
@@ -127,8 +128,22 @@ public class ChooseCarActivity extends AppCompatActivity {
 
             view.setOnClickListener(v -> {
                 Log.i(TAG, "Clicked Car with _id: " + v.getTag(R.integer.tag_allCars_id));
+                String key = hsn + "/" + tsn;
+
+                Intent intent = new Intent(ChooseCarActivity.this, CarAddActivity.class);
+                intent.putExtra("key", key);
+                intent.putExtra("name", name);
+                startActivity(intent);
+
+
+
+                ChooseCarActivity.this.finish();
+
+
 
             });
+
+
 
         }
     }

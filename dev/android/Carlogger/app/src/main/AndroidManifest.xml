@@ -71,7 +71,12 @@
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
-        <activity android:name=".activities.ChooseCarActivity"></activity>
+        <activity android:name=".activities.ChooseCarActivity" />
+        <activity android:name=".activities.CarActivity" />
+        <activity
+            android:name=".activities.AddActivities.CarAddActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
