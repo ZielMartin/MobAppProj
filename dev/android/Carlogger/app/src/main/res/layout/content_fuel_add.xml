@@ -37,7 +37,7 @@
                 android:focusedByDefault="true"
                 android:selectAllOnFocus="true"
                 android:inputType="number"
-                android:digits="0123456789,"
+                android:digits="0123456789,."
                 android:text="0,00" />
 
 
@@ -54,7 +54,7 @@
                 android:ems="10"
                 android:selectAllOnFocus="true"
                 android:inputType="number"
-                android:digits="0123456789,"
+                android:digits="0123456789,."
                 android:text="0,00" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:ems="10"
                 android:selectAllOnFocus="true"
                 android:inputType="number"
-                android:digits="0123456789,"
+                android:digits="0123456789,."
                 android:text="0" />
 
             <View

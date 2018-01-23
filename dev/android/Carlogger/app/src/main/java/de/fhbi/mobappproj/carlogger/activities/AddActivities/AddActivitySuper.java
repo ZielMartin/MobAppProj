@@ -117,7 +117,7 @@ public abstract class AddActivitySuper extends AppCompatActivity implements View
 
     //parsing string with comma to double
     protected double editTextToDouble(EditText et) {
-        String regexp = "^[0-9]\\d*(\\,\\d+)?$";
+        String regexp = "^[0-9]\\d*(\\,|\\.\\d+)?$";
 
         if (et.getText().toString().trim().matches(regexp)) {
             return Double.parseDouble(et.getText().toString().trim().replace(",", "."));
