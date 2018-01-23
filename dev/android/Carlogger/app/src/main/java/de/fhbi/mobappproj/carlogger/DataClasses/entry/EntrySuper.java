@@ -107,10 +107,8 @@ public abstract class EntrySuper implements Comparable<EntrySuper> {
         return calendar;
     }
 
-    public Calendar getCreateTime() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(createTime);
-        return calendar;
+    public long getCreateTime() {
+        return createTime;
     }
 
     public AutoEntryDates.AutoEntry getAutoEntry() {

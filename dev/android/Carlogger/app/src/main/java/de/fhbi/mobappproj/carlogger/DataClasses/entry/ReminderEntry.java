@@ -3,6 +3,8 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
@@ -38,6 +40,7 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
     }
 
 
+    @Exclude
     public Calendar getDateTimeCalendar() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(dateTime);
