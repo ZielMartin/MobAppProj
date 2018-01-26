@@ -2,6 +2,9 @@ package de.fhbi.mobappproj.carlogger.DataClasses;
 
 import java.util.ArrayList;
 
+import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
+
 /**
  * Created by Johannes on 23.01.2018.
  */
@@ -19,8 +22,11 @@ public class CarList {
 
     private CarList() {
         cars = new ArrayList<Car>();
-    }
+        DataAccess dataAccess = FirebaseAccess.getInstance();
+        String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), "");
 
+        dataAccess.getAll(path, this.cars, Car.class);
+    }
 
 
     public ArrayList<Car> getCars() {
@@ -28,8 +34,6 @@ public class CarList {
     }
 
     public boolean getAllEntriesFromFirebase() {
-
-        //TODO - fill me
 
         return false;
     }

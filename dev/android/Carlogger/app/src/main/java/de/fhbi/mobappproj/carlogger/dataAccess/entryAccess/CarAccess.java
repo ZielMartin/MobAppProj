@@ -1,5 +1,8 @@
 package de.fhbi.mobappproj.carlogger.dataAccess.entryAccess;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import de.fhbi.mobappproj.carlogger.DataClasses.Car;
 
 /**
@@ -20,5 +23,9 @@ public class CarAccess {
 
     public Car getCurrentCar() {
         return currentCar;
+    }
+
+    public void setCurrentCar(Car currentCar) {
+        this.currentCar = currentCar;
     }
 }

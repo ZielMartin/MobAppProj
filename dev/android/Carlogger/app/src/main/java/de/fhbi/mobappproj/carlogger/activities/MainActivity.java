@@ -47,6 +47,7 @@ import de.fhbi.mobappproj.carlogger.AddMenu;
 import de.fhbi.mobappproj.carlogger.DataClasses.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
 import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
 import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
@@ -171,12 +172,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (userIsInteracting) {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putLong("SELECTEDCARKEY", CarList.getInstance().getCars().get(position).getTimeKey());
+                    Car car = CarList.getInstance().getCars().get(position);
+                    editor.putLong("SELECTEDCARKEY", car.getTimeKey());
                     editor.apply();
 
-                    Log.d("SELECTEDCARKEY", CarList.getInstance().getCars().get(position).getName());
+                    Log.d("SELECTEDCARKEY", car.getName());
 
                     //TODO - Refresh data. car has changed
+                    CarAccess.getInstance().setCurrentCar(car);
 
                 }
             }

@@ -12,15 +12,13 @@ import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
 import de.fhbi.mobappproj.carlogger.R;
 
 
-public class CarAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener{
+public class CarAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
 
 
     private Car editEntry = null;
     private String name, key;
 
     private EditText ET_CarAddNameValue, ET_CarAddHsnTsnValue;
-
-
 
 
     @Override
@@ -30,14 +28,14 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
         if (savedInstanceState != null) {
 
 
-        }else{
+        } else {
             //when editButton is pressed
             Bundle extras = getIntent().getExtras();
-            if(extras != null){
-                if(extras.getString("key") != null && extras.getString("name")!= null){
+            if (extras != null) {
+                if (extras.getString("key") != null && extras.getString("name") != null) {
                     key = extras.getString("key");
                     name = extras.getString("name");
-                } else{
+                } else {
                     editEntry = CarList.getInstance().getCars().get(extras.getInt("entryIndex"));
                 }
 
@@ -58,8 +56,6 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
         ET_CarAddHsnTsnValue.setOnFocusChangeListener(this);
 
 
-
-
     }
 
     @Override
@@ -70,13 +66,13 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
     @Override
     protected boolean checkInput() {
 
-        if(ET_CarAddHsnTsnValue.getText().toString().equals("")){
+        if (ET_CarAddHsnTsnValue.getText().toString().equals("")) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
             ET_CarAddHsnTsnValue.setError("bitte HSN/TSN eingeben");
             ET_CarAddHsnTsnValue.requestFocus();
             return false;
         }
-        if(ET_CarAddNameValue.getText().toString().equals("")){
+        if (ET_CarAddNameValue.getText().toString().equals("")) {
             Toast.makeText(this, getString(R.string.input_error), Toast.LENGTH_SHORT).show();
             ET_CarAddNameValue.setError("bitte Name eingeben");
             ET_CarAddNameValue.requestFocus();
@@ -89,18 +85,18 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()){
-            case(R.id.fabCarCheck):
+        switch (view.getId()) {
+            case (R.id.fabCarCheck):
 
-                if(checkInput()){
+                if (checkInput()) {
                     //if this is an edit: edit the given entry
-                    if(editEntry != null){
+                    if (editEntry != null) {
                         editEntry.setName(ET_CarAddNameValue.getText().toString());
-                        editEntry.setHSNTSN(ET_CarAddHsnTsnValue.getText().toString());
+                        editEntry.setHsntsn(ET_CarAddHsnTsnValue.getText().toString());
                         editEntry.update();
-                    }else{
+                    } else {
                         Car car = new Car();
-                        car.setHSNTSN(ET_CarAddHsnTsnValue.getText().toString());
+                        car.setHsntsn(ET_CarAddHsnTsnValue.getText().toString());
                         car.setName(ET_CarAddNameValue.getText().toString());
                         car.pushToFirebase();
                     }
@@ -116,20 +112,15 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
     }
 
 
-
-
-
-
-
-    protected void setEditEntryValues(){
-            if(editEntry != null){
-                ET_CarAddNameValue.setText(editEntry.getName());
-                ET_CarAddHsnTsnValue.setText(editEntry.getHSNTSN());
-            }else{
-                ET_CarAddHsnTsnValue.setText(key);
-                ET_CarAddNameValue.setText(name);
-            }
+    protected void setEditEntryValues() {
+        if (editEntry != null) {
+            ET_CarAddNameValue.setText(editEntry.getName());
+            ET_CarAddHsnTsnValue.setText(editEntry.getHsntsn());
+        } else {
+            ET_CarAddHsnTsnValue.setText(key);
+            ET_CarAddNameValue.setText(name);
         }
+    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

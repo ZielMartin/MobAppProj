@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == RC_GOOGLE_SIGNIN) {
-            setResult(RESULT_OK, data);
+            setResult(resultCode, data);
             finish();
         } else {
             Log.w(TAG, "unknown onActivityResult(requestCode)");
