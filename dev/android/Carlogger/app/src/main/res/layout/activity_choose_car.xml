@@ -9,6 +9,8 @@
     <android.support.v7.widget.ListViewCompat
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/side_margin"
+        android:layout_marginLeft="@dimen/side_margin"
         android:id="@+id/LV_chooseCar" />
 
 

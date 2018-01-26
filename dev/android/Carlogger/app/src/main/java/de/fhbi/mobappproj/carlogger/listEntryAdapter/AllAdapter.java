@@ -25,7 +25,6 @@ public class AllAdapter extends RecyclerView.Adapter<GenericViewHolder> {
 
     private ArrayList<? extends EntrySuper> entries;
     private Context mContext;
-    private ViewGroup recyclerView;
 
     private static final int TYPE_REMINDER = 1;
     private static final int TYPE_REPAIR = 2;

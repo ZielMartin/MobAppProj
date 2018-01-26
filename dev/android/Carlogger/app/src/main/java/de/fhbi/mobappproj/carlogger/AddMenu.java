@@ -1,5 +1,7 @@
 package de.fhbi.mobappproj.carlogger;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
@@ -47,7 +49,7 @@ public class AddMenu implements View.OnClickListener {
 
     private void init() {
         addMenuButtons();
-        setButtonColor(FragmentType.DEFAULT);
+        setButtonColor();
         menu.setClosedOnTouchOutside(true);
         menu.hideMenuButton(false);
 
@@ -81,7 +83,7 @@ public class AddMenu implements View.OnClickListener {
         fab_addOtherCost = (com.github.clans.fab.FloatingActionButton) caller.findViewById(R.id.fab_addOtherCost);
     }
 
-    public void setButtonColor(FragmentType fragmentType) {
+    public void setButtonColor() {
         //addButton setup should be done in xml (app_bar_main)
 
         fab_addFuel.setColorNormal(caller.getResources().getColor(R.color.colorPrimaryFuel));
@@ -93,29 +95,34 @@ public class AddMenu implements View.OnClickListener {
         fab_addOtherCost.setColorNormal(caller.getResources().getColor(R.color.colorPrimaryOther));
         fab_addOtherCost.setColorPressed(caller.getResources().getColor(R.color.colorAccentOther));
 
-        switch (fragmentType) {
-            case FUEL:
-                setColors(R.color.colorPrimaryFuel, R.color.colorAccentFuel);
-                break;
-            case OTHER:
-                setColors(R.color.colorPrimaryOther, R.color.colorAccentOther);
-                break;
-            case REPAIR:
-                setColors(R.color.colorPrimaryRepair, R.color.colorAccentRepair);
-                break;
-            case REMINDER:
-                setColors(R.color.colorPrimaryReminder, R.color.colorAccentReminder);
-                break;
-            default:
-                setColors(R.color.colorPrimary, R.color.colorAccent);
-                break;
+        FragmentManager fm = caller.getFragmentManager();
+        Fragment curFragment = fm.findFragmentByTag(MainActivity.FRAGMENTTAG);
 
+        if(curFragment != null) {
+            switch (curFragment.getClass().getSimpleName()) {
+                case "FuelFragment":
+                    setColors(R.color.colorPrimaryFuel, R.color.colorAccentFuel);
+                    break;
+                case "OtherFragment":
+                    setColors(R.color.colorPrimaryOther, R.color.colorAccentOther);
+                    break;
+                case "RepairFragment":
+                    setColors(R.color.colorPrimaryRepair, R.color.colorAccentRepair);
+                    break;
+                case "ReminderFragment":
+                    setColors(R.color.colorPrimaryReminder, R.color.colorAccentReminder);
+                    break;
+                default:
+                    setColors(R.color.colorPrimary, R.color.colorAccent);
+                    break;
+            }
+        }else{
+            setColors(R.color.colorPrimary, R.color.colorAccent);
         }
-
 
     }
 
-    private void setColors(int primary, int accent) {
+    public void setColors(int primary, int accent) {
         menu.setMenuButtonColorNormalResId(primary);
         menu.setMenuButtonColorPressedResId(accent);
     }

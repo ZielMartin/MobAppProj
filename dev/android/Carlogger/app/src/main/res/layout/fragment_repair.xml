@@ -15,8 +15,6 @@
         android:id="@+id/fragRepairLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="2dp">
@@ -39,54 +37,49 @@
                     android:id="@+id/totalCostLL"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="100"
+                    android:layout_weight="65"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/TV_RepairTotalCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="@string/repairFragment_allCost" />
 
                     <TextView
                         android:id="@+id/TV_RepairTotalCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="500,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
                 </LinearLayout>
-            </TableRow>
-
-            <View
-                android:id="@+id/dividerLine1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TableRow
-                android:id="@+id/monthCostTR"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorStatsBackground">
 
                 <LinearLayout
                     android:id="@+id/monthCostLL"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="100"
+                    android:layout_weight="35"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/TV_RepairMonthCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="@string/repairFragment_monthCost" />
 
                     <TextView
                         android:id="@+id/TV_RepairMonthCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="100,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -96,10 +89,12 @@
             </TableRow>
 
             <View
-                android:id="@+id/dividerLine2"
+                android:id="@+id/dividerLine1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray" />
+
+
 
             <TableRow
                 android:id="@+id/periodCostTR"
@@ -119,12 +114,16 @@
                         android:id="@+id/TV_RepairPeriodCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="@string/repairFragment_periodCost" />
 
                     <TextView
                         android:id="@+id/TV_RepairPeriodCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="0,00€"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -137,7 +136,8 @@
                         android:id="@+id/BTN_RepairDatePicker"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:background="@drawable/ic_action_calendar"
                         android:theme="@style/AlertDialog.AppCompat.Light" />
                 </FrameLayout>
@@ -191,6 +191,8 @@
                         android:id="@+id/TV_RepairMonthCostOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:layout_marginLeft="@dimen/side_margin"
                         android:text="@string/repairFragment_monthCostOther" />
 
                     <TextView
@@ -231,7 +233,8 @@
             android:id="@+id/RV_RepairFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_grey"
+            android:layout_marginRight="@dimen/side_margin"
+            android:layout_marginLeft="@dimen/side_margin"
             android:nestedScrollingEnabled="false" />
 
 

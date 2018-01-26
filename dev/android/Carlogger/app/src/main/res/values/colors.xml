@@ -10,8 +10,8 @@
     <color name="colorPrimaryRepair">#da4a4d</color>
     <color name="colorAccentRepair">#b13134</color>
 
-    <color name="colorPrimaryReminder">#d7d710</color>
-    <color name="colorAccentReminder">#baba15</color>
+    <color name="colorPrimaryReminder">#ffab40</color>
+    <color name="colorAccentReminder">#d69038</color>
 
     <color name="colorPrimaryOther">#8745d7</color>
     <color name="colorAccentOther">#552b87</color>

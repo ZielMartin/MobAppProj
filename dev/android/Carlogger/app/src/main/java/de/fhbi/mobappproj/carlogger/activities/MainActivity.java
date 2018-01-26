@@ -56,6 +56,7 @@ import de.fhbi.mobappproj.carlogger.fragments.RepairFragment;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
     private static final String TAG = "MainActivity";
     public static final int RC_LOGIN_ACTIVITY = 555;
+    public static final String FRAGMENTTAG = "CurrentFragment";
 
     //Plus-Button for entry adding
     private AddMenu menuAdd;
@@ -63,9 +64,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FragmentManager fragmentManager = getFragmentManager();
     private boolean pressedBackAlready = false;
+    private Fragment curFragment;
 
     private Spinner spinner;
     private ArrayAdapter<Car> dataAdapter;
+
 
     private boolean userIsInteracting;
 
@@ -89,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -144,7 +148,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Log.e(TAG, "failed copying " + file.getAbsolutePath(), e);
         }
 
-        changeFragmentTo(new AllFragment());
+        if(savedInstanceState == null){
+            changeFragmentTo(new AllFragment());
+        }
+
+
     }
 
     private void setUpSpinner(View header) {
@@ -293,29 +301,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_fuel) {
             // Handle the fuel action
             changeFragmentTo(new FuelFragment());
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryFuel));
-            menuAdd.setButtonColor(AddMenu.FragmentType.FUEL);
-            this.setTitle(R.string.fuelFragment_title);
+            menuAdd.setColors(R.color.colorPrimaryFuel, R.color.colorAccentFuel);
         } else if (id == R.id.nav_otherCosts) {
             changeFragmentTo(new OtherCostFragment());
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryOther));
-            menuAdd.setButtonColor(AddMenu.FragmentType.OTHER);
-            this.setTitle(R.string.otherCostFragment_title);
+            menuAdd.setColors(R.color.colorPrimaryOther, R.color.colorAccentOther);
         } else if (id == R.id.nav_reminder) {
             changeFragmentTo(new ReminderFragment());
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryReminder));
-            menuAdd.setButtonColor(AddMenu.FragmentType.REMINDER);
-            this.setTitle(R.string.reminder_fragment_title);
+            menuAdd.setColors(R.color.colorPrimaryReminder, R.color.colorAccentReminder);
         } else if (id == R.id.nav_repair_service) {
             changeFragmentTo(new RepairFragment());
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryRepair));
-            menuAdd.setButtonColor(AddMenu.FragmentType.REPAIR);
-            this.setTitle(R.string.repairFragment_title);
+            menuAdd.setColors(R.color.colorPrimaryRepair, R.color.colorAccentRepair);
         } else if (id == R.id.nav_all) {
             changeFragmentTo(new AllFragment());
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            menuAdd.setButtonColor(AddMenu.FragmentType.DEFAULT);
-            this.setTitle(R.string.nav_all);
+            menuAdd.setColors(R.color.colorPrimary, R.color.colorAccent);
         } else if (id == R.id.loginlogout) {
             if (firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
                 Intent loginIntent = new Intent(this, LoginActivity.class);
@@ -344,10 +342,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void changeFragmentTo(Fragment fragment) {
+
         fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.replace(R.id.MainFrame, fragment);
+        fragmentTransaction.replace(R.id.MainFrame, fragment, FRAGMENTTAG);
 //        fragmentTransaction.addToBackStack(null);
 
 
@@ -402,6 +401,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onClick(View view) {
 
     }
+
+
 
     @Override
     public void onUserInteraction() {

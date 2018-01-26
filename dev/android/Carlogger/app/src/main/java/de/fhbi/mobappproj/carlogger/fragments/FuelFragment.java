@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -26,6 +28,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
@@ -48,6 +51,10 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 
 
     @Override
@@ -61,6 +68,10 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
 
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fuel, container, false);
+
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryFuel));
+        getActivity().setTitle(R.string.fuelFragment_title);
 
 
         Button btn_DatePicker = (Button) v.findViewById(R.id.BTN_FuelDatePicker);
