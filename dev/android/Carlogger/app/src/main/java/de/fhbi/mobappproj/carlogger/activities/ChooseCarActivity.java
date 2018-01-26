@@ -83,6 +83,7 @@ public class ChooseCarActivity extends AppCompatActivity {
     }
 
     private class MyCursorAdapter extends CursorAdapter {
+
         public MyCursorAdapter(Context context, Cursor c) {
             super(context, c, 0);
         }
@@ -90,9 +91,6 @@ public class ChooseCarActivity extends AppCompatActivity {
         @Override
         public View newView(Context context, Cursor cursor, ViewGroup parent) {
             View itemView = LayoutInflater.from(context).inflate(R.layout.list_item_car, parent, false);
-//            itemView.setOnClickListener(view -> {
-//                Log.i(TAG, "Clicked item");
-//            });
             return itemView;
         }
 
@@ -118,8 +116,8 @@ public class ChooseCarActivity extends AppCompatActivity {
 
             TV_ListItemName.setText(name);
             TV_ListItemFuel.setText(context.getString(R.string.car_info_fuel) + kraftstoff);
-            TV_ListItemPower.setText(context.getString(R.string.car_info_power) + ps);
-            TV_ListItemcm3.setText(context.getString(R.string.car_info_cm3) + cm3);
+            TV_ListItemPower.setText(context.getString(R.string.car_info_cm3) + cm3);
+            TV_ListItemcm3.setText(context.getString(R.string.car_info_power) + ps);
             TV_ListItemProductionYears.setText(baujahre);
             TV_ListItemHsn.setText(context.getString(R.string.car_info_hsn) + hsn);
             TV_ListItemTsn.setText(context.getString(R.string.car_info_tsn) + tsn);
@@ -133,14 +131,10 @@ public class ChooseCarActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChooseCarActivity.this, CarAddActivity.class);
                 intent.putExtra("key", key);
                 intent.putExtra("name", name);
+                intent.putExtra("_id", (Integer) v.getTag(R.integer.tag_allCars_id));
                 startActivity(intent);
 
-
-
                 ChooseCarActivity.this.finish();
-
-
-
             });
 
 

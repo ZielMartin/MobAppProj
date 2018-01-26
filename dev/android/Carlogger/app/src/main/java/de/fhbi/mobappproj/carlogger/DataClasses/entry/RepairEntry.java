@@ -4,11 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.Exclude;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
+import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.EntryAccess;
 
 /**
  * Created by Johannes on 21.12.2017.
@@ -45,7 +47,9 @@ public class RepairEntry extends EntrySuper implements Parcelable {
         billPath = re.billPath;
     }
 
-    public void setType(String type){ this.type = type; }
+    public void setType(String type) {
+        this.type = type;
+    }
 
 
     public void setPartCost(double partCost) {
@@ -63,7 +67,7 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     }
 
     public void setBillPath(String billPath) {
-       this.billPath = billPath;
+        this.billPath = billPath;
 
     }
 
@@ -88,12 +92,14 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     }
 
 
-
     @Override
     protected void pushToFirebase() {
         FirebaseAccess access = FirebaseAccess.getInstance();
-        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        access.push("users/" + id + "/cars", this);
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String car_id = CarAccess.getInstance().getCurrentCar().getKey();
+
+        String path = String.format(DataAccess.ENTRY_PATH, user_id, car_id, "");
+        access.push(path, this);
     }
 
     @Override
@@ -104,8 +110,12 @@ public class RepairEntry extends EntrySuper implements Parcelable {
 
     @Override
     public void updateChangesOnFirebase() {
-        //called when entry was modified - save changes on firebase
-        //TODO - fill me
+        FirebaseAccess access = FirebaseAccess.getInstance();
+        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String car_id = CarAccess.getInstance().getCurrentCar().getKey();
+
+        String path = String.format(DataAccess.ENTRY_PATH, user_id, car_id, "");
+        access.update(path, this);
     }
 
 
@@ -113,8 +123,6 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     public void push() {
         pushToFirebase();
     }
-
-
 
 
     protected RepairEntry(Parcel in) {

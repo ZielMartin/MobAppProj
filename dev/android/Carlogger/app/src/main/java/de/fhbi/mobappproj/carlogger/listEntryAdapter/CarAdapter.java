@@ -86,7 +86,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         public void setDataOnView(int position, Car entry) {
             this.entry = entry;
             TV_ListItemCarName.setText(entry.getName());
-            TV_ListItemCarKey.setText(entry.getHSNTSN());
+            TV_ListItemCarKey.setText(entry.getHsntsn());
 
             //configure expanding entry
             setUpExpandable(position);
