@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,6 +26,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -282,24 +284,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_fuel) {
             // Handle the fuel action
             changeFragmentTo(new FuelFragment());
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryFuel));
+            menuAdd.setButtonColor(AddMenu.FragmentType.FUEL);
             this.setTitle(R.string.fuelFragment_title);
         } else if (id == R.id.nav_otherCosts) {
             changeFragmentTo(new OtherCostFragment());
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryOther));
+            menuAdd.setButtonColor(AddMenu.FragmentType.OTHER);
             this.setTitle(R.string.otherCostFragment_title);
         } else if (id == R.id.nav_reminder) {
             changeFragmentTo(new ReminderFragment());
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryReminder));
+            menuAdd.setButtonColor(AddMenu.FragmentType.REMINDER);
             this.setTitle(R.string.reminder_fragment_title);
         } else if (id == R.id.nav_repair_service) {
             changeFragmentTo(new RepairFragment());
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryRepair));
+            menuAdd.setButtonColor(AddMenu.FragmentType.REPAIR);
             this.setTitle(R.string.repairFragment_title);
         } else if (id == R.id.nav_all) {
             changeFragmentTo(new AllFragment());
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            menuAdd.setButtonColor(AddMenu.FragmentType.DEFAULT);
             this.setTitle(R.string.nav_all);
         } else if (id == R.id.loginlogout) {
             if (firebaseAuth.getCurrentUser() == null || firebaseAuth.getCurrentUser().isAnonymous()) {
@@ -319,6 +334,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
             }
+        }else{
+            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

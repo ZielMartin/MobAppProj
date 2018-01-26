@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
+import de.fhbi.mobappproj.carlogger.Helper;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
@@ -63,6 +65,10 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
         //addButton
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabOtherCostCheck);
         fab.setOnClickListener(this);
+        Helper.buttonEffect(fab);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryOther));
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -18,6 +19,7 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.ReminderEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.Helper;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.reminderNotification.AlarmReceiver;
@@ -64,6 +66,10 @@ public class ReminderAddActivity extends AddActivitySuper implements CompoundBut
     protected void initGUIElements() {
         fab = (FloatingActionButton) findViewById(R.id.fabReminderCheck);
         fab.setOnClickListener(this);
+        Helper.buttonEffect(fab);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryReminder));
 
         //set 24h Format
         TP_TimePicker = (TimePicker) findViewById(R.id.TP_ReminderAdd);

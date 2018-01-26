@@ -178,7 +178,9 @@
 
                     </LinearLayout>
 
-                    <FrameLayout android:layout_height="match_parent">
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent">
 
                         <Button
                             android:id="@+id/BTN_FuelConsumptionInfo"

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -20,6 +21,7 @@ import java.util.Arrays;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
+import de.fhbi.mobappproj.carlogger.Helper;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
@@ -73,6 +75,8 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
     @Override
     protected void initGUIElements() {
 
+
+
         SP_RepairAddType = (Spinner) findViewById(R.id.SP_RepairAddType);
 
 
@@ -102,6 +106,10 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
         //addButton
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabRepairCheck);
         fab.setOnClickListener(this);
+        Helper.buttonEffect(fab);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryRepair));
     }
 
     @Override

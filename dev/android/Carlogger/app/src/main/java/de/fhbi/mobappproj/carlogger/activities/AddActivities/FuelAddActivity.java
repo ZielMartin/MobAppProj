@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates.AutoEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.Helper;
 import de.fhbi.mobappproj.carlogger.R;
 
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
@@ -54,6 +56,11 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
     protected void initGUIElements() {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabFuelCheck);
         fab.setOnClickListener(this);
+        Helper.buttonEffect(fab);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimaryFuel));
+
 
         ET_FuelAddCostPerLitre = (EditText) findViewById(R.id.ET_FuelAddCostPerLitre);
         ET_FuelAddCostPerLitre.setOnFocusChangeListener(this);
