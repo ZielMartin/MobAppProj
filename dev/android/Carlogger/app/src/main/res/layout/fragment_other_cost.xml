@@ -8,235 +8,218 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <LinearLayout
-        android:id="@+id/fragOtherLL"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="2dp">
+        >
 
-        <TableLayout
-            android:id="@+id/fragOtherStatsTL"
+        <LinearLayout
+            android:id="@+id/fragOtherLL"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:shrinkColumns="*">
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="2dp">
 
-
-
-            <TableRow
-                android:id="@+id/totalCostTR"
+            <TableLayout
+                android:id="@+id/fragOtherStatsTL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorStatsBackground">
+                android:shrinkColumns="*">
 
-                <LinearLayout
-                    android:id="@+id/totalCostLL"
-                    android:layout_width="0dp"
+
+                <TableRow
+                    android:id="@+id/totalCostTR"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="65"
-                    android:layout_marginRight="@dimen/side_margin"
-                    android:layout_marginLeft="@dimen/side_margin"
-                    android:orientation="vertical">
+                    android:background="@color/colorStatsBackground">
 
-                    <TextView
-                        android:id="@+id/TV_OtherTotalCost"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
+                    <LinearLayout
+                        android:id="@+id/totalCostLL"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/otherCostFragment_allCost" />
-
-                    <TextView
-                        android:id="@+id/TV_OtherTotalCostValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="500,00€"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                        android:layout_weight="65"
+                        android:orientation="vertical">
 
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/TV_OtherTotalCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/otherCostFragment_allCost" />
 
-                <LinearLayout
-                    android:id="@+id/monthCostLL"
-                    android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/TV_OtherTotalCostValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="500,00€"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/monthCostLL"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="35"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/TV_OtherMonthCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/otherCostFragment_monthCost"
+                            android:textAlignment="textEnd" />
+
+                        <TextView
+                            android:id="@+id/TV_OtherMonthCostValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="100,00€"
+                            android:textAlignment="textEnd"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+                    </LinearLayout>
+
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorStatsBackground"/>
+
+                <TableRow
+                    android:id="@+id/periodCostTR"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="35"
-                    android:orientation="vertical">
+                    android:background="@color/colorStatsBackground">
 
-                    <TextView
-                        android:id="@+id/TV_OtherMonthCost"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/otherCostFragment_monthCost" />
+                    <LinearLayout
+                        android:id="@+id/periodCostLL"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="100"
 
-                    <TextView
-                        android:id="@+id/TV_OtherMonthCostValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="100,00€"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/TV_OtherPeriodCost"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/otherCostFragment_periodCost" />
 
-                </LinearLayout>
-
-            </TableRow>
-
-            <View
-                android:id="@+id/dividerLine1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                        <TextView
+                            android:id="@+id/TV_OtherPeriodCostValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="0,00€"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
+                    </LinearLayout>
 
-            <TableRow
-                android:id="@+id/periodCostTR"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorStatsBackground">
+                    <FrameLayout android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:id="@+id/periodCostLL"
-                    android:layout_width="0dp"
+                        <Button
+                            android:id="@+id/BTN_OtherDatePicker"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+
+                            android:background="@drawable/ic_action_calendar"
+                            android:theme="@style/AlertDialog.AppCompat.Light" />
+                    </FrameLayout>
+
+                </TableRow>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/colorStatsBackground"/>
+
+                <View
+                    android:id="@+id/dividerLine5"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@android:color/darker_gray" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@color/colorStatsOtherBackground" />
+
+
+                <TableRow
+                    android:id="@+id/otherMonthCostOtherTR"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="100"
+                    android:background="@color/colorStatsOtherBackground">
 
-                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/otherMonthCostOtherLL"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="100"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/TV_OtherPeriodCost"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/otherCostFragment_periodCost" />
+                        <TextView
+                            android:id="@+id/TV_OtherMonthCostOther"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/otherCostFragment_monthCostOther"
+                            android:textAlignment="center" />
 
-                    <TextView
-                        android:id="@+id/TV_OtherPeriodCostValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="0,00€"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+                        <TextView
+                            android:id="@+id/TV_OtherMonthCostOtherValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="100,00€"
+                            android:textAlignment="center"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
-                </LinearLayout>
+                    </LinearLayout>
 
-                <FrameLayout
-                    android:layout_height="match_parent">
-                    <Button
-                        android:id="@+id/BTN_OtherDatePicker"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                </TableRow>
 
-                        android:background="@drawable/ic_action_calendar"
-                        android:theme="@style/AlertDialog.AppCompat.Light" />
-                </FrameLayout>
 
-            </TableRow>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="@color/colorStatsOtherBackground" />
 
-            <View
-                android:id="@+id/dividerLine3"
+                <View
+                    android:id="@+id/dividerLine6"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@android:color/darker_gray" />
+
+            </TableLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/RV_OtherFragment"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/side_margin"
+                android:layout_marginRight="@dimen/side_margin"
+                android:nestedScrollingEnabled="false" />
 
-
-            <View
-                android:id="@+id/dividerLine4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/colorStatsBackground" />
-
-            <View
-                android:id="@+id/dividerLine5"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@android:color/darker_gray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/colorStatsOtherBackground" />
-
-
-            <TableRow
-                android:id="@+id/otherMonthCostOtherTR"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorStatsOtherBackground">
-
-                <LinearLayout
-                    android:id="@+id/otherMonthCostOtherLL"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="100"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/TV_OtherMonthCostOther"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/otherCostFragment_monthCostOther" />
-
-                    <TextView
-                        android:id="@+id/TV_OtherMonthCostOtherValue"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
-                        android:layout_marginLeft="@dimen/side_margin"
-                        android:text="100,00€"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-
-                </LinearLayout>
-
-            </TableRow>
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/colorStatsOtherBackground" />
-
-            <View
-                android:id="@+id/dividerLine6"
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@android:color/darker_gray" />
-
-        </TableLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/RV_OtherFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/side_margin"
-            android:layout_marginLeft="@dimen/side_margin"
-            android:nestedScrollingEnabled="false" />
-
-    </LinearLayout>
+        </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
 

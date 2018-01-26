@@ -65,17 +65,19 @@
                         android:id="@+id/TV_AllMonthCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/fuelFragment_monthCost" />
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:text="@string/fuelFragment_monthCost"
+                        android:textAlignment="textEnd" />
 
                     <TextView
                         android:id="@+id/TV_AllMonthCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
+                        android:layout_marginRight="@dimen/side_margin"
                         android:text="100,00€"
+                        android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -83,25 +85,14 @@
 
             </TableRow>
 
-            <View
-                android:id="@+id/dividerLine1"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
 
-            <TableRow
-                android:id="@+id/monthCostTR"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorStatsBackground">
 
-            </TableRow>
+
 
             <View
-                android:id="@+id/dividerLine2"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="3dp"
+                android:background="@color/colorStatsBackground"/>
 
             <TableRow
                 android:id="@+id/periodCostTR"
@@ -151,12 +142,11 @@
 
             </TableRow>
 
-
-
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/colorStatsBackground" />
+                android:layout_height="3dp"
+                android:background="@color/colorStatsBackground"/>
+
 
             <View
                 android:id="@+id/dividerLine5"
@@ -166,7 +156,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="6dp"
                 android:background="@color/colorStatsOtherBackground" />
 
 
@@ -187,17 +177,19 @@
                         android:id="@+id/TV_AllMonthCostOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/fuelFragment_monthCostOther" />
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:text="@string/fuelFragment_monthCostOther"
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/TV_AllMonthCostOtherValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
+                        android:layout_marginRight="@dimen/side_margin"
                         android:text="100,00€"
+                        android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -205,17 +197,12 @@
 
             </TableRow>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="6dp"
                 android:background="@color/colorStatsOtherBackground" />
+
 
             <View
                 android:id="@+id/dividerLine6"

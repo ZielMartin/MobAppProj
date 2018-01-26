@@ -69,17 +69,19 @@
                             android:id="@+id/TV_FuelMonthCost"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/side_margin"
                             android:layout_marginLeft="@dimen/side_margin"
-                            android:text="@string/fuelFragment_monthCost" />
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/fuelFragment_monthCost"
+                            android:textAlignment="textEnd" />
 
                         <TextView
                             android:id="@+id/TV_FuelMonthCostValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/side_margin"
                             android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
                             android:text="100,00€"
+                            android:textAlignment="textEnd"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -88,10 +90,9 @@
                 </TableRow>
 
                 <View
-                    android:id="@+id/dividerLine1"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:layout_height="3dp"
+                    android:background="@color/colorStatsBackground"/>
 
 
 
@@ -145,10 +146,9 @@
                 </TableRow>
 
                 <View
-                    android:id="@+id/dividerLine3"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:layout_height="3dp"
+                    android:background="@color/colorStatsBackground"/>
 
                 <TableRow
                     android:id="@+id/fuelConsumptionTR"
@@ -199,15 +199,9 @@
                 </TableRow>
 
                 <View
-                    android:id="@+id/dividerLine4"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"
-                    android:background="@color/colorStatsBackground" />
+                    android:layout_height="3dp"
+                    android:background="@color/colorStatsBackground"/>
 
                 <View
                     android:id="@+id/dividerLine5"
@@ -217,7 +211,7 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="6dp"
                     android:background="@color/colorStatsOtherBackground" />
 
 
@@ -238,17 +232,19 @@
                             android:id="@+id/TV_monthCostOther"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/side_margin"
                             android:layout_marginLeft="@dimen/side_margin"
-                            android:text="@string/fuelFragment_monthCostOther" />
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/fuelFragment_monthCostOther"
+                            android:textAlignment="center" />
 
                         <TextView
                             android:id="@+id/TV_MonthCostOtherValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/side_margin"
                             android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
                             android:text="100,00€"
+                            android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -256,10 +252,12 @@
 
                 </TableRow>
 
+
+
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+                    android:layout_height="10dp"
+                    android:background="@color/colorStatsOtherBackground" />
 
                 <TableRow
                     android:id="@+id/fuelConsumptionOtherTR"
@@ -278,17 +276,19 @@
                             android:id="@+id/TV_FuelConsumptionOther"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/side_margin"
                             android:layout_marginLeft="@dimen/side_margin"
-                            android:text="@string/fuelFragment_fuelConsumptionOther" />
+                            android:layout_marginRight="@dimen/side_margin"
+                            android:text="@string/fuelFragment_fuelConsumptionOther"
+                            android:textAlignment="center" />
 
                         <TextView
                             android:id="@+id/TV_FuelConsumptionOtherValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/side_margin"
                             android:layout_marginLeft="@dimen/side_margin"
+                            android:layout_marginRight="@dimen/side_margin"
                             android:text="9,56"
+                            android:textAlignment="center"
                             android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -296,14 +296,11 @@
 
                 </TableRow>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/darker_gray" />
+
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="6dp"
                     android:background="@color/colorStatsOtherBackground" />
 
                 <View

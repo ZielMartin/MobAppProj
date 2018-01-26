@@ -70,17 +70,19 @@
                         android:id="@+id/TV_RepairMonthCost"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/repairFragment_monthCost" />
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:text="@string/repairFragment_monthCost"
+                        android:textAlignment="textEnd" />
 
                     <TextView
                         android:id="@+id/TV_RepairMonthCostValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
+                        android:layout_marginRight="@dimen/side_margin"
                         android:text="100,00€"
+                        android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -89,10 +91,9 @@
             </TableRow>
 
             <View
-                android:id="@+id/dividerLine1"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+                android:layout_height="3dp"
+                android:background="@color/colorStatsBackground"/>
 
 
 
@@ -145,22 +146,9 @@
             </TableRow>
 
             <View
-                android:id="@+id/dividerLine3"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-
-            <View
-                android:id="@+id/dividerLine4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/colorStatsBackground" />
+                android:layout_height="3dp"
+                android:background="@color/colorStatsBackground"/>
 
             <View
                 android:id="@+id/dividerLine5"
@@ -170,7 +158,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="6dp"
                 android:background="@color/colorStatsOtherBackground" />
 
 
@@ -191,15 +179,17 @@
                         android:id="@+id/TV_RepairMonthCostOther"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/side_margin"
                         android:layout_marginLeft="@dimen/side_margin"
-                        android:text="@string/repairFragment_monthCostOther" />
+                        android:layout_marginRight="@dimen/side_margin"
+                        android:text="@string/repairFragment_monthCostOther"
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/TV_RepairMonthCostOtherValue"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="100,00€"
+                        android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 
@@ -208,17 +198,9 @@
             </TableRow>
 
 
-
-
-
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="6dp"
                 android:background="@color/colorStatsOtherBackground" />
 
             <View
