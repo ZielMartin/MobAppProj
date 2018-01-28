@@ -5,14 +5,16 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
 
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.FuelAddActivity;
-import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAddActivity;
-import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.OtherCostAddActivity;
+import de.fhbi.mobappproj.carlogger.activities.AddActivities.ReminderAddActivity;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAddActivity;
+import de.fhbi.mobappproj.carlogger.activities.MainActivity;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 
 /**
  * Created by Johannes on 06.12.2017.
@@ -64,7 +66,11 @@ public class AddMenu implements View.OnClickListener {
         mUiHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                menu.showMenuButton(true);
+                if (CarAccess.getInstance().getCurrentCar() != null)
+                    menu.showMenuButton(true);
+                else {
+                    Toast.makeText(caller, "Bitte zuerst ein Auto wählen/erstellen", Toast.LENGTH_LONG);
+                }
             }
         }, ANIMATIONDELAY);
     }
@@ -98,7 +104,7 @@ public class AddMenu implements View.OnClickListener {
         FragmentManager fm = caller.getFragmentManager();
         Fragment curFragment = fm.findFragmentByTag(MainActivity.FRAGMENTTAG);
 
-        if(curFragment != null) {
+        if (curFragment != null) {
             switch (curFragment.getClass().getSimpleName()) {
                 case "FuelFragment":
                     setColors(R.color.colorPrimaryFuel, R.color.colorAccentFuel);
@@ -116,7 +122,7 @@ public class AddMenu implements View.OnClickListener {
                     setColors(R.color.colorPrimary, R.color.colorAccent);
                     break;
             }
-        }else{
+        } else {
             setColors(R.color.colorPrimary, R.color.colorAccent);
         }
 

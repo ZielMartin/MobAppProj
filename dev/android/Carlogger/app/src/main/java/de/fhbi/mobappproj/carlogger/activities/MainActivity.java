@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if (currentUser.isAnonymous())
+        if (currentUser != null && currentUser.isAnonymous())
             logoutLogin.setTitle(getString(R.string.login));
         else
             logoutLogin.setTitle(getString(R.string.logout));
