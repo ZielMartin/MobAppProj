@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.Car;
-import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.CarAddActivity;
 

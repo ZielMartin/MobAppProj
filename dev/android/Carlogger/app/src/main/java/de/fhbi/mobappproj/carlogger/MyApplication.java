@@ -5,9 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
-import de.fhbi.mobappproj.carlogger.activities.CarActivity;
 import de.fhbi.mobappproj.carlogger.activities.ChooseCarActivity;
 
 /**

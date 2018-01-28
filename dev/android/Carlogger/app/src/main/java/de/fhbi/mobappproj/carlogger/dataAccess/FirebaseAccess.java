@@ -14,10 +14,10 @@ import com.google.gson.JsonElement;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.Car;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
+import de.fhbi.mobappproj.carlogger.DataClasses.MyList;
 
 /**
  * Created by martin on 08.01.18.
@@ -76,7 +76,7 @@ public class FirebaseAccess implements DataAccess {
     }
 
     @Override
-    public void getAll(String path, List list, Type typeOfT) {
+    public <T> void getAll(String path, MyList<T> list, Type typeOfT) {
         Log.i(TAG, "getAll: " + path);
 
 
@@ -84,20 +84,22 @@ public class FirebaseAccess implements DataAccess {
         target.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Log.i(TAG, "onDataChange: " + path);
+
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     Log.i(TAG, child.getValue().toString());
-//
+
                     Gson gson = new GsonBuilder().create();
                     HashMap<String, Object> val = (HashMap<String, Object>) child.getValue();
                     val.put("key", child.getKey());
 
                     JsonElement jsonElement = gson.toJsonTree(val);
-                    Object instance = gson.fromJson(jsonElement, typeOfT);
-
-                    if (!list.contains(instance))
-                        list.add(instance);
+                    T instance = gson.fromJson(jsonElement, typeOfT);
+                    list.add(instance);
                 }
-                Log.i(TAG, "onDataChange");
+
+                target.removeEventListener(this);
             }
 
             @Override

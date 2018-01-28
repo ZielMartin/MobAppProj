@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,7 +25,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -44,8 +42,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import de.fhbi.mobappproj.carlogger.AddMenu;
-import de.fhbi.mobappproj.carlogger.DataClasses.Car;
-import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
@@ -68,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment curFragment;
 
     private Spinner spinner;
-    private ArrayAdapter<Car> dataAdapter;
+    public ArrayAdapter<Car> dataAdapter;
 
 
     private boolean userIsInteracting;
@@ -167,6 +165,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         spinner.setAdapter(dataAdapter);
 
+        CarList.getInstance().setAdapterToUpdate(dataAdapter);
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userIsInteracting) {
@@ -181,10 +181,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     //TODO - Refresh data. car has changed
                     CarAccess.getInstance().setCurrentCar(car);
 
+                } else {
+                    Log.d(TAG, "user not interacting");
                 }
             }
 
             public void onNothingSelected(AdapterView<?> parent) {
+                Log.i(TAG, "onNothingSelected");
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putLong("SELECTEDCARKEY", 0);

@@ -123,6 +123,7 @@ public class FuelAddActivity extends AddActivitySuper implements CompoundButton.
                         editEntry.updateEntry();
                     }else{
                         FuelEntry fe = new FuelEntry();
+                        FuelEntryList.getInstance().addEntry(fe);
                         fe.setAutoEntry(autoEntry);
                         fe.setCostPerLitre(editTextToDouble(ET_FuelAddCostPerLitre));
                         fe.setFull(CB_FuelAddFull.isChecked());

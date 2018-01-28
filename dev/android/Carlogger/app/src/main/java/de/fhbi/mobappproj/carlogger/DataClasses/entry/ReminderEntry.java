@@ -9,6 +9,9 @@ import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 
 /**
  * Created by Johannes on 15.12.2017.
@@ -16,6 +19,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
 
 public class ReminderEntry extends EntrySuper implements Parcelable {
 
+    private DataAccess dataAccess = FirebaseAccess.getInstance();
 
     // Calendar createTime; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
@@ -23,6 +27,8 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
     private long dateTime;
     private boolean pushNotification;
     private int hoursNotification;
+
+    private String carkey;
 
 
 
@@ -81,24 +87,33 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
         this.hoursNotification = hoursNotification;
     }
 
+    public String getCarkey() {
+        return carkey;
+    }
 
+    public void setCarkey(String carkey) {
+        this.carkey = carkey;
+    }
 
     @Override
     protected void pushToFirebase() {
-        //called when entry was added - add to firebase
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.push(path, this);
     }
 
     @Override
     protected void removeFromFirebase() {
-        //called when entry was deleted - delete on firebase to
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.delete(path);
     }
 
     @Override
     public void updateChangesOnFirebase() {
-        //called when entry was modified - save changes on firebase
-        //TODO - fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.update(path, this);
     }
 
 

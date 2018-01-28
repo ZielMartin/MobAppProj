@@ -8,14 +8,12 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.Car;
-import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.CarAdapter;
 

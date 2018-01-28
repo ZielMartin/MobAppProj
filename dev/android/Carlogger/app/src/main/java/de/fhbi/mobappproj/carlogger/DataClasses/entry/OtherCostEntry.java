@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
+import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 
 /**
  * Created by Johannes on 25.12.2017.
@@ -12,6 +15,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 
 public class OtherCostEntry extends EntrySuper implements Parcelable {
 
+    private DataAccess dataAccess = FirebaseAccess.getInstance();
 
     // Calendar createTime; - in SuperClass
     // AutoEntryDates.AutoEntry autoEntry; - in SuperClass
@@ -21,13 +25,11 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
     public OtherCostEntry(){
         super();
         entryType = entryType.OTHERCOSTENTRY;
-        OtherCostEntryList.getInstance().addEntry(this);
     }
 
     public OtherCostEntry(OtherCostEntry oe){
         super();
         entryType = entryType.OTHERCOSTENTRY;
-        OtherCostEntryList.getInstance().addEntry(this);
 
         autoEntry = oe.autoEntry;
         description = oe.description;
@@ -40,20 +42,23 @@ public class OtherCostEntry extends EntrySuper implements Parcelable {
 
     @Override
     protected void pushToFirebase() {
-        //called when entry was added - add to firebase
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.OTHERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.push(path, this);
     }
 
     @Override
     protected void removeFromFirebase() {
-        //called when entry was deleted - delete on firebase to
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.OTHERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.delete(path);
     }
 
     @Override
     public void updateChangesOnFirebase() {
-        //called when entry was modified - save changes on firebase
-        //TODO - fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.OTHERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.update(path, this);
     }
 
 

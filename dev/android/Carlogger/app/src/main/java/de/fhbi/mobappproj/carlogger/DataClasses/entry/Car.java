@@ -1,9 +1,10 @@
-package de.fhbi.mobappproj.carlogger.DataClasses;
+package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
 import com.google.firebase.database.Exclude;
 
 import java.util.Calendar;
 
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 
@@ -17,16 +18,15 @@ public class Car {
     private String name;
     private long timeKey;
     private String key;
-    private Integer allcars_id = null;
     private DataAccess dataAccess = null;
 
     public Car() {
         timeKey = Calendar.getInstance().getTimeInMillis();
-        CarList.getInstance().getCars().add(this);
+
         dataAccess = FirebaseAccess.getInstance();
     }
 
-    public void removeCar(){
+    public void removeCar() {
         CarList.getInstance().getCars().remove(this);
     }
 
@@ -42,17 +42,17 @@ public class Car {
         this.name = name;
     }
 
-    public void pushToFirebase(){
+    public void pushToFirebase() {
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), "");
         dataAccess.push(path, this);
     }
 
-    public void update(){
+    public void update() {
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), this.getKey());
         dataAccess.update(path, this);
     }
 
-    public void remove(){
+    public void remove() {
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), this.getKey());
         dataAccess.delete(path);
 
@@ -66,7 +66,7 @@ public class Car {
             return false;
         }
         Car other = (Car) o;
-        return this.hsntsn == other.hsntsn;
+        return this.timeKey == other.timeKey;
 //        return this.getKey() == other.getKey();
     }
 
@@ -76,16 +76,8 @@ public class Car {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.getName();
-    }
-
-    public Integer getAllcars_id() {
-        return allcars_id;
-    }
-
-    public void setAllcars_id(Integer allcars_id) {
-        this.allcars_id = allcars_id;
     }
 
     public String getHsntsn() {

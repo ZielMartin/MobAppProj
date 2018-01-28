@@ -94,6 +94,7 @@ public class AllEntryList extends EntryListSuper {
                     case FUELENTRY:
                         FuelEntry fe = (FuelEntry) entry;
                         FuelEntry newFe = new FuelEntry(fe);
+                        FuelEntryList.getInstance().addEntry(newFe);
                         newFe.setLastEntry(i == calList.size() - 1);
                         newFe.editCreateTimeCalendar(calList.get(i));
                         newFe.push();
@@ -102,6 +103,7 @@ public class AllEntryList extends EntryListSuper {
                     case REPAIRENTRY:
                         RepairEntry re = (RepairEntry) entry;
                         RepairEntry newRe = new RepairEntry(re);
+                        RepairEntryList.getInstance().addEntry(newRe);
                         newRe.setLastEntry(i == calList.size() - 1);
                         newRe.editCreateTimeCalendar(calList.get(i));
                         newRe.push();
@@ -111,6 +113,7 @@ public class AllEntryList extends EntryListSuper {
                     case OTHERCOSTENTRY:
                         OtherCostEntry oe = (OtherCostEntry) entry;
                         OtherCostEntry newOe = new OtherCostEntry(oe);
+                        OtherCostEntryList.getInstance().addEntry(newOe);
                         newOe.setLastEntry(i == calList.size() - 1);
                         newOe.editCreateTimeCalendar(calList.get(i));
                         newOe.push();

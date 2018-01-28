@@ -4,14 +4,15 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
-import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
+import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 
 /**
  * Created by Johannes on 16.12.2017.
  */
 
 public class FuelEntry extends EntrySuper implements Parcelable {
-
 
 
     // Calendar createTime; - in SuperClass
@@ -21,11 +22,12 @@ public class FuelEntry extends EntrySuper implements Parcelable {
     private double km;
     private boolean full;
 
+    private DataAccess dataAccess = FirebaseAccess.getInstance();
+
 
     public FuelEntry() {
         super();
         entryType = entryType.FUELENTRY;
-        FuelEntryList.getInstance().addEntry(this);
         amount = 0;
         costPerLitre = 0;
     }
@@ -33,7 +35,6 @@ public class FuelEntry extends EntrySuper implements Parcelable {
     public FuelEntry(FuelEntry fe) {
         super();
         entryType = entryType.FUELENTRY;
-        FuelEntryList.getInstance().addEntry(this);
         autoEntry = fe.autoEntry;
         amount = fe.amount;
         costPerLitre = fe.costPerLitre;
@@ -57,17 +58,16 @@ public class FuelEntry extends EntrySuper implements Parcelable {
     }
 
 
-
     public void setAmount(double amount) {
         this.amount = amount;
-        if(costPerLitre != 0){
+        if (costPerLitre != 0) {
             cost = amount * costPerLitre;
         }
     }
 
     public void setCostPerLitre(double costPerLitre) {
         this.costPerLitre = costPerLitre;
-        if(amount != 0){
+        if (amount != 0) {
             cost = amount * costPerLitre;
         }
     }
@@ -81,24 +81,25 @@ public class FuelEntry extends EntrySuper implements Parcelable {
     }
 
 
-
-
     @Override
     protected void pushToFirebase() {
-        //called when entry was added - add to firebase
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.push(path, this);
     }
 
     @Override
     protected void removeFromFirebase() {
-        //called when entry was deleted - delete on firebase to
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.delete(path);
     }
 
     @Override
     public void updateChangesOnFirebase() {
-        //called when entry was modified - save changes on firebase
-        //TODO - fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.update(path, this);
     }
 
 

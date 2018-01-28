@@ -7,8 +7,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import de.fhbi.mobappproj.carlogger.DataClasses.Car;
-import de.fhbi.mobappproj.carlogger.DataClasses.CarList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.R;
 
 
@@ -96,6 +96,8 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
                         editEntry.update();
                     } else {
                         Car car = new Car();
+                        CarList.getInstance().getCars().add(car);
+
                         car.setHsntsn(ET_CarAddHsnTsnValue.getText().toString());
                         car.setName(ET_CarAddNameValue.getText().toString());
                         car.pushToFirebase();

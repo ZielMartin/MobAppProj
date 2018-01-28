@@ -3,14 +3,10 @@ package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import de.fhbi.mobappproj.carlogger.DataClasses.AutoEntryDates;
-import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
-import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.EntryAccess;
 
 /**
  * Created by Johannes on 21.12.2017.
@@ -27,17 +23,17 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     private String description;
     private String billPath;
 
+    private DataAccess dataAccess = FirebaseAccess.getInstance();
+
 
     public RepairEntry() {
         super();
         entryType = entryType.REPAIRENTRY;
-        RepairEntryList.getInstance().addEntry(this);
     }
 
     public RepairEntry(RepairEntry re) {
         super();
         entryType = entryType.REPAIRENTRY;
-        RepairEntryList.getInstance().addEntry(this);
 
         autoEntry = re.autoEntry;
         type = re.type;
@@ -92,30 +88,26 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     }
 
 
+
     @Override
     protected void pushToFirebase() {
-        FirebaseAccess access = FirebaseAccess.getInstance();
-        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String car_id = CarAccess.getInstance().getCurrentCar().getKey();
-
-        String path = String.format(DataAccess.ENTRY_PATH, user_id, car_id, "");
-        access.push(path, this);
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.push(path, this);
     }
 
     @Override
     protected void removeFromFirebase() {
-        //called when entry was deleted - delete on firebase to
-        //TODO fill me
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.delete(path);
     }
 
     @Override
     public void updateChangesOnFirebase() {
-        FirebaseAccess access = FirebaseAccess.getInstance();
-        String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String car_id = CarAccess.getInstance().getCurrentCar().getKey();
-
-        String path = String.format(DataAccess.ENTRY_PATH, user_id, car_id, "");
-        access.update(path, this);
+        Car currentCar = CarAccess.getInstance().getCurrentCar();
+        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        dataAccess.update(path, this);
     }
 
 

@@ -112,6 +112,7 @@ public class OtherCostAddActivity extends AddActivitySuper implements CompoundBu
 
                     }else{
                         OtherCostEntry entry = new OtherCostEntry();
+                        OtherCostEntryList.getInstance().addEntry(entry);
                         entry.setCost(editTextToDouble(ET_OtherCostCost));
                         entry.setDescription(ET_OtherCostDescription.getText().toString());
                         entry.setAutoEntry(autoEntry);

@@ -178,6 +178,7 @@ public class RepairAddActivity extends AddActivitySuper implements CompoundButto
                     }else {
                         //Create Entry and fill in Data
                         RepairEntry entry = new RepairEntry();
+                        RepairEntryList.getInstance().addEntry(entry);
                         entry.setType(SP_RepairAddType.getSelectedItem().toString());
                         entry.setAutoEntry(autoEntry);
                         entry.setBillPath(image != null ? image.getAbsolutePath() : null);
