@@ -57,7 +57,7 @@ public class Car {
         DataAccess dataAccess = FirebaseAccess.getInstance();
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), this.getKey());
         dataAccess.delete(path);
-        
+
 
         CarList.getInstance().getCars().remove(this);
     }

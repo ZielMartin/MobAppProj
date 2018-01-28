@@ -3,7 +3,6 @@ package de.fhbi.mobappproj.carlogger.DataClasses.list;
 import android.util.Log;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
-import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
@@ -37,7 +36,7 @@ public class RepairEntryList extends EntryListSuper<RepairEntry> {
         if (currentCar != null) {
             DataAccess dataAccess = FirebaseAccess.getInstance();
             String path = String.format(DataAccess.REPAIRENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
-            dataAccess.getAll(path, this, FuelEntry.class);
+            dataAccess.getAll(path, this, RepairEntry.class);
         }
 
         return false;

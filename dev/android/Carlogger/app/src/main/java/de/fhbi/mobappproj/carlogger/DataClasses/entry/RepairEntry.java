@@ -92,21 +92,21 @@ public class RepairEntry extends EntrySuper implements Parcelable {
     @Override
     protected void pushToFirebase() {
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        String path = String.format(DataAccess.REPAIRENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
         dataAccess.push(path, this);
     }
 
     @Override
     protected void removeFromFirebase() {
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        String path = String.format(DataAccess.REPAIRENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
         dataAccess.delete(path);
     }
 
     @Override
     public void updateChangesOnFirebase() {
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        String path = String.format(DataAccess.REPAIRENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
         dataAccess.update(path, this);
     }
 
