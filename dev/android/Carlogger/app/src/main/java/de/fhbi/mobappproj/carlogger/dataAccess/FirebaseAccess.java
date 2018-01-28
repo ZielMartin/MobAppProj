@@ -20,6 +20,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.MyList;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 
 /**
@@ -102,6 +103,7 @@ public class FirebaseAccess implements DataAccess {
                     list.add(instance);
                     list.notifyAdapter();
                     AllEntryList.getInstance().getInstance().notifyAdapter();
+                    CarList.getInstance().notifyAdapter();
                 }
                 target.removeEventListener(this);
             }

@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.DataSetObserver;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
@@ -13,6 +14,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+
+import com.google.gson.Gson;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
@@ -60,35 +63,27 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
 
         this.setOnItemSelectedListener(this);
 
-        /*
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String selected = prefs.getString("SELECTEDCARKEY", "");
-        int index = 0;
 
-        for(Car car : CarList.getInstance().getCars()){
-            Log.d("kjdfus", car.getName());
-            if(car.getKey().equals(selected)){
-                this.setSelection(index);
+
+
+        CarSelectSpinner spinner = this;
+        spinnerDataAdapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+                Gson gson = new Gson();
+                String json = preferences.getString("SelectedCar", "");
+                Car selectedCar = gson.fromJson(json, Car.class);
+                int index = CarList.getInstance().getCars().indexOf(selectedCar);
+                Log.d("kjsdhrgiu", index+"");
+                spinner.setSelection(index);
             }
-            index++;
-        }
-        */
+        });
+
 
     }
 
-    public void updateSpinner() {
-
-/*
-        int index = 0;
-        for(Car car : CarList.getInstance().getCars()){
-            if(car.equals(CarAccess.getInstance().getCurrentCar())){
-                this.setSelection(index);
-            }
-            index++;
-        }*/
-        spinnerDataAdapter.notifyDataSetChanged();
-
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

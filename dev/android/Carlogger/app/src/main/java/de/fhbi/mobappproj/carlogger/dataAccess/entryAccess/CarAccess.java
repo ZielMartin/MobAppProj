@@ -43,7 +43,6 @@ public class CarAccess {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor prefsEditor = preferences.edit();
 
-
         if(currentCar != null){
             Gson gson = new Gson();
             String json = gson.toJson(currentCar);

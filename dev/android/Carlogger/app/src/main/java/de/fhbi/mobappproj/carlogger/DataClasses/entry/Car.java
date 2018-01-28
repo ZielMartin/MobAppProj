@@ -58,7 +58,6 @@ public class Car {
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), this.getKey());
         dataAccess.delete(path);
 
-
         CarList.getInstance().getCars().remove(this);
     }
 
@@ -69,8 +68,7 @@ public class Car {
             return false;
         }
         Car other = (Car) o;
-        return this.key == other.key;
-//        return this.getKey() == other.getKey();
+        return this.key.equals(other.key);
     }
 
     @Override

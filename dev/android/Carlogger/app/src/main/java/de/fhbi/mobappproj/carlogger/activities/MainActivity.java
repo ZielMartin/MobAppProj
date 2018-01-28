@@ -124,19 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             changeFragmentTo(new AllFragment());
         }
 
-
-
-
     }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        spinner.updateSpinner();
-
-    }
-
 
     @Override
     public void onBackPressed() {

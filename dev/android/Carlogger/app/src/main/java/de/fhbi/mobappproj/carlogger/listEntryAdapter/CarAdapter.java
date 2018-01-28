@@ -1,6 +1,8 @@
 package de.fhbi.mobappproj.carlogger.listEntryAdapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -129,9 +131,32 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             BTN_CarDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    entry.remove();
-                    callback.notifyDataSetChanged();
-                    mExpandedPosition = -1;
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(mContext);
+                    builder1.setMessage("ACHTUNG! alle Einträge zu diesem Auto werden entfernt!\nWirklich Löschen?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Ja",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    entry.remove();
+                                    callback.notifyDataSetChanged();
+                                    mExpandedPosition = -1;
+                                    dialog.cancel();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Nein",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+
                 }
             });
         }
