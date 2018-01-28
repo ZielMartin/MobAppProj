@@ -1,8 +1,6 @@
 package de.fhbi.mobappproj.carlogger;
 
 import android.app.Fragment;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,7 +18,7 @@ public class DatePickerAlert implements DatePickerDialog.OnDateSetListener {
 
     private Button callingBTN;
     private Fragment callingFragment;
-    private DatePickerDialogUserInterface callerFragmentInterface;
+    private DatePickerDialogInterface callerFragmentInterface;
     private TextView callingTextview;
 
     /**
@@ -32,7 +30,7 @@ public class DatePickerAlert implements DatePickerDialog.OnDateSetListener {
     public DatePickerAlert(Button callingBTN, Fragment callingFragment, TextView callingTextview){
         this.callingFragment = callingFragment;
         this.callingTextview = callingTextview;
-        callerFragmentInterface = (DatePickerDialogUserInterface) callingFragment;
+        callerFragmentInterface = (DatePickerDialogInterface) callingFragment;
         show();
     }
 

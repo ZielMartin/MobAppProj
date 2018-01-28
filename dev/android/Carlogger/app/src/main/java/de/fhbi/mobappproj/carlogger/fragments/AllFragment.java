@@ -21,7 +21,7 @@ import java.util.Calendar;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
-import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
+import de.fhbi.mobappproj.carlogger.DatePickerDialogInterface;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.AllAdapter;
 
@@ -29,7 +29,7 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class AllFragment extends Fragment implements View.OnClickListener, DatePickerDialogUserInterface {
+public class AllFragment extends Fragment implements View.OnClickListener, DatePickerDialogInterface {
 
 
 

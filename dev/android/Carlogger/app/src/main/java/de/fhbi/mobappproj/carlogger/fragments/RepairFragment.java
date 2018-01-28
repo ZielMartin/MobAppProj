@@ -22,7 +22,7 @@ import java.util.Calendar;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
-import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
+import de.fhbi.mobappproj.carlogger.DatePickerDialogInterface;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.RepairAdapter;
 
@@ -30,7 +30,7 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialogUserInterface {
+public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialogInterface {
 
     private OnFragmentInteractionListener mListener;
 

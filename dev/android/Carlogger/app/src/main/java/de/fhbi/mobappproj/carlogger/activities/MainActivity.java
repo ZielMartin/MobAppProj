@@ -4,10 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,10 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -42,10 +38,10 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import de.fhbi.mobappproj.carlogger.AddMenu;
+import de.fhbi.mobappproj.carlogger.CarSelectSpinner;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
 import de.fhbi.mobappproj.carlogger.fragments.FuelFragment;
 import de.fhbi.mobappproj.carlogger.fragments.OtherCostFragment;
@@ -63,12 +59,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private FragmentManager fragmentManager = getFragmentManager();
     private boolean pressedBackAlready = false;
-    private Fragment curFragment;
 
-    private Spinner spinner;
-    public ArrayAdapter<Car> dataAdapter;
-
-
+    private CarSelectSpinner spinner;
     private boolean userIsInteracting;
 
 
@@ -122,135 +114,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         View header = navigationView.getHeaderView(0);
 
-        setUpSpinner(header);
-
-
+        spinner = (CarSelectSpinner) header.findViewById(R.id.SP_HeaderMain);
+        spinner.setUpSpinner();
 
 
         Button button_chooseCar = header.findViewById(R.id.button_chooseCar);
-        button_chooseCar.setOnClickListener(view -> {
-            Intent intent = new Intent(this, CarActivity.class);
-            startActivity(intent);
-        });
+        button_chooseCar.setOnClickListener(this);
 
-
-        File file = getDatabasePath("cars.sqlite");
-        File dir = file.getParentFile();
-        try {
-            if (dir.mkdirs() || dir.isDirectory()) {
-                CopyRAWtoSDCard(R.raw.all_cars, file.getAbsolutePath());
-                Log.v(TAG, "successfully copied " + file.getAbsolutePath());
-            } else {
-                Log.e(TAG, "!mkdirs()" + dir.getAbsolutePath());
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "failed copying " + file.getAbsolutePath(), e);
-        }
-
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             changeFragmentTo(new AllFragment());
         }
 
 
+
+
     }
 
-    private void setUpSpinner(View header) {
-        spinner = (Spinner) header.findViewById(R.id.SP_HeaderMain);
-
-
-        dataAdapter = new ArrayAdapter<Car>(this,
-                android.R.layout.simple_spinner_item, CarList.getInstance().getCars());
-
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinner.setAdapter(dataAdapter);
-
-        CarList.getInstance().setAdapterToUpdate(dataAdapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userIsInteracting) {
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    Car car = CarList.getInstance().getCars().get(position);
-                    editor.putLong("SELECTEDCARKEY", car.getTimeKey());
-                    editor.apply();
-
-                    Log.d("SELECTEDCARKEY", car.getName());
-
-                    //TODO - Refresh data. car has changed
-                    CarAccess.getInstance().setCurrentCar(car);
-
-                } else {
-                    Log.d(TAG, "user not interacting");
-                }
-            }
-
-            public void onNothingSelected(AdapterView<?> parent) {
-                Log.i(TAG, "onNothingSelected");
-                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putLong("SELECTEDCARKEY", 0);
-                editor.apply();
-
-                Log.d("SELECTEDCARKEY", "0");
-            }
-        });
-
-
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        long selected = prefs.getLong("SELECTEDCARKEY", 0);
-
-
-        for(Car car : CarList.getInstance().getCars()){
-            if(car.getTimeKey() == selected){
-                spinner.setSelection(CarList.getInstance().getCars().indexOf(car), true);
-
-            }
-        }
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        dataAdapter.notifyDataSetChanged();
-
-        checkSharedPref();
-
+        spinner.updateSpinner(userIsInteracting);
 
     }
 
-    private void checkSharedPref() {
-        //sometimes setOnItemSelectedListener() doesnt fire, check if right car is selected
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        long selected = prefs.getLong("SELECTEDCARKEY", 0);
-        boolean found = false;
-        if(spinner.getSelectedItem() != null){
-            for(Car car : CarList.getInstance().getCars()){
-                if(car.getTimeKey() == selected){
-                    found = true;
-                }
-            }
-            if(!found) {
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putLong("SELECTEDCARKEY", selected);
-                editor.apply();
-
-                Log.d("SELECTEDCARKEY", selected + "");
-            }
-        }
-    }
 
     @Override
     public void onBackPressed() {
@@ -271,31 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
 
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
@@ -338,7 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
             }
-        }else{
+        } else {
             toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
@@ -353,8 +216,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.MainFrame, fragment, FRAGMENTTAG);
-//        fragmentTransaction.addToBackStack(null);
-
 
         fragmentTransaction.commit();
         Log.v(TAG, "fragment switched to " + fragment.getClass());
@@ -405,9 +266,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.button_chooseCar:
+                Intent intent = new Intent(this, CarActivity.class);
+                startActivity(intent);
+        }
     }
-
 
 
     @Override
@@ -416,18 +280,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         userIsInteracting = true;
     }
 
-    private void CopyRAWtoSDCard(int id, String path) throws IOException {
-        InputStream in = getResources().openRawResource(id);
-        FileOutputStream out = new FileOutputStream(path);
-        byte[] buff = new byte[1024];
-        int read = 0;
-        try {
-            while ((read = in.read(buff)) > 0) {
-                out.write(buff, 0, read);
-            }
-        } finally {
-            in.close();
-            out.close();
-        }
-    }
+
 }

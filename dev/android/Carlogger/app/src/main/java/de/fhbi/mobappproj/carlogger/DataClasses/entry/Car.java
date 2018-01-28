@@ -16,13 +16,10 @@ public class Car {
 
     private String hsntsn;
     private String name;
-    private long timeKey;
     private String key;
     private DataAccess dataAccess = null;
 
     public Car() {
-        timeKey = Calendar.getInstance().getTimeInMillis();
-
         dataAccess = FirebaseAccess.getInstance();
     }
 
@@ -30,9 +27,6 @@ public class Car {
         CarList.getInstance().getCars().remove(this);
     }
 
-    public long getTimeKey() {
-        return timeKey;
-    }
 
     public String getName() {
         return name;
@@ -66,7 +60,7 @@ public class Car {
             return false;
         }
         Car other = (Car) o;
-        return this.timeKey == other.timeKey;
+        return this.key == other.key;
 //        return this.getKey() == other.getKey();
     }
 

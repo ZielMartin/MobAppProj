@@ -30,7 +30,7 @@
         android:text="@string/add_edit_car"
         android:textSize="@dimen/text_size_big" />
 
-    <Spinner
+    <de.fhbi.mobappproj.carlogger.CarSelectSpinner
         android:id="@+id/SP_HeaderMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

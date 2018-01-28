@@ -19,22 +19,20 @@ import android.widget.TextView;
 import android.app.AlertDialog;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
-import de.fhbi.mobappproj.carlogger.DatePickerDialogUserInterface;
+import de.fhbi.mobappproj.carlogger.DatePickerDialogInterface;
 import de.fhbi.mobappproj.carlogger.R;
-import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
 
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
-public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialogUserInterface {
+public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialogInterface {
 
     private OnFragmentInteractionListener mListener;
 

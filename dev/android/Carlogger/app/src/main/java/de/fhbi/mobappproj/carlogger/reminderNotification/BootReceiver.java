@@ -21,9 +21,6 @@ public class BootReceiver extends BroadcastReceiver {
 
         ReminderEntryList.getInstance().getAllEntriesFromFirebase();
 
-
-
-
         for (ReminderEntry reminder : ReminderEntryList.getInstance().getAllEntries()) {
             if(reminder.isPushNotification()) {
                 Intent alarmIntent = new Intent(context, AlarmReceiver.class);
