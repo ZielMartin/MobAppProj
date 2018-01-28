@@ -1,11 +1,14 @@
 package de.fhbi.mobappproj.carlogger.DataClasses.list;
 
+import android.support.v7.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.MyList;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.GenericViewHolder;
 
 /**
  * Each Class that represents an Entry-list has to use these Methods
@@ -17,10 +20,13 @@ import de.fhbi.mobappproj.carlogger.DataClasses.MyList;
  */
 
 
-public abstract class EntryListSuper<EntryType extends EntrySuper> implements MyList<EntryType> {
+public abstract class EntryListSuper<EntryType extends EntrySuper, AdapterType extends RecyclerView.Adapter<? extends GenericViewHolder>> implements MyList<EntryType> {
 
 
     protected ArrayList<EntryType> allEntries;
+
+    AdapterType adapterToUpdate = null;
+
 
 
     public EntryListSuper() {
@@ -87,10 +93,22 @@ public abstract class EntryListSuper<EntryType extends EntrySuper> implements My
         allEntries.clear();
     }
 
+    public void setAdapterToUpdate(AdapterType adapterToUpdate) {
+        this.adapterToUpdate = adapterToUpdate;
+    }
+
     @Override
     public void add(EntryType item) {
         if (!this.allEntries.contains(item)) {
             this.addEntry(item);
+
+        }
+    }
+
+    @Override
+    public void notifyAdapter(){
+        if(adapterToUpdate != null){
+            adapterToUpdate.notifyDataSetChanged();
         }
     }
 }

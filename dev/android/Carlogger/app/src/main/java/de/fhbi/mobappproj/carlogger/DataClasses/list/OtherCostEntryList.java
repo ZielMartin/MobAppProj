@@ -6,12 +6,13 @@ import de.fhbi.mobappproj.carlogger.DataClasses.entry.OtherCostEntry;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.OtherCostAdapter;
 
 /**
  * Created by Johannes on 25.12.2017.
  */
 
-public class OtherCostEntryList extends EntryListSuper<OtherCostEntry> {
+public class OtherCostEntryList extends EntryListSuper<OtherCostEntry, OtherCostAdapter> {
 
     //Singleton Instance
     private static final OtherCostEntryList ourInstance = new OtherCostEntryList();
@@ -35,6 +36,7 @@ public class OtherCostEntryList extends EntryListSuper<OtherCostEntry> {
             String path = String.format(DataAccess.OTHERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
             dataAccess.getAll(path, this, OtherCostEntry.class);
         }
+
 
         return false;
     }

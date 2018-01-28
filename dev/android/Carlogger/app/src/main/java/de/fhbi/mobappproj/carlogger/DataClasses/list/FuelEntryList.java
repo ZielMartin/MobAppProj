@@ -10,12 +10,13 @@ import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
 
 /**
  * Created by Johannes on 16.12.2017.
  */
 
-public class FuelEntryList extends EntryListSuper<FuelEntry> {
+public class FuelEntryList extends EntryListSuper<FuelEntry,FuelAdapter> {
 
     private static final String TAG = FuelEntryList.class.getSimpleName();
 
@@ -43,6 +44,7 @@ public class FuelEntryList extends EntryListSuper<FuelEntry> {
             String path = String.format(DataAccess.FUELENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
             dataAccess.getAll(path, this, FuelEntry.class);
         }
+
 
         return false;
     }

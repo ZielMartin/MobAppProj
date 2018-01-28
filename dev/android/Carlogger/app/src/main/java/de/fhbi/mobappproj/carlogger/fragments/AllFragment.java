@@ -29,14 +29,14 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class AllFragment extends Fragment implements View.OnClickListener, DatePickerDialogInterface {
+public class AllFragment extends FragmentSuper implements View.OnClickListener, DatePickerDialogInterface {
 
 
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recyclerView;
-    private AllAdapter mAdapter;
+
 
     private ArrayList<EntrySuper> entryList;
 
@@ -84,6 +84,16 @@ public class AllFragment extends Fragment implements View.OnClickListener, DateP
 
         // specify an adapter
         mAdapter = new AllAdapter(getActivity(), entryList);
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setStatValues();
+            }
+
+        });
+        AllEntryList.getInstance().setAdapterToUpdate(mAdapter);
+
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -110,8 +120,8 @@ public class AllFragment extends Fragment implements View.OnClickListener, DateP
         mAdapter.notifyDataSetChanged();
         setStatValues();
     }
-
-    private void setStatValues() {
+    @Override
+    protected void setStatValues() {
         TV_AllTotalCostValue.setText(doubleToString(AllEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
         TV_AllMonthCostValue.setText(doubleToString(AllEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
     }

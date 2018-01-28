@@ -32,12 +32,11 @@ import de.fhbi.mobappproj.carlogger.listEntryAdapter.FuelAdapter;
 import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
-public class FuelFragment extends Fragment implements OnClickListener, DatePickerDialogInterface {
+public class FuelFragment extends FragmentSuper<FuelAdapter> implements OnClickListener, DatePickerDialogInterface {
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recyclerView;
-    private FuelAdapter mAdapter;
 
     private ArrayList<FuelEntry> entryList;
 
@@ -93,7 +92,8 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
         return v;
     }
 
-    private void setStatValues() {
+    @Override
+    protected void setStatValues() {
 
         TV_FuelTotalCostValue.setText(doubleToString(FuelEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
         TV_FuelMonthCostValue.setText(doubleToString(FuelEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
@@ -112,6 +112,15 @@ public class FuelFragment extends Fragment implements OnClickListener, DatePicke
 
         // specify an adapter
         mAdapter = new FuelAdapter(getActivity(),entryList);
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setStatValues();
+
+            }
+        });
+        FuelEntryList.getInstance().setAdapterToUpdate(mAdapter);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);

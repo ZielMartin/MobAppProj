@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.OtherCostEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.DatePickerAlert;
 import de.fhbi.mobappproj.carlogger.DatePickerDialogInterface;
@@ -30,12 +32,11 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class RepairFragment extends Fragment implements View.OnClickListener, DatePickerDialogInterface {
+public class RepairFragment extends FragmentSuper<RepairAdapter> implements View.OnClickListener, DatePickerDialogInterface {
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recyclerView;
-    private RepairAdapter mAdapter;
 
     private ArrayList<RepairEntry> entryList;
 
@@ -83,6 +84,16 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
 
         // specify an adapter
         mAdapter = new RepairAdapter(getActivity(),entryList);
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setStatValues();
+            }
+
+        });
+        RepairEntryList.getInstance().setAdapterToUpdate(mAdapter);
+
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -103,8 +114,8 @@ public class RepairFragment extends Fragment implements View.OnClickListener, Da
         setStatValues();
 
     }
-
-    private void setStatValues() {
+    @Override
+    protected void setStatValues() {
         TV_RepairTotalCostValue.setText(doubleToString(RepairEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
         TV_RepairMonthCostValue.setText(doubleToString(RepairEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
     }

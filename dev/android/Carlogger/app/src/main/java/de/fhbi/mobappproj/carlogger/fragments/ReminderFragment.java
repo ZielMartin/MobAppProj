@@ -22,12 +22,11 @@ import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.listEntryAdapter.ReminderAdapter;
 
 
-public class ReminderFragment extends Fragment {
+public class ReminderFragment extends FragmentSuper<ReminderAdapter> {
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recyclerView;
-    private ReminderAdapter mAdapter;
 
 
     public ReminderFragment() {
@@ -49,6 +48,8 @@ public class ReminderFragment extends Fragment {
 
         // specify an adapter
         mAdapter = new ReminderAdapter(getActivity(),entryList);
+        ReminderEntryList.getInstance().setAdapterToUpdate(mAdapter);
+
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -60,6 +61,8 @@ public class ReminderFragment extends Fragment {
 
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

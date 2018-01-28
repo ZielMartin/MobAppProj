@@ -30,12 +30,11 @@ import static de.fhbi.mobappproj.carlogger.Helper.buttonEffect;
 import static de.fhbi.mobappproj.carlogger.Helper.doubleToString;
 
 
-public class OtherCostFragment extends Fragment implements View.OnClickListener, DatePickerDialogInterface {
+public class OtherCostFragment extends FragmentSuper<OtherCostAdapter> implements View.OnClickListener, DatePickerDialogInterface {
 
     private OnFragmentInteractionListener mListener;
 
     private RecyclerView recyclerView;
-    private OtherCostAdapter mAdapter;
 
     private ArrayList<OtherCostEntry> entryList;
 
@@ -83,6 +82,15 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener,
 
         // specify an adapter
         mAdapter = new OtherCostAdapter(getActivity(),entryList);
+        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                setStatValues();
+
+            }
+        });
+        OtherCostEntryList.getInstance().setAdapterToUpdate(mAdapter);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
@@ -143,7 +151,8 @@ public class OtherCostFragment extends Fragment implements View.OnClickListener,
 
     }
 
-    private void setStatValues() {
+    @Override
+    protected void setStatValues() {
         TV_OtherTotalCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
         TV_OtherMonthCostValue.setText(doubleToString(OtherCostEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
     }

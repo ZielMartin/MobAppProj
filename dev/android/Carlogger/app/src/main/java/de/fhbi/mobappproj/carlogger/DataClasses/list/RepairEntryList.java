@@ -7,12 +7,13 @@ import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
+import de.fhbi.mobappproj.carlogger.listEntryAdapter.RepairAdapter;
 
 /**
  * Created by Johannes on 21.12.2017.
  */
 
-public class RepairEntryList extends EntryListSuper<RepairEntry> {
+public class RepairEntryList extends EntryListSuper<RepairEntry, RepairAdapter> {
 
     private static final String TAG = RepairEntryList.class.getSimpleName();
 

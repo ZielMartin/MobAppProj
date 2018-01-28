@@ -19,6 +19,7 @@ import java.util.Calendar;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.RepairEntry;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.ReminderEntryList;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.RepairEntryList;
 import de.fhbi.mobappproj.carlogger.R;
 import de.fhbi.mobappproj.carlogger.activities.AddActivities.RepairAddActivity;
 
@@ -210,7 +211,7 @@ public class RepairAdapter extends RecyclerView.Adapter<RepairAdapter.RepairView
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(view.getContext(), RepairAddActivity.class);
-                    intent.putExtra("entryIndex", ReminderEntryList.getInstance().getAllEntries().indexOf(entry));
+                    intent.putExtra("entryIndex", RepairEntryList.getInstance().getAllEntries().indexOf(entry));
                     view.getContext().startActivity(intent);
                 }
             });

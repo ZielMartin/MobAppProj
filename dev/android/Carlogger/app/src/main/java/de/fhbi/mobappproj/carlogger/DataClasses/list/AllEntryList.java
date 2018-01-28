@@ -52,6 +52,9 @@ public class AllEntryList extends EntryListSuper {
         repairEntries.getAllEntriesFromFirebase();
         otherEntries.getAllEntriesFromFirebase();
         setAutoEntries();
+        if(adapterToUpdate != null){
+            adapterToUpdate.notifyDataSetChanged();
+        }
         return true;
     }
 

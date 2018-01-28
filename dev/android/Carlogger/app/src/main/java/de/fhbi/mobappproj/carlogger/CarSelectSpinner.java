@@ -1,6 +1,7 @@
 package de.fhbi.mobappproj.carlogger;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
+import de.fhbi.mobappproj.carlogger.fragments.FragmentSuper;
 
 import static de.fhbi.mobappproj.carlogger.activities.MainActivity.FRAGMENTTAG;
 
@@ -91,9 +93,22 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (userIsInteracting) {
-            //caller.changeFragmentTo(new AllFragment());
             Car car = CarList.getInstance().getCars().get(position);
             CarAccess.getInstance().setCurrentCar(car, context);
+
+            android.app.FragmentManager fm = caller.getFragmentManager();
+            FragmentSuper curFragment = (FragmentSuper) fm.findFragmentByTag(MainActivity.FRAGMENTTAG);
+            curFragment.mAdapter.notifyDataSetChanged();
+
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.detach(curFragment);
+            fragmentTransaction.attach(curFragment);
+            fragmentTransaction.commit();
+
+            spinnerDataAdapter.notifyDataSetChanged();
+
+
+
 
             Log.d(TAG, "car selected");
 

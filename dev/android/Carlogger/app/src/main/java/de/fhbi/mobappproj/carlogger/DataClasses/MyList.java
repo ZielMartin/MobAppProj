@@ -6,4 +6,5 @@ package de.fhbi.mobappproj.carlogger.DataClasses;
 
 public interface MyList<ItemType> {
     void add(ItemType item);
+    void notifyAdapter();
 }

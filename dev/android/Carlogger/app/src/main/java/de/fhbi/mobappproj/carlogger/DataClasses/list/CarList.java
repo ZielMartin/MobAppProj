@@ -41,6 +41,10 @@ public class CarList implements MyList<Car> {
 
         dataAccess.getAll(path, this, Car.class);
 
+        if(adapterToUpdate != null){
+            adapterToUpdate.notifyDataSetChanged();
+        }
+
         return false;
     }
 
@@ -49,8 +53,14 @@ public class CarList implements MyList<Car> {
     public void add(Car item) {
         if (!this.cars.contains(item)) {
             this.cars.add(item);
-            if (adapterToUpdate != null)
-                adapterToUpdate.notifyDataSetChanged();
+            notifyAdapter();
+        }
+    }
+
+    @Override
+    public void notifyAdapter() {
+        if(adapterToUpdate != null){
+            adapterToUpdate.notifyDataSetChanged();
         }
     }
 
