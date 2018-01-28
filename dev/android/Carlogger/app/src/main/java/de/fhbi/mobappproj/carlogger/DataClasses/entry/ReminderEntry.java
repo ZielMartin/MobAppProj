@@ -98,21 +98,21 @@ public class ReminderEntry extends EntrySuper implements Parcelable {
     @Override
     protected void pushToFirebase() {
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), "");
         dataAccess.push(path, this);
     }
 
     @Override
     protected void removeFromFirebase() {
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), "");
         dataAccess.delete(path);
     }
 
     @Override
     public void updateChangesOnFirebase() {
         Car currentCar = CarAccess.getInstance().getCurrentCar();
-        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+        String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), "");
         dataAccess.update(path, this);
     }
 

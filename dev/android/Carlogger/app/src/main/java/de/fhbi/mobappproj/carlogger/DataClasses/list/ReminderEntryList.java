@@ -34,7 +34,7 @@ public class ReminderEntryList extends EntryListSuper<ReminderEntry, ReminderAda
 
         if (currentCar != null) {
             DataAccess dataAccess = FirebaseAccess.getInstance();
-            String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), currentCar.getKey(), "");
+            String path = String.format(DataAccess.REMINDERENTRY_PATH, dataAccess.getUid(), "");
             dataAccess.getAll(path, this, ReminderEntry.class);
         }
 

@@ -49,7 +49,12 @@ public class FirebaseAccess implements DataAccess {
         DatabaseReference target = getReferenceTo(new DatabasePath(path));
 
         if (object instanceof EntrySuper) {
-            target.child(((EntrySuper) object).getKey());
+            target = target.child(((EntrySuper) object).getKey());
+        } else if (object instanceof Car) {
+            target = target.child(((Car) object).getKey());
+        } else {
+            Log.e(TAG, "Updating something, that's not supposed to be updated");
+            return;
         }
 
         target.setValue(object);
@@ -63,10 +68,11 @@ public class FirebaseAccess implements DataAccess {
 
         if (object instanceof EntrySuper) {
             ((EntrySuper) object).setKey(target.getKey());
-        }
-
-        if (object instanceof Car) {
+        } else if (object instanceof Car) {
             ((Car) object).setKey(target.getKey());
+        } else {
+            Log.e(TAG, "Pushing something, that's not supposed to be pushed");
+            return;
         }
 
         target.setValue(object);
@@ -95,8 +101,14 @@ public class FirebaseAccess implements DataAccess {
                     Log.i(TAG, child.getValue().toString());
 
                     Gson gson = new GsonBuilder().create();
-                    HashMap<String, Object> val = (HashMap<String, Object>) child.getValue();
-                    val.put("key", child.getKey());
+                    HashMap<String, Object> val;
+                    try {
+                        val = (HashMap<String, Object>) child.getValue();
+                        val.put("key", child.getKey());
+                    } catch (ClassCastException ex) {
+                        Log.e(TAG, "could not cast " + child.getValue(), ex);
+                        return;
+                    }
 
                     JsonElement jsonElement = gson.toJsonTree(val);
                     T instance = gson.fromJson(jsonElement, typeOfT);
