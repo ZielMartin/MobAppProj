@@ -97,7 +97,7 @@ public class FuelFragment extends FragmentSuper<FuelAdapter> implements OnClickL
 
         TV_FuelTotalCostValue.setText(doubleToString(FuelEntryList.getInstance().getAllCosts()) + getString(R.string.euro));
         TV_FuelMonthCostValue.setText(doubleToString(FuelEntryList.getInstance().getCostPerMonth(Calendar.getInstance())) + getString(R.string.euro));
-        TV_FuelConsumptionValue.setText(doubleToString(FuelEntryList.getInstance().getConsumtion()) + getString(R.string.euro));
+        TV_FuelConsumptionValue.setText(doubleToString(FuelEntryList.getInstance().getConsumtion()));
 
 
     }
