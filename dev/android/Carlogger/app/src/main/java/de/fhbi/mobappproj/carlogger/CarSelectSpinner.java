@@ -1,21 +1,25 @@
 package de.fhbi.mobappproj.carlogger;
 
+import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentManager;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
-import de.fhbi.mobappproj.carlogger.activities.ChooseCarActivity;
-import de.fhbi.mobappproj.carlogger.dataAccess.allCars.AllCars;
+import de.fhbi.mobappproj.carlogger.activities.MainActivity;
 import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
+import de.fhbi.mobappproj.carlogger.fragments.AllFragment;
+
+import static de.fhbi.mobappproj.carlogger.activities.MainActivity.FRAGMENTTAG;
 
 /**
  * Created by Johannes on 28.01.2018.
@@ -26,8 +30,10 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
     private static final String TAG = "CarSelectSpinner";
 
     private Context context;
-    private boolean userIsInteracting;
+    private boolean userIsInteracting = false;
     private ArrayAdapter<Car> spinnerDataAdapter;
+
+    MainActivity caller;
 
 
     public CarSelectSpinner(Context context) {
@@ -42,7 +48,8 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
 
     }
 
-    public void setUpSpinner(){
+    public void setUpSpinner(MainActivity caller){
+        this.caller = caller;
         spinnerDataAdapter = new ArrayAdapter<Car>(context,
                 android.R.layout.simple_spinner_item, CarList.getInstance().getCars());
         spinnerDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -67,25 +74,33 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
 
     }
 
-    public void updateSpinner(boolean userIsInteracting) {
-        this.userIsInteracting = userIsInteracting;
+    public void updateSpinner() {
+
+/*
+        int index = 0;
+        for(Car car : CarList.getInstance().getCars()){
+            if(car.equals(CarAccess.getInstance().getCurrentCar())){
+                this.setSelection(index);
+            }
+            index++;
+        }*/
         spinnerDataAdapter.notifyDataSetChanged();
-
-
-
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (userIsInteracting) {
+            //caller.changeFragmentTo(new AllFragment());
             Car car = CarList.getInstance().getCars().get(position);
             CarAccess.getInstance().setCurrentCar(car, context);
+
             Log.d(TAG, "car selected");
 
         } else {
             Log.d(TAG, "user not interacting");
         }
+        userIsInteracting = true;
     }
 
     @Override

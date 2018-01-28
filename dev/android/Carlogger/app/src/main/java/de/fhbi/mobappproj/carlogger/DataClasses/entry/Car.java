@@ -1,12 +1,18 @@
 package de.fhbi.mobappproj.carlogger.DataClasses.entry;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.google.firebase.database.Exclude;
+import com.google.gson.Gson;
 
 import java.util.Calendar;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
+import de.fhbi.mobappproj.carlogger.MyApplication;
 import de.fhbi.mobappproj.carlogger.dataAccess.DataAccess;
 import de.fhbi.mobappproj.carlogger.dataAccess.FirebaseAccess;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 
 /**
  * Created by martin on 18.01.18.
@@ -17,10 +23,9 @@ public class Car {
     private String hsntsn;
     private String name;
     private String key;
-    private DataAccess dataAccess = null;
 
     public Car() {
-        dataAccess = FirebaseAccess.getInstance();
+
     }
 
     public void removeCar() {
@@ -37,18 +42,22 @@ public class Car {
     }
 
     public void pushToFirebase() {
+        DataAccess dataAccess = FirebaseAccess.getInstance();
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), "");
         dataAccess.push(path, this);
     }
 
     public void update() {
+        DataAccess dataAccess = FirebaseAccess.getInstance();
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), this.getKey());
         dataAccess.update(path, this);
     }
 
     public void remove() {
+        DataAccess dataAccess = FirebaseAccess.getInstance();
         String path = String.format(DataAccess.CARS_PATH, dataAccess.getUid(), this.getKey());
         dataAccess.delete(path);
+        
 
         CarList.getInstance().getCars().remove(this);
     }

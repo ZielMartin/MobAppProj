@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.MyApplication;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by martin on 18.01.18.
@@ -34,15 +38,23 @@ public class CarAccess {
         //AllEntryList.getInstance().clear();
         AllEntryList.getInstance().getAllEntriesFromFirebase();
 
+
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences.Editor prefsEditor = preferences.edit();
+
+
         if(currentCar != null){
-            editor.putString("SELECTEDCARKEY", currentCar.getKey());
-            Log.d("SELECTEDCARKEY", currentCar.getName());
+            Gson gson = new Gson();
+            String json = gson.toJson(currentCar);
+            prefsEditor.putString("SelectedCar", json);
+            Log.d("selectedCar", currentCar.getName());
         }else{
-            editor.putString("SELECTEDCARKEY", "");
+            prefsEditor.putString("SelectedCar", "");
+            Log.d("selectedCar", "none");
+
         }
-        editor.apply();
+        prefsEditor.commit();
 
 
 

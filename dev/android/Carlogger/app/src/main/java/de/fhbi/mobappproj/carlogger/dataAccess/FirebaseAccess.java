@@ -18,6 +18,8 @@ import java.util.HashMap;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
 import de.fhbi.mobappproj.carlogger.DataClasses.MyList;
+import de.fhbi.mobappproj.carlogger.DataClasses.entry.FuelEntry;
+import de.fhbi.mobappproj.carlogger.DataClasses.list.FuelEntryList;
 
 /**
  * Created by martin on 08.01.18.
@@ -98,7 +100,6 @@ public class FirebaseAccess implements DataAccess {
                     T instance = gson.fromJson(jsonElement, typeOfT);
                     list.add(instance);
                 }
-
                 target.removeEventListener(this);
             }
 
@@ -107,6 +108,7 @@ public class FirebaseAccess implements DataAccess {
                 Log.e(TAG, "onCancelled");
             }
         });
+
     }
 
     private DatabaseReference getReferenceTo(DatabasePath path) {

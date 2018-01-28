@@ -28,8 +28,6 @@ public class FuelEntry extends EntrySuper implements Parcelable {
     public FuelEntry() {
         super();
         entryType = entryType.FUELENTRY;
-        amount = 0;
-        costPerLitre = 0;
     }
 
     public FuelEntry(FuelEntry fe) {

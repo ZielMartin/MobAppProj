@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -39,28 +40,21 @@ public class MyApplication extends Application {
         AllEntryList.getInstance().getAllEntriesFromFirebase();
 
 
-/*
-        for(Car car : CarList.getInstance().getCars()){
-            Log.d("asdgrdsgr", car.getName());
-        }
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Gson gson = new Gson();
+        String json = preferences.getString("SelectedCar", "");
+        Car selectedCar = gson.fromJson(json, Car.class);
 
 
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String selected = prefs.getString("SELECTEDCARKEY", "");
-
-        boolean carSelected = false;
-        for(Car car : CarList.getInstance().getCars()){
-            if(car.getKey().equals(selected)){
-                CarAccess.getInstance().setCurrentCar(car, this);
-                carSelected = true;
-            }
-        }
-
-        if(!carSelected){
+        if(selectedCar == null){
             Intent intent = new Intent(this, ChooseCarActivity.class);
             startActivity(intent);
+        }else{
+            CarAccess.getInstance().setCurrentCar(selectedCar, this);
         }
-        */
+
 
 
 

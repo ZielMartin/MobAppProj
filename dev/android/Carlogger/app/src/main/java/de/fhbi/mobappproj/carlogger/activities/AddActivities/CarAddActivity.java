@@ -10,6 +10,7 @@ import android.widget.Toast;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.Car;
 import de.fhbi.mobappproj.carlogger.DataClasses.list.CarList;
 import de.fhbi.mobappproj.carlogger.R;
+import de.fhbi.mobappproj.carlogger.dataAccess.entryAccess.CarAccess;
 
 
 public class CarAddActivity extends AddActivitySuper implements CompoundButton.OnCheckedChangeListener {
@@ -101,6 +102,8 @@ public class CarAddActivity extends AddActivitySuper implements CompoundButton.O
                         car.setHsntsn(ET_CarAddHsnTsnValue.getText().toString());
                         car.setName(ET_CarAddNameValue.getText().toString());
                         car.pushToFirebase();
+
+                        CarAccess.getInstance().setCurrentCar(car, this);
                     }
                     finish();
                 }

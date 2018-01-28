@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private boolean pressedBackAlready = false;
 
     private CarSelectSpinner spinner;
-    private boolean userIsInteracting;
 
 
     @Override
@@ -115,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         View header = navigationView.getHeaderView(0);
 
         spinner = (CarSelectSpinner) header.findViewById(R.id.SP_HeaderMain);
-        spinner.setUpSpinner();
+        spinner.setUpSpinner(this);
 
 
         Button button_chooseCar = header.findViewById(R.id.button_chooseCar);
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
-        spinner.updateSpinner(userIsInteracting);
+        spinner.updateSpinner();
 
     }
 
@@ -210,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void changeFragmentTo(Fragment fragment) {
+    public void changeFragmentTo(Fragment fragment) {
 
         fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -274,11 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    public void onUserInteraction() {
-        super.onUserInteraction();
-        userIsInteracting = true;
-    }
+
 
 
 }
