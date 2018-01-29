@@ -115,6 +115,7 @@ public class FirebaseAccess implements DataAccess {
                     list.add(instance);
                     list.notifyAdapter();
                     AllEntryList.getInstance().getInstance().notifyAdapter();
+
                     CarList.getInstance().notifyAdapter();
                 }
                 target.removeEventListener(this);

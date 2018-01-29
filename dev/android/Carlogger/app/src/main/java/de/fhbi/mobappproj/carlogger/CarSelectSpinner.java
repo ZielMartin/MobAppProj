@@ -37,6 +37,7 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
     private Context context;
     private boolean userIsInteracting = false;
     private ArrayAdapter<Car> spinnerDataAdapter;
+    boolean firstCall = true;
 
     MainActivity caller;
 
@@ -53,35 +54,37 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
 
     }
 
-    public void setUpSpinner(MainActivity caller){
+    public void setUpSpinner(MainActivity caller) {
         this.caller = caller;
         spinnerDataAdapter = new ArrayAdapter<Car>(context,
                 android.R.layout.simple_spinner_item, CarList.getInstance().getCars());
         spinnerDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.setAdapter(spinnerDataAdapter);
         CarList.getInstance().setAdapterToUpdate(spinnerDataAdapter);
-
         this.setOnItemSelectedListener(this);
 
 
-
-
-        CarSelectSpinner spinner = this;
         spinnerDataAdapter.registerDataSetObserver(new DataSetObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-                Gson gson = new Gson();
-                String json = preferences.getString("SelectedCar", "");
-                Car selectedCar = gson.fromJson(json, Car.class);
-                int index = CarList.getInstance().getCars().indexOf(selectedCar);
-                Log.d("kjsdhrgiu", index+"");
-                spinner.setSelection(index);
+                if(firstCall){
+                    //selection();
+                    firstCall = false;
+                }
             }
         });
 
 
+    }
+
+    private void selection() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        Gson gson = new Gson();
+        String json = preferences.getString("SelectedCar", "");
+        Car selectedCar = gson.fromJson(json, Car.class);
+        int index = CarList.getInstance().getCars().indexOf(selectedCar);
+        this.setSelection(index);
     }
 
 
@@ -103,8 +106,6 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
             spinnerDataAdapter.notifyDataSetChanged();
 
 
-
-
             Log.d(TAG, "car selected");
 
         } else {
@@ -118,7 +119,6 @@ public class CarSelectSpinner extends android.support.v7.widget.AppCompatSpinner
         CarAccess.getInstance().setCurrentCar(null, context);
 
         Log.i(TAG, "onNothingSelected");
-
 
 
     }

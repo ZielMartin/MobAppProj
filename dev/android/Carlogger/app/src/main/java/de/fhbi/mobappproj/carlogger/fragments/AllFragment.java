@@ -7,7 +7,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.AdapterDataObserver;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 import de.fhbi.mobappproj.carlogger.DataClasses.list.AllEntryList;
 import de.fhbi.mobappproj.carlogger.DataClasses.entry.EntrySuper;
@@ -34,10 +37,7 @@ public class AllFragment extends FragmentSuper implements View.OnClickListener, 
 
 
     private OnFragmentInteractionListener mListener;
-
     private RecyclerView recyclerView;
-
-
     private ArrayList<EntrySuper> entryList;
 
     private TextView TV_AllTotalCostValue, TV_AllMonthCostValue, TV_AllPeriodCostValue;
@@ -82,13 +82,18 @@ public class AllFragment extends FragmentSuper implements View.OnClickListener, 
 
         entryList = AllEntryList.getInstance().getAllEntries();
 
+
         // specify an adapter
         mAdapter = new AllAdapter(getActivity(), entryList);
-        mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+
+        mAdapter.registerAdapterDataObserver(new AdapterDataObserver() {
             @Override
             public void onChanged() {
                 super.onChanged();
                 setStatValues();
+                Collections.sort(entryList);
+                Collections.reverse(entryList);
+
             }
 
         });
